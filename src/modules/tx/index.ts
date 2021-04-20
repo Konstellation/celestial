@@ -1,10 +1,10 @@
-import api from './api';
-import msgs from './';
+// import api from './api';
+// import msgs from './';
 
-const moduleName = 'tx';
+// const moduleName = 'tx';
 
-export default {
-    name: moduleName,
-    msgs: {},
-    api,
-};
+// export default {
+//     name: moduleName,
+//     msgs: {},
+//     api,
+// };

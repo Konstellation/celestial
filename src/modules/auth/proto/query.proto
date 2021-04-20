@@ -1,0 +1,45 @@
+syntax = "proto3";
+package cosmos.auth.v1beta1;
+
+import "google/protobuf/any.proto";
+import "google/api/annotations.proto";
+import "src/modules/auth/proto/auth.proto";
+import "src/modules/auth/proto/pagination.proto";
+
+
+service Query {
+  rpc Accounts(QueryAccountsRequest) returns (QueryAccountsResponse) {
+    option (google.api.http).get = "/cosmos/auth/v1beta1/accounts";
+  }
+
+  rpc Account(QueryAccountRequest) returns (QueryAccountResponse) {
+    option (google.api.http).get = "/cosmos/auth/v1beta1/accounts/{address}";
+  }
+
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/cosmos/auth/v1beta1/params";
+  }
+}
+
+message QueryAccountsRequest {
+  PageRequest pagination = 1;
+}
+
+message QueryAccountsResponse {
+  repeated BaseAccount accounts = 1;
+  PageResponse pagination = 2;
+}
+
+message QueryAccountRequest {
+  string address = 1;
+}
+
+message QueryAccountResponse {
+  BaseAccount account = 1;
+}
+
+message QueryParamsRequest {}
+
+message QueryParamsResponse {
+  google.protobuf.Any params = 1;
+}
