@@ -10,6 +10,26 @@ authClient.Account({ address: 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx' }, (
     console.log(res);
 });
 
+// @ts-ignore
+authClient.Params({}, (err, res) => {
+    // @ts-ignore
+    if (err) throw err;
+
+    console.log('params: ');
+    // @ts-ignore
+    console.log(res);
+});
+
+// @ts-ignore
+// authClient.Accounts({ pagination: { offset: 1, limit: 10, count_total: true, reverse: false } }, (err, res) => {
+//     // @ts-ignore
+//     if (err) throw err;
+
+//     console.log('all accs: ');
+//     // @ts-ignore
+//     console.log(res);
+// });
+
 export class ModuleManager {
     constructor() {}
 }
