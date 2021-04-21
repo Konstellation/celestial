@@ -2,7 +2,6 @@
 // file: auth/query.proto
 
 import * as jspb from "google-protobuf";
-import * as google_protobuf_any_pb from "google-protobuf/google/protobuf/any_pb";
 import * as google_api_annotations_pb from "../google/api/annotations_pb";
 import * as auth_auth_pb from "../auth/auth_pb";
 import * as pagination_pb from "../pagination_pb";

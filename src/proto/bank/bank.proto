@@ -1,7 +1,7 @@
 syntax = "proto3";
 package cosmos.bank.v1beta1;
 
-import "src/types/proto/coin.proto";
+import "coin.proto";
 
 message Params {
   repeated SendEnabled send_enabled         = 1;
@@ -16,13 +16,13 @@ message SendEnabled {
 // Input models transaction input.
 message Input {
   string   address                        = 1;
-  repeated Coin coins = 2;
+  repeated cosmos.base.v1beta1.Coin coins = 2;
 }
 
 // Output models transaction outputs.
 message Output {
   string   address                        = 1;
-  repeated Coin coins = 2;
+  repeated cosmos.base.v1beta1.Coin coins = 2;
 }
 
 // DenomUnit represents a struct that describes a given

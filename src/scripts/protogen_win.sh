@@ -5,7 +5,6 @@ PROTOC_GEN_TS_PATH="./node_modules/.bin/protoc-gen-ts"
 OUT_DIR="src/types"
 
 protoc -I"src/proto" \
-    --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
     --js_out="import_style=commonjs,binary:${OUT_DIR}" \
     --ts_out="${OUT_DIR}" \
     src/proto/*/*.proto src/proto/*/*/*.proto src/proto/*.proto
