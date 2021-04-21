@@ -4,7 +4,7 @@ package cosmos.auth.v1beta1;
 import "google/protobuf/any.proto";
 import "google/api/annotations.proto";
 import "auth/auth.proto";
-import "proto/pagination.proto";
+import "pagination.proto";
 
 
 service Query {
@@ -22,12 +22,12 @@ service Query {
 }
 
 message QueryAccountsRequest {
-  PageRequest pagination = 1;
+  cosmos.base.v1beta1.PageRequest pagination = 1;
 }
 
 message QueryAccountsResponse {
   repeated BaseAccount accounts = 1;
-  PageResponse pagination = 2;
+  cosmos.base.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryAccountRequest {
