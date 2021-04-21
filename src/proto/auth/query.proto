@@ -5,6 +5,8 @@ import "google/api/annotations.proto";
 import "auth/auth.proto";
 import "pagination.proto";
 
+import "google/protobuf/any.proto";
+
 
 service Query {
   rpc Accounts(QueryAccountsRequest) returns (QueryAccountsResponse) {
@@ -34,7 +36,7 @@ message QueryAccountRequest {
 }
 
 message QueryAccountResponse {
-  BaseAccount account = 1;
+  google.protobuf.Any account = 1;
 }
 
 message QueryParamsRequest {}

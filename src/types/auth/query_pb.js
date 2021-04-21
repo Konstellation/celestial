@@ -21,6 +21,8 @@ var auth_auth_pb = require('../auth/auth_pb.js');
 goog.object.extend(proto, auth_auth_pb);
 var pagination_pb = require('../pagination_pb.js');
 goog.object.extend(proto, pagination_pb);
+var google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
+goog.object.extend(proto, google_protobuf_any_pb);
 goog.exportSymbol('proto.cosmos.auth.v1beta1.QueryAccountRequest', null, global);
 goog.exportSymbol('proto.cosmos.auth.v1beta1.QueryAccountResponse', null, global);
 goog.exportSymbol('proto.cosmos.auth.v1beta1.QueryAccountsRequest', null, global);
@@ -677,7 +679,7 @@ proto.cosmos.auth.v1beta1.QueryAccountResponse.prototype.toObject = function(opt
  */
 proto.cosmos.auth.v1beta1.QueryAccountResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    account: (f = msg.getAccount()) && auth_auth_pb.BaseAccount.toObject(includeInstance, f)
+    account: (f = msg.getAccount()) && google_protobuf_any_pb.Any.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -715,8 +717,8 @@ proto.cosmos.auth.v1beta1.QueryAccountResponse.deserializeBinaryFromReader = fun
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new auth_auth_pb.BaseAccount;
-      reader.readMessage(value,auth_auth_pb.BaseAccount.deserializeBinaryFromReader);
+      var value = new google_protobuf_any_pb.Any;
+      reader.readMessage(value,google_protobuf_any_pb.Any.deserializeBinaryFromReader);
       msg.setAccount(value);
       break;
     default:
@@ -753,24 +755,24 @@ proto.cosmos.auth.v1beta1.QueryAccountResponse.serializeBinaryToWriter = functio
     writer.writeMessage(
       1,
       f,
-      auth_auth_pb.BaseAccount.serializeBinaryToWriter
+      google_protobuf_any_pb.Any.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * optional BaseAccount account = 1;
- * @return {?proto.cosmos.auth.v1beta1.BaseAccount}
+ * optional google.protobuf.Any account = 1;
+ * @return {?proto.google.protobuf.Any}
  */
 proto.cosmos.auth.v1beta1.QueryAccountResponse.prototype.getAccount = function() {
-  return /** @type{?proto.cosmos.auth.v1beta1.BaseAccount} */ (
-    jspb.Message.getWrapperField(this, auth_auth_pb.BaseAccount, 1));
+  return /** @type{?proto.google.protobuf.Any} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_any_pb.Any, 1));
 };
 
 
 /**
- * @param {?proto.cosmos.auth.v1beta1.BaseAccount|undefined} value
+ * @param {?proto.google.protobuf.Any|undefined} value
  * @return {!proto.cosmos.auth.v1beta1.QueryAccountResponse} returns this
 */
 proto.cosmos.auth.v1beta1.QueryAccountResponse.prototype.setAccount = function(value) {
