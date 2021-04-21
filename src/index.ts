@@ -1,10 +1,11 @@
 // import { bankClient } from './modules/bank/api';
-import { authClient } from './modules/auth/api';
+import { getAccount } from './modules/auth/api';
 
-//@ts-ignore
-authClient.Account({ address: 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx' }, (err, res) => {
-    console.log(res);
-});
+(async function() {
+    const r = await getAccount('darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx');
+    console.log(r);
+})();
+
 // // @ts-ignore
 // bankClient.Balance(
 //     {
