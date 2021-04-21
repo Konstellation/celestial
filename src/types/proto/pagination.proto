@@ -1,5 +1,5 @@
 syntax = "proto3";
-package cosmos.auth.v1beta1;
+package cosmos.base.v1beta1;
 
 // PageRequest is to be embedded in gRPC request messages for efficient
 // pagination. Ex:

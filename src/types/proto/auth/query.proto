@@ -3,8 +3,8 @@ package cosmos.auth.v1beta1;
 
 import "google/protobuf/any.proto";
 import "google/api/annotations.proto";
-import "src/modules/auth/proto/auth.proto";
-import "src/modules/auth/proto/pagination.proto";
+import "auth/auth.proto";
+import "proto/pagination.proto";
 
 
 service Query {
@@ -41,5 +41,5 @@ message QueryAccountResponse {
 message QueryParamsRequest {}
 
 message QueryParamsResponse {
-  google.protobuf.Any params = 1;
+  Params params = 1;
 }
