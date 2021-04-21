@@ -18,7 +18,7 @@
         "prettier-watch:default": "onchange 'src/**/*.ts' -- prettier --write {{changed}}",
         "test": "jest",
         "test:dev": "jest --watchAll",
-        "proto": "sh ./src/scripts/generateProto.sh"
+        "proto": "sh ./src/scripts/protogen.sh"
     },
     "husky": {
         "hooks": {
