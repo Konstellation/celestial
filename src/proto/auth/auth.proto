@@ -1,19 +1,23 @@
 syntax = "proto3";
 package cosmos.auth.v1beta1;
 
+import "cosmos_proto/cosmos.proto";
 import "google/protobuf/any.proto";
 
 message BaseAccount {
-    string address = 1;
-    google.protobuf.Any pub_key = 2;
-    uint64 account_number = 3;
-    uint64 sequence = 4;
+  option (cosmos_proto.implements_interface) = "AccountI";
+
+//  string type = 1;
+  string address = 1;
+  google.protobuf.Any pub_key = 2;
+  uint64 account_number = 3;
+  uint64 sequence = 4;
 }
 
-message Params {  
-    uint64 max_memo_characters     = 1;
-    uint64 tx_sig_limit            = 2;
-    uint64 tx_size_cost_per_byte   = 3;
-    uint64 sig_verify_cost_ed25519 = 4;
-    uint64 sig_verify_cost_secp256k1 = 5;
+message Params {
+  uint64 max_memo_characters = 1;
+  uint64 tx_sig_limit = 2;
+  uint64 tx_size_cost_per_byte = 3;
+  uint64 sig_verify_cost_ed25519 = 4;
+  uint64 sig_verify_cost_secp256k1 = 5;
 }
