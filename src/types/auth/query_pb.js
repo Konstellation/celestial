@@ -23,6 +23,8 @@ var pagination_pb = require('../pagination_pb.js');
 goog.object.extend(proto, pagination_pb);
 var google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
 goog.object.extend(proto, google_protobuf_any_pb);
+var cosmos_proto_cosmos_pb = require('../cosmos_proto/cosmos_pb.js');
+goog.object.extend(proto, cosmos_proto_cosmos_pb);
 goog.exportSymbol('proto.cosmos.auth.v1beta1.QueryAccountRequest', null, global);
 goog.exportSymbol('proto.cosmos.auth.v1beta1.QueryAccountResponse', null, global);
 goog.exportSymbol('proto.cosmos.auth.v1beta1.QueryAccountsRequest', null, global);

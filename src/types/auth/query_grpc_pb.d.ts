@@ -9,6 +9,7 @@ import * as auth_query_pb from "../auth/query_pb";
 import * as auth_auth_pb from "../auth/auth_pb";
 import * as pagination_pb from "../pagination_pb";
 import * as google_protobuf_any_pb from "google-protobuf/google/protobuf/any_pb";
+import * as cosmos_proto_cosmos_pb from "../cosmos_proto/cosmos_pb";
 
 interface IQueryService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     accounts: IQueryService_IAccounts;

@@ -7,6 +7,7 @@ var google_api_annotations_pb = require('../google/api/annotations_pb.js');
 var auth_auth_pb = require('../auth/auth_pb.js');
 var pagination_pb = require('../pagination_pb.js');
 var google_protobuf_any_pb = require('google-protobuf/google/protobuf/any_pb.js');
+var cosmos_proto_cosmos_pb = require('../cosmos_proto/cosmos_pb.js');
 
 function serialize_cosmos_auth_v1beta1_QueryAccountRequest(arg) {
   if (!(arg instanceof auth_query_pb.QueryAccountRequest)) {
