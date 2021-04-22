@@ -5,9 +5,6 @@ import "cosmos_proto/cosmos.proto";
 import "google/protobuf/any.proto";
 
 message BaseAccount {
-  option (cosmos_proto.implements_interface) = "AccountI";
-
-//  string type = 1;
   string address = 1;
   google.protobuf.Any pub_key = 2;
   uint64 account_number = 3;

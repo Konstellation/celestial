@@ -1,4 +1,3 @@
-import { Any } from 'google-protobuf/google/protobuf/any_pb';
 import { credentials } from 'grpc';
 import { BaseAccount } from '../../types/auth/auth_pb';
 import { QueryClient } from '../../types/auth/query_grpc_pb';
