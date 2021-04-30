@@ -1,10 +1,11 @@
 syntax = "proto3";
 package cosmos.auth.v1beta1;
 
-import "google/protobuf/any.proto";
 import "google/api/annotations.proto";
-import "src/modules/auth/proto/auth.proto";
-import "src/modules/auth/proto/pagination.proto";
+import "auth/auth.proto";
+import "pagination.proto";
+import "google/protobuf/any.proto";
+import "cosmos_proto/cosmos.proto";
 
 
 service Query {
@@ -22,12 +23,12 @@ service Query {
 }
 
 message QueryAccountsRequest {
-  PageRequest pagination = 1;
+  cosmos.base.v1beta1.PageRequest pagination = 1;
 }
 
 message QueryAccountsResponse {
   repeated BaseAccount accounts = 1;
-  PageResponse pagination = 2;
+  cosmos.base.v1beta1.PageResponse pagination = 2;
 }
 
 message QueryAccountRequest {
@@ -35,11 +36,11 @@ message QueryAccountRequest {
 }
 
 message QueryAccountResponse {
-  BaseAccount account = 1;
+  google.protobuf.Any account = 1;
 }
 
 message QueryParamsRequest {}
 
 message QueryParamsResponse {
-  google.protobuf.Any params = 1;
+  Params params = 1;
 }

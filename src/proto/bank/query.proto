@@ -1,0 +1,96 @@
+syntax = "proto3";
+package cosmos.bank.v1beta1;
+
+import "pagination.proto";
+import "coin.proto";
+import "bank/bank.proto";
+import "google/api/annotations.proto";
+
+service Query {
+  rpc Balance(QueryBalanceRequest) returns (QueryBalanceResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/balances/{address}/{denom}";
+  }
+
+  rpc AllBalances(QueryAllBalancesRequest) returns (QueryAllBalancesResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/balances/{address}";
+  }
+
+  rpc TotalSupply(QueryTotalSupplyRequest) returns (QueryTotalSupplyResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/supply";
+  }
+
+  rpc SupplyOf(QuerySupplyOfRequest) returns (QuerySupplyOfResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/supply/{denom}";
+  }
+
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/params";
+  }
+
+  rpc DenomMetadata(QueryDenomMetadataRequest) returns (QueryDenomMetadataResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/denoms_metadata/{denom}";
+  }
+
+  rpc DenomsMetadata(QueryDenomsMetadataRequest) returns (QueryDenomsMetadataResponse) {
+    option (google.api.http).get = "/cosmos/bank/v1beta1/denoms_metadata";
+  }
+}
+
+message QueryBalanceRequest {
+  string address = 1;
+  string denom = 2;
+}
+
+message QueryBalanceResponse {
+  cosmos.base.v1beta1.Coin balance = 1;
+}
+
+message QueryAllBalancesRequest {
+  string address = 1;
+  cosmos.base.v1beta1.PageRequest pagination = 2;
+}
+
+message QueryAllBalancesResponse {
+  repeated cosmos.base.v1beta1.Coin balances = 1;
+  cosmos.base.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryTotalSupplyRequest {
+  cosmos.base.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryTotalSupplyResponse {
+  repeated cosmos.base.v1beta1.Coin supply = 1;
+  cosmos.base.v1beta1.PageResponse pagination = 2;
+}
+
+message QuerySupplyOfRequest {
+  string denom = 1;
+}
+
+message QuerySupplyOfResponse {
+  cosmos.base.v1beta1.Coin amount = 1;
+}
+
+message QueryParamsRequest {}
+
+message QueryParamsResponse {
+  Params params = 1;
+}
+
+message QueryDenomsMetadataRequest {
+  cosmos.base.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryDenomsMetadataResponse {
+  repeated Metadata metadatas = 1;
+  cosmos.base.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryDenomMetadataRequest {
+  string denom = 1;
+}
+
+message QueryDenomMetadataResponse {
+  Metadata metadata = 1;
+}
