@@ -6,7 +6,7 @@ export default class TxModule {
     private txClient: ServiceClient;
 
     constructor(grpcAddress: string) {
-        this.txClient = new ServiceClient(grpcAddress, credentials.createInsecure());
+        this.txClient = new ServiceClient(grpcAddress);
     }
 
     getTxByHash(hash: string): Promise<GetTxResponse.AsObject> {
