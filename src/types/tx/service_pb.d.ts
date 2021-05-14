@@ -4,12 +4,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as jspb from "google-protobuf";
-import * as abci_pb from "../abci_pb";
-import * as tx_tx_pb from "../tx/tx_pb";
-import * as pagination_pb from "../pagination_pb";
+import * as jspb from 'google-protobuf';
+import * as abci_pb from '../abci_pb';
+import * as tx_tx_pb from '../tx/tx_pb';
+import * as pagination_pb from '../pagination_pb';
 
-export class GetTxsEventRequest extends jspb.Message { 
+export class GetTxsEventRequest extends jspb.Message {
     clearEventsList(): void;
     getEventsList(): Array<string>;
     setEventsList(value: Array<string>): GetTxsEventRequest;
@@ -25,8 +25,8 @@ export class GetTxsEventRequest extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTxsEventRequest.AsObject;
     static toObject(includeInstance: boolean, msg: GetTxsEventRequest): GetTxsEventRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: GetTxsEventRequest, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): GetTxsEventRequest;
     static deserializeBinaryFromReader(message: GetTxsEventRequest, reader: jspb.BinaryReader): GetTxsEventRequest;
@@ -34,13 +34,13 @@ export class GetTxsEventRequest extends jspb.Message {
 
 export namespace GetTxsEventRequest {
     export type AsObject = {
-        eventsList: Array<string>,
-        pagination?: pagination_pb.PageRequest.AsObject,
-        orderBy: OrderBy,
-    }
+        eventsList: Array<string>;
+        pagination?: pagination_pb.PageRequest.AsObject;
+        orderBy: OrderBy;
+    };
 }
 
-export class GetTxsEventResponse extends jspb.Message { 
+export class GetTxsEventResponse extends jspb.Message {
     clearTxsList(): void;
     getTxsList(): Array<tx_tx_pb.Tx>;
     setTxsList(value: Array<tx_tx_pb.Tx>): GetTxsEventResponse;
@@ -58,8 +58,8 @@ export class GetTxsEventResponse extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTxsEventResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetTxsEventResponse): GetTxsEventResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: GetTxsEventResponse, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): GetTxsEventResponse;
     static deserializeBinaryFromReader(message: GetTxsEventResponse, reader: jspb.BinaryReader): GetTxsEventResponse;
@@ -67,13 +67,13 @@ export class GetTxsEventResponse extends jspb.Message {
 
 export namespace GetTxsEventResponse {
     export type AsObject = {
-        txsList: Array<tx_tx_pb.Tx.AsObject>,
-        txResponsesList: Array<abci_pb.TxResponse.AsObject>,
-        pagination?: pagination_pb.PageResponse.AsObject,
-    }
+        txsList: Array<tx_tx_pb.Tx.AsObject>;
+        txResponsesList: Array<abci_pb.TxResponse.AsObject>;
+        pagination?: pagination_pb.PageResponse.AsObject;
+    };
 }
 
-export class BroadcastTxRequest extends jspb.Message { 
+export class BroadcastTxRequest extends jspb.Message {
     getTxBytes(): Uint8Array | string;
     getTxBytes_asU8(): Uint8Array;
     getTxBytes_asB64(): string;
@@ -84,8 +84,8 @@ export class BroadcastTxRequest extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BroadcastTxRequest.AsObject;
     static toObject(includeInstance: boolean, msg: BroadcastTxRequest): BroadcastTxRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: BroadcastTxRequest, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): BroadcastTxRequest;
     static deserializeBinaryFromReader(message: BroadcastTxRequest, reader: jspb.BinaryReader): BroadcastTxRequest;
@@ -93,13 +93,12 @@ export class BroadcastTxRequest extends jspb.Message {
 
 export namespace BroadcastTxRequest {
     export type AsObject = {
-        txBytes: Uint8Array | string,
-        mode: BroadcastMode,
-    }
+        txBytes: Uint8Array | string;
+        mode: BroadcastMode;
+    };
 }
 
-export class BroadcastTxResponse extends jspb.Message { 
-
+export class BroadcastTxResponse extends jspb.Message {
     hasTxResponse(): boolean;
     clearTxResponse(): void;
     getTxResponse(): abci_pb.TxResponse | undefined;
@@ -108,8 +107,8 @@ export class BroadcastTxResponse extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BroadcastTxResponse.AsObject;
     static toObject(includeInstance: boolean, msg: BroadcastTxResponse): BroadcastTxResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: BroadcastTxResponse, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): BroadcastTxResponse;
     static deserializeBinaryFromReader(message: BroadcastTxResponse, reader: jspb.BinaryReader): BroadcastTxResponse;
@@ -117,12 +116,11 @@ export class BroadcastTxResponse extends jspb.Message {
 
 export namespace BroadcastTxResponse {
     export type AsObject = {
-        txResponse?: abci_pb.TxResponse.AsObject,
-    }
+        txResponse?: abci_pb.TxResponse.AsObject;
+    };
 }
 
-export class SimulateRequest extends jspb.Message { 
-
+export class SimulateRequest extends jspb.Message {
     hasTx(): boolean;
     clearTx(): void;
     getTx(): tx_tx_pb.Tx | undefined;
@@ -135,8 +133,8 @@ export class SimulateRequest extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SimulateRequest.AsObject;
     static toObject(includeInstance: boolean, msg: SimulateRequest): SimulateRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: SimulateRequest, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): SimulateRequest;
     static deserializeBinaryFromReader(message: SimulateRequest, reader: jspb.BinaryReader): SimulateRequest;
@@ -144,13 +142,12 @@ export class SimulateRequest extends jspb.Message {
 
 export namespace SimulateRequest {
     export type AsObject = {
-        tx?: tx_tx_pb.Tx.AsObject,
-        txBytes: Uint8Array | string,
-    }
+        tx?: tx_tx_pb.Tx.AsObject;
+        txBytes: Uint8Array | string;
+    };
 }
 
-export class SimulateResponse extends jspb.Message { 
-
+export class SimulateResponse extends jspb.Message {
     hasGasInfo(): boolean;
     clearGasInfo(): void;
     getGasInfo(): abci_pb.GasInfo | undefined;
@@ -164,8 +161,8 @@ export class SimulateResponse extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SimulateResponse.AsObject;
     static toObject(includeInstance: boolean, msg: SimulateResponse): SimulateResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: SimulateResponse, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): SimulateResponse;
     static deserializeBinaryFromReader(message: SimulateResponse, reader: jspb.BinaryReader): SimulateResponse;
@@ -173,20 +170,20 @@ export class SimulateResponse extends jspb.Message {
 
 export namespace SimulateResponse {
     export type AsObject = {
-        gasInfo?: abci_pb.GasInfo.AsObject,
-        result?: abci_pb.Result.AsObject,
-    }
+        gasInfo?: abci_pb.GasInfo.AsObject;
+        result?: abci_pb.Result.AsObject;
+    };
 }
 
-export class GetTxRequest extends jspb.Message { 
+export class GetTxRequest extends jspb.Message {
     getHash(): string;
     setHash(value: string): GetTxRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTxRequest.AsObject;
     static toObject(includeInstance: boolean, msg: GetTxRequest): GetTxRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: GetTxRequest, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): GetTxRequest;
     static deserializeBinaryFromReader(message: GetTxRequest, reader: jspb.BinaryReader): GetTxRequest;
@@ -194,12 +191,11 @@ export class GetTxRequest extends jspb.Message {
 
 export namespace GetTxRequest {
     export type AsObject = {
-        hash: string,
-    }
+        hash: string;
+    };
 }
 
-export class GetTxResponse extends jspb.Message { 
-
+export class GetTxResponse extends jspb.Message {
     hasTx(): boolean;
     clearTx(): void;
     getTx(): tx_tx_pb.Tx | undefined;
@@ -213,8 +209,8 @@ export class GetTxResponse extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTxResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetTxResponse): GetTxResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: GetTxResponse, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): GetTxResponse;
     static deserializeBinaryFromReader(message: GetTxResponse, reader: jspb.BinaryReader): GetTxResponse;
@@ -222,9 +218,9 @@ export class GetTxResponse extends jspb.Message {
 
 export namespace GetTxResponse {
     export type AsObject = {
-        tx?: tx_tx_pb.Tx.AsObject,
-        txResponse?: abci_pb.TxResponse.AsObject,
-    }
+        tx?: tx_tx_pb.Tx.AsObject;
+        txResponse?: abci_pb.TxResponse.AsObject;
+    };
 }
 
 export enum OrderBy {

@@ -4,11 +4,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as jspb from "google-protobuf";
-import * as google_protobuf_duration_pb from "google-protobuf/google/protobuf/duration_pb";
+import * as jspb from 'google-protobuf';
+import * as google_protobuf_duration_pb from 'google-protobuf/google/protobuf/duration_pb';
 
-export class ConsensusParams extends jspb.Message { 
-
+export class ConsensusParams extends jspb.Message {
     hasBlock(): boolean;
     clearBlock(): void;
     getBlock(): BlockParams | undefined;
@@ -32,8 +31,8 @@ export class ConsensusParams extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ConsensusParams.AsObject;
     static toObject(includeInstance: boolean, msg: ConsensusParams): ConsensusParams.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: ConsensusParams, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): ConsensusParams;
     static deserializeBinaryFromReader(message: ConsensusParams, reader: jspb.BinaryReader): ConsensusParams;
@@ -41,14 +40,14 @@ export class ConsensusParams extends jspb.Message {
 
 export namespace ConsensusParams {
     export type AsObject = {
-        block?: BlockParams.AsObject,
-        evidence?: EvidenceParams.AsObject,
-        validator?: ValidatorParams.AsObject,
-        version?: VersionParams.AsObject,
-    }
+        block?: BlockParams.AsObject;
+        evidence?: EvidenceParams.AsObject;
+        validator?: ValidatorParams.AsObject;
+        version?: VersionParams.AsObject;
+    };
 }
 
-export class BlockParams extends jspb.Message { 
+export class BlockParams extends jspb.Message {
     getMaxBytes(): number;
     setMaxBytes(value: number): BlockParams;
     getMaxGas(): number;
@@ -59,8 +58,8 @@ export class BlockParams extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BlockParams.AsObject;
     static toObject(includeInstance: boolean, msg: BlockParams): BlockParams.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: BlockParams, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): BlockParams;
     static deserializeBinaryFromReader(message: BlockParams, reader: jspb.BinaryReader): BlockParams;
@@ -68,13 +67,13 @@ export class BlockParams extends jspb.Message {
 
 export namespace BlockParams {
     export type AsObject = {
-        maxBytes: number,
-        maxGas: number,
-        timeIotaMs: number,
-    }
+        maxBytes: number;
+        maxGas: number;
+        timeIotaMs: number;
+    };
 }
 
-export class EvidenceParams extends jspb.Message { 
+export class EvidenceParams extends jspb.Message {
     getMaxAgeNumBlocks(): number;
     setMaxAgeNumBlocks(value: number): EvidenceParams;
 
@@ -88,8 +87,8 @@ export class EvidenceParams extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): EvidenceParams.AsObject;
     static toObject(includeInstance: boolean, msg: EvidenceParams): EvidenceParams.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: EvidenceParams, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): EvidenceParams;
     static deserializeBinaryFromReader(message: EvidenceParams, reader: jspb.BinaryReader): EvidenceParams;
@@ -97,13 +96,13 @@ export class EvidenceParams extends jspb.Message {
 
 export namespace EvidenceParams {
     export type AsObject = {
-        maxAgeNumBlocks: number,
-        maxAgeDuration?: google_protobuf_duration_pb.Duration.AsObject,
-        maxBytes: number,
-    }
+        maxAgeNumBlocks: number;
+        maxAgeDuration?: google_protobuf_duration_pb.Duration.AsObject;
+        maxBytes: number;
+    };
 }
 
-export class ValidatorParams extends jspb.Message { 
+export class ValidatorParams extends jspb.Message {
     clearPubKeyTypesList(): void;
     getPubKeyTypesList(): Array<string>;
     setPubKeyTypesList(value: Array<string>): ValidatorParams;
@@ -112,8 +111,8 @@ export class ValidatorParams extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ValidatorParams.AsObject;
     static toObject(includeInstance: boolean, msg: ValidatorParams): ValidatorParams.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: ValidatorParams, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): ValidatorParams;
     static deserializeBinaryFromReader(message: ValidatorParams, reader: jspb.BinaryReader): ValidatorParams;
@@ -121,19 +120,19 @@ export class ValidatorParams extends jspb.Message {
 
 export namespace ValidatorParams {
     export type AsObject = {
-        pubKeyTypesList: Array<string>,
-    }
+        pubKeyTypesList: Array<string>;
+    };
 }
 
-export class VersionParams extends jspb.Message { 
+export class VersionParams extends jspb.Message {
     getAppVersion(): number;
     setAppVersion(value: number): VersionParams;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): VersionParams.AsObject;
     static toObject(includeInstance: boolean, msg: VersionParams): VersionParams.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: VersionParams, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): VersionParams;
     static deserializeBinaryFromReader(message: VersionParams, reader: jspb.BinaryReader): VersionParams;
@@ -141,11 +140,11 @@ export class VersionParams extends jspb.Message {
 
 export namespace VersionParams {
     export type AsObject = {
-        appVersion: number,
-    }
+        appVersion: number;
+    };
 }
 
-export class HashedParams extends jspb.Message { 
+export class HashedParams extends jspb.Message {
     getBlockMaxBytes(): number;
     setBlockMaxBytes(value: number): HashedParams;
     getBlockMaxGas(): number;
@@ -154,8 +153,8 @@ export class HashedParams extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): HashedParams.AsObject;
     static toObject(includeInstance: boolean, msg: HashedParams): HashedParams.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: HashedParams, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): HashedParams;
     static deserializeBinaryFromReader(message: HashedParams, reader: jspb.BinaryReader): HashedParams;
@@ -163,7 +162,7 @@ export class HashedParams extends jspb.Message {
 
 export namespace HashedParams {
     export type AsObject = {
-        blockMaxBytes: number,
-        blockMaxGas: number,
-    }
+        blockMaxBytes: number;
+        blockMaxGas: number;
+    };
 }

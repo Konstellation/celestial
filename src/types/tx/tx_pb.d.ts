@@ -4,13 +4,12 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as jspb from "google-protobuf";
-import * as coin_pb from "../coin_pb";
-import * as tx_signing_pb from "../tx/signing_pb";
-import * as google_protobuf_any_pb from "google-protobuf/google/protobuf/any_pb";
+import * as jspb from 'google-protobuf';
+import * as coin_pb from '../coin_pb';
+import * as tx_signing_pb from '../tx/signing_pb';
+import * as google_protobuf_any_pb from 'google-protobuf/google/protobuf/any_pb';
 
-export class Tx extends jspb.Message { 
-
+export class Tx extends jspb.Message {
     hasBody(): boolean;
     clearBody(): void;
     getBody(): TxBody | undefined;
@@ -30,8 +29,8 @@ export class Tx extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Tx.AsObject;
     static toObject(includeInstance: boolean, msg: Tx): Tx.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Tx, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Tx;
     static deserializeBinaryFromReader(message: Tx, reader: jspb.BinaryReader): Tx;
@@ -39,13 +38,13 @@ export class Tx extends jspb.Message {
 
 export namespace Tx {
     export type AsObject = {
-        body?: TxBody.AsObject,
-        authInfo?: AuthInfo.AsObject,
-        signaturesList: Array<Uint8Array | string>,
-    }
+        body?: TxBody.AsObject;
+        authInfo?: AuthInfo.AsObject;
+        signaturesList: Array<Uint8Array | string>;
+    };
 }
 
-export class TxRaw extends jspb.Message { 
+export class TxRaw extends jspb.Message {
     getBodyBytes(): Uint8Array | string;
     getBodyBytes_asU8(): Uint8Array;
     getBodyBytes_asB64(): string;
@@ -64,8 +63,8 @@ export class TxRaw extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TxRaw.AsObject;
     static toObject(includeInstance: boolean, msg: TxRaw): TxRaw.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: TxRaw, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): TxRaw;
     static deserializeBinaryFromReader(message: TxRaw, reader: jspb.BinaryReader): TxRaw;
@@ -73,13 +72,13 @@ export class TxRaw extends jspb.Message {
 
 export namespace TxRaw {
     export type AsObject = {
-        bodyBytes: Uint8Array | string,
-        authInfoBytes: Uint8Array | string,
-        signaturesList: Array<Uint8Array | string>,
-    }
+        bodyBytes: Uint8Array | string;
+        authInfoBytes: Uint8Array | string;
+        signaturesList: Array<Uint8Array | string>;
+    };
 }
 
-export class SignDoc extends jspb.Message { 
+export class SignDoc extends jspb.Message {
     getBodyBytes(): Uint8Array | string;
     getBodyBytes_asU8(): Uint8Array;
     getBodyBytes_asB64(): string;
@@ -96,8 +95,8 @@ export class SignDoc extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SignDoc.AsObject;
     static toObject(includeInstance: boolean, msg: SignDoc): SignDoc.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: SignDoc, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): SignDoc;
     static deserializeBinaryFromReader(message: SignDoc, reader: jspb.BinaryReader): SignDoc;
@@ -105,14 +104,14 @@ export class SignDoc extends jspb.Message {
 
 export namespace SignDoc {
     export type AsObject = {
-        bodyBytes: Uint8Array | string,
-        authInfoBytes: Uint8Array | string,
-        chainId: string,
-        accountNumber: number,
-    }
+        bodyBytes: Uint8Array | string;
+        authInfoBytes: Uint8Array | string;
+        chainId: string;
+        accountNumber: number;
+    };
 }
 
-export class TxBody extends jspb.Message { 
+export class TxBody extends jspb.Message {
     clearMessagesList(): void;
     getMessagesList(): Array<google_protobuf_any_pb.Any>;
     setMessagesList(value: Array<google_protobuf_any_pb.Any>): TxBody;
@@ -133,8 +132,8 @@ export class TxBody extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TxBody.AsObject;
     static toObject(includeInstance: boolean, msg: TxBody): TxBody.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: TxBody, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): TxBody;
     static deserializeBinaryFromReader(message: TxBody, reader: jspb.BinaryReader): TxBody;
@@ -142,15 +141,15 @@ export class TxBody extends jspb.Message {
 
 export namespace TxBody {
     export type AsObject = {
-        messagesList: Array<google_protobuf_any_pb.Any.AsObject>,
-        memo: string,
-        timeoutHeight: number,
-        extensionOptionsList: Array<google_protobuf_any_pb.Any.AsObject>,
-        nonCriticalExtensionOptionsList: Array<google_protobuf_any_pb.Any.AsObject>,
-    }
+        messagesList: Array<google_protobuf_any_pb.Any.AsObject>;
+        memo: string;
+        timeoutHeight: number;
+        extensionOptionsList: Array<google_protobuf_any_pb.Any.AsObject>;
+        nonCriticalExtensionOptionsList: Array<google_protobuf_any_pb.Any.AsObject>;
+    };
 }
 
-export class AuthInfo extends jspb.Message { 
+export class AuthInfo extends jspb.Message {
     clearSignerInfosList(): void;
     getSignerInfosList(): Array<SignerInfo>;
     setSignerInfosList(value: Array<SignerInfo>): AuthInfo;
@@ -164,8 +163,8 @@ export class AuthInfo extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): AuthInfo.AsObject;
     static toObject(includeInstance: boolean, msg: AuthInfo): AuthInfo.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: AuthInfo, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): AuthInfo;
     static deserializeBinaryFromReader(message: AuthInfo, reader: jspb.BinaryReader): AuthInfo;
@@ -173,13 +172,12 @@ export class AuthInfo extends jspb.Message {
 
 export namespace AuthInfo {
     export type AsObject = {
-        signerInfosList: Array<SignerInfo.AsObject>,
-        fee?: Fee.AsObject,
-    }
+        signerInfosList: Array<SignerInfo.AsObject>;
+        fee?: Fee.AsObject;
+    };
 }
 
-export class SignerInfo extends jspb.Message { 
-
+export class SignerInfo extends jspb.Message {
     hasPublicKey(): boolean;
     clearPublicKey(): void;
     getPublicKey(): google_protobuf_any_pb.Any | undefined;
@@ -195,8 +193,8 @@ export class SignerInfo extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SignerInfo.AsObject;
     static toObject(includeInstance: boolean, msg: SignerInfo): SignerInfo.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: SignerInfo, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): SignerInfo;
     static deserializeBinaryFromReader(message: SignerInfo, reader: jspb.BinaryReader): SignerInfo;
@@ -204,14 +202,13 @@ export class SignerInfo extends jspb.Message {
 
 export namespace SignerInfo {
     export type AsObject = {
-        publicKey?: google_protobuf_any_pb.Any.AsObject,
-        modeInfo?: ModeInfo.AsObject,
-        sequence: number,
-    }
+        publicKey?: google_protobuf_any_pb.Any.AsObject;
+        modeInfo?: ModeInfo.AsObject;
+        sequence: number;
+    };
 }
 
-export class ModeInfo extends jspb.Message { 
-
+export class ModeInfo extends jspb.Message {
     hasSingle(): boolean;
     clearSingle(): void;
     getSingle(): ModeInfo.Single | undefined;
@@ -222,8 +219,8 @@ export class ModeInfo extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ModeInfo.AsObject;
     static toObject(includeInstance: boolean, msg: ModeInfo): ModeInfo.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: ModeInfo, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): ModeInfo;
     static deserializeBinaryFromReader(message: ModeInfo, reader: jspb.BinaryReader): ModeInfo;
@@ -231,19 +228,18 @@ export class ModeInfo extends jspb.Message {
 
 export namespace ModeInfo {
     export type AsObject = {
-        single?: ModeInfo.Single.AsObject,
-    }
+        single?: ModeInfo.Single.AsObject;
+    };
 
-
-    export class Single extends jspb.Message { 
+    export class Single extends jspb.Message {
         getMode(): tx_signing_pb.SignMode;
         setMode(value: tx_signing_pb.SignMode): Single;
 
         serializeBinary(): Uint8Array;
         toObject(includeInstance?: boolean): Single.AsObject;
         static toObject(includeInstance: boolean, msg: Single): Single.AsObject;
-        static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-        static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+        static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+        static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
         static serializeBinaryToWriter(message: Single, writer: jspb.BinaryWriter): void;
         static deserializeBinary(bytes: Uint8Array): Single;
         static deserializeBinaryFromReader(message: Single, reader: jspb.BinaryReader): Single;
@@ -251,19 +247,17 @@ export namespace ModeInfo {
 
     export namespace Single {
         export type AsObject = {
-            mode: tx_signing_pb.SignMode,
-        }
+            mode: tx_signing_pb.SignMode;
+        };
     }
-
 
     export enum SumCase {
         SUM_NOT_SET = 0,
         SINGLE = 1,
     }
-
 }
 
-export class Fee extends jspb.Message { 
+export class Fee extends jspb.Message {
     clearAmountList(): void;
     getAmountList(): Array<coin_pb.Coin>;
     setAmountList(value: Array<coin_pb.Coin>): Fee;
@@ -278,8 +272,8 @@ export class Fee extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Fee.AsObject;
     static toObject(includeInstance: boolean, msg: Fee): Fee.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Fee, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Fee;
     static deserializeBinaryFromReader(message: Fee, reader: jspb.BinaryReader): Fee;
@@ -287,9 +281,9 @@ export class Fee extends jspb.Message {
 
 export namespace Fee {
     export type AsObject = {
-        amountList: Array<coin_pb.Coin.AsObject>,
-        gasLimit: number,
-        payer: string,
-        granter: string,
-    }
+        amountList: Array<coin_pb.Coin.AsObject>;
+        gasLimit: number;
+        payer: string;
+        granter: string;
+    };
 }

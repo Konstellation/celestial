@@ -4,10 +4,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as jspb from "google-protobuf";
+import * as jspb from 'google-protobuf';
 
-export class PublicKey extends jspb.Message { 
-
+export class PublicKey extends jspb.Message {
     hasEd25519(): boolean;
     clearEd25519(): void;
     getEd25519(): Uint8Array | string;
@@ -27,8 +26,8 @@ export class PublicKey extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PublicKey.AsObject;
     static toObject(includeInstance: boolean, msg: PublicKey): PublicKey.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: PublicKey, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): PublicKey;
     static deserializeBinaryFromReader(message: PublicKey, reader: jspb.BinaryReader): PublicKey;
@@ -36,14 +35,13 @@ export class PublicKey extends jspb.Message {
 
 export namespace PublicKey {
     export type AsObject = {
-        ed25519: Uint8Array | string,
-        secp256k1: Uint8Array | string,
-    }
+        ed25519: Uint8Array | string;
+        secp256k1: Uint8Array | string;
+    };
 
     export enum SumCase {
         SUM_NOT_SET = 0,
         ED25519 = 1,
         SECP256K1 = 2,
     }
-
 }

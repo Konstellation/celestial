@@ -4,13 +4,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import * as jspb from "google-protobuf";
-import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
-import * as tendermint_crypto_proof_pb from "../../tendermint/crypto/proof_pb";
-import * as tendermint_version_types_pb from "../../tendermint/version/types_pb";
-import * as tendermint_types_validator_pb from "../../tendermint/types/validator_pb";
+import * as jspb from 'google-protobuf';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+import * as tendermint_crypto_proof_pb from '../../tendermint/crypto/proof_pb';
+import * as tendermint_version_types_pb from '../../tendermint/version/types_pb';
+import * as tendermint_types_validator_pb from '../../tendermint/types/validator_pb';
 
-export class PartSetHeader extends jspb.Message { 
+export class PartSetHeader extends jspb.Message {
     getTotal(): number;
     setTotal(value: number): PartSetHeader;
     getHash(): Uint8Array | string;
@@ -21,8 +21,8 @@ export class PartSetHeader extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PartSetHeader.AsObject;
     static toObject(includeInstance: boolean, msg: PartSetHeader): PartSetHeader.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: PartSetHeader, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): PartSetHeader;
     static deserializeBinaryFromReader(message: PartSetHeader, reader: jspb.BinaryReader): PartSetHeader;
@@ -30,12 +30,12 @@ export class PartSetHeader extends jspb.Message {
 
 export namespace PartSetHeader {
     export type AsObject = {
-        total: number,
-        hash: Uint8Array | string,
-    }
+        total: number;
+        hash: Uint8Array | string;
+    };
 }
 
-export class Part extends jspb.Message { 
+export class Part extends jspb.Message {
     getIndex(): number;
     setIndex(value: number): Part;
     getBytes(): Uint8Array | string;
@@ -51,8 +51,8 @@ export class Part extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Part.AsObject;
     static toObject(includeInstance: boolean, msg: Part): Part.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Part, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Part;
     static deserializeBinaryFromReader(message: Part, reader: jspb.BinaryReader): Part;
@@ -60,13 +60,13 @@ export class Part extends jspb.Message {
 
 export namespace Part {
     export type AsObject = {
-        index: number,
-        bytes: Uint8Array | string,
-        proof?: tendermint_crypto_proof_pb.Proof.AsObject,
-    }
+        index: number;
+        bytes: Uint8Array | string;
+        proof?: tendermint_crypto_proof_pb.Proof.AsObject;
+    };
 }
 
-export class BlockID extends jspb.Message { 
+export class BlockID extends jspb.Message {
     getHash(): Uint8Array | string;
     getHash_asU8(): Uint8Array;
     getHash_asB64(): string;
@@ -80,8 +80,8 @@ export class BlockID extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BlockID.AsObject;
     static toObject(includeInstance: boolean, msg: BlockID): BlockID.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: BlockID, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): BlockID;
     static deserializeBinaryFromReader(message: BlockID, reader: jspb.BinaryReader): BlockID;
@@ -89,13 +89,12 @@ export class BlockID extends jspb.Message {
 
 export namespace BlockID {
     export type AsObject = {
-        hash: Uint8Array | string,
-        partSetHeader?: PartSetHeader.AsObject,
-    }
+        hash: Uint8Array | string;
+        partSetHeader?: PartSetHeader.AsObject;
+    };
 }
 
-export class Header extends jspb.Message { 
-
+export class Header extends jspb.Message {
     hasVersion(): boolean;
     clearVersion(): void;
     getVersion(): tendermint_version_types_pb.Consensus | undefined;
@@ -154,8 +153,8 @@ export class Header extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Header.AsObject;
     static toObject(includeInstance: boolean, msg: Header): Header.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Header, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Header;
     static deserializeBinaryFromReader(message: Header, reader: jspb.BinaryReader): Header;
@@ -163,24 +162,24 @@ export class Header extends jspb.Message {
 
 export namespace Header {
     export type AsObject = {
-        version?: tendermint_version_types_pb.Consensus.AsObject,
-        chainId: string,
-        height: number,
-        time?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        lastBlockId?: BlockID.AsObject,
-        lastCommitHash: Uint8Array | string,
-        dataHash: Uint8Array | string,
-        validatorsHash: Uint8Array | string,
-        nextValidatorsHash: Uint8Array | string,
-        consensusHash: Uint8Array | string,
-        appHash: Uint8Array | string,
-        lastResultsHash: Uint8Array | string,
-        evidenceHash: Uint8Array | string,
-        proposerAddress: Uint8Array | string,
-    }
+        version?: tendermint_version_types_pb.Consensus.AsObject;
+        chainId: string;
+        height: number;
+        time?: google_protobuf_timestamp_pb.Timestamp.AsObject;
+        lastBlockId?: BlockID.AsObject;
+        lastCommitHash: Uint8Array | string;
+        dataHash: Uint8Array | string;
+        validatorsHash: Uint8Array | string;
+        nextValidatorsHash: Uint8Array | string;
+        consensusHash: Uint8Array | string;
+        appHash: Uint8Array | string;
+        lastResultsHash: Uint8Array | string;
+        evidenceHash: Uint8Array | string;
+        proposerAddress: Uint8Array | string;
+    };
 }
 
-export class Data extends jspb.Message { 
+export class Data extends jspb.Message {
     clearTxsList(): void;
     getTxsList(): Array<Uint8Array | string>;
     getTxsList_asU8(): Array<Uint8Array>;
@@ -191,8 +190,8 @@ export class Data extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Data.AsObject;
     static toObject(includeInstance: boolean, msg: Data): Data.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Data, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Data;
     static deserializeBinaryFromReader(message: Data, reader: jspb.BinaryReader): Data;
@@ -200,11 +199,11 @@ export class Data extends jspb.Message {
 
 export namespace Data {
     export type AsObject = {
-        txsList: Array<Uint8Array | string>,
-    }
+        txsList: Array<Uint8Array | string>;
+    };
 }
 
-export class Vote extends jspb.Message { 
+export class Vote extends jspb.Message {
     getType(): SignedMsgType;
     setType(value: SignedMsgType): Vote;
     getHeight(): number;
@@ -235,8 +234,8 @@ export class Vote extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Vote.AsObject;
     static toObject(includeInstance: boolean, msg: Vote): Vote.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Vote, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Vote;
     static deserializeBinaryFromReader(message: Vote, reader: jspb.BinaryReader): Vote;
@@ -244,18 +243,18 @@ export class Vote extends jspb.Message {
 
 export namespace Vote {
     export type AsObject = {
-        type: SignedMsgType,
-        height: number,
-        round: number,
-        blockId?: BlockID.AsObject,
-        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        validatorAddress: Uint8Array | string,
-        validatorIndex: number,
-        signature: Uint8Array | string,
-    }
+        type: SignedMsgType;
+        height: number;
+        round: number;
+        blockId?: BlockID.AsObject;
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
+        validatorAddress: Uint8Array | string;
+        validatorIndex: number;
+        signature: Uint8Array | string;
+    };
 }
 
-export class Commit extends jspb.Message { 
+export class Commit extends jspb.Message {
     getHeight(): number;
     setHeight(value: number): Commit;
     getRound(): number;
@@ -273,8 +272,8 @@ export class Commit extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Commit.AsObject;
     static toObject(includeInstance: boolean, msg: Commit): Commit.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Commit, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Commit;
     static deserializeBinaryFromReader(message: Commit, reader: jspb.BinaryReader): Commit;
@@ -282,14 +281,14 @@ export class Commit extends jspb.Message {
 
 export namespace Commit {
     export type AsObject = {
-        height: number,
-        round: number,
-        blockId?: BlockID.AsObject,
-        signaturesList: Array<CommitSig.AsObject>,
-    }
+        height: number;
+        round: number;
+        blockId?: BlockID.AsObject;
+        signaturesList: Array<CommitSig.AsObject>;
+    };
 }
 
-export class CommitSig extends jspb.Message { 
+export class CommitSig extends jspb.Message {
     getBlockIdFlag(): BlockIDFlag;
     setBlockIdFlag(value: BlockIDFlag): CommitSig;
     getValidatorAddress(): Uint8Array | string;
@@ -309,8 +308,8 @@ export class CommitSig extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): CommitSig.AsObject;
     static toObject(includeInstance: boolean, msg: CommitSig): CommitSig.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: CommitSig, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): CommitSig;
     static deserializeBinaryFromReader(message: CommitSig, reader: jspb.BinaryReader): CommitSig;
@@ -318,14 +317,14 @@ export class CommitSig extends jspb.Message {
 
 export namespace CommitSig {
     export type AsObject = {
-        blockIdFlag: BlockIDFlag,
-        validatorAddress: Uint8Array | string,
-        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        signature: Uint8Array | string,
-    }
+        blockIdFlag: BlockIDFlag;
+        validatorAddress: Uint8Array | string;
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
+        signature: Uint8Array | string;
+    };
 }
 
-export class Proposal extends jspb.Message { 
+export class Proposal extends jspb.Message {
     getType(): SignedMsgType;
     setType(value: SignedMsgType): Proposal;
     getHeight(): number;
@@ -352,8 +351,8 @@ export class Proposal extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Proposal.AsObject;
     static toObject(includeInstance: boolean, msg: Proposal): Proposal.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: Proposal, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): Proposal;
     static deserializeBinaryFromReader(message: Proposal, reader: jspb.BinaryReader): Proposal;
@@ -361,18 +360,17 @@ export class Proposal extends jspb.Message {
 
 export namespace Proposal {
     export type AsObject = {
-        type: SignedMsgType,
-        height: number,
-        round: number,
-        polRound: number,
-        blockId?: BlockID.AsObject,
-        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        signature: Uint8Array | string,
-    }
+        type: SignedMsgType;
+        height: number;
+        round: number;
+        polRound: number;
+        blockId?: BlockID.AsObject;
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject;
+        signature: Uint8Array | string;
+    };
 }
 
-export class SignedHeader extends jspb.Message { 
-
+export class SignedHeader extends jspb.Message {
     hasHeader(): boolean;
     clearHeader(): void;
     getHeader(): Header | undefined;
@@ -386,8 +384,8 @@ export class SignedHeader extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SignedHeader.AsObject;
     static toObject(includeInstance: boolean, msg: SignedHeader): SignedHeader.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: SignedHeader, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): SignedHeader;
     static deserializeBinaryFromReader(message: SignedHeader, reader: jspb.BinaryReader): SignedHeader;
@@ -395,13 +393,12 @@ export class SignedHeader extends jspb.Message {
 
 export namespace SignedHeader {
     export type AsObject = {
-        header?: Header.AsObject,
-        commit?: Commit.AsObject,
-    }
+        header?: Header.AsObject;
+        commit?: Commit.AsObject;
+    };
 }
 
-export class LightBlock extends jspb.Message { 
-
+export class LightBlock extends jspb.Message {
     hasSignedHeader(): boolean;
     clearSignedHeader(): void;
     getSignedHeader(): SignedHeader | undefined;
@@ -415,8 +412,8 @@ export class LightBlock extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): LightBlock.AsObject;
     static toObject(includeInstance: boolean, msg: LightBlock): LightBlock.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: LightBlock, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): LightBlock;
     static deserializeBinaryFromReader(message: LightBlock, reader: jspb.BinaryReader): LightBlock;
@@ -424,13 +421,12 @@ export class LightBlock extends jspb.Message {
 
 export namespace LightBlock {
     export type AsObject = {
-        signedHeader?: SignedHeader.AsObject,
-        validatorSet?: tendermint_types_validator_pb.ValidatorSet.AsObject,
-    }
+        signedHeader?: SignedHeader.AsObject;
+        validatorSet?: tendermint_types_validator_pb.ValidatorSet.AsObject;
+    };
 }
 
-export class BlockMeta extends jspb.Message { 
-
+export class BlockMeta extends jspb.Message {
     hasBlockId(): boolean;
     clearBlockId(): void;
     getBlockId(): BlockID | undefined;
@@ -448,8 +444,8 @@ export class BlockMeta extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): BlockMeta.AsObject;
     static toObject(includeInstance: boolean, msg: BlockMeta): BlockMeta.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: BlockMeta, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): BlockMeta;
     static deserializeBinaryFromReader(message: BlockMeta, reader: jspb.BinaryReader): BlockMeta;
@@ -457,14 +453,14 @@ export class BlockMeta extends jspb.Message {
 
 export namespace BlockMeta {
     export type AsObject = {
-        blockId?: BlockID.AsObject,
-        blockSize: number,
-        header?: Header.AsObject,
-        numTxs: number,
-    }
+        blockId?: BlockID.AsObject;
+        blockSize: number;
+        header?: Header.AsObject;
+        numTxs: number;
+    };
 }
 
-export class TxProof extends jspb.Message { 
+export class TxProof extends jspb.Message {
     getRootHash(): Uint8Array | string;
     getRootHash_asU8(): Uint8Array;
     getRootHash_asB64(): string;
@@ -482,8 +478,8 @@ export class TxProof extends jspb.Message {
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TxProof.AsObject;
     static toObject(includeInstance: boolean, msg: TxProof): TxProof.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static extensions: { [key: number]: jspb.ExtensionFieldInfo<jspb.Message> };
+    static extensionsBinary: { [key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message> };
     static serializeBinaryToWriter(message: TxProof, writer: jspb.BinaryWriter): void;
     static deserializeBinary(bytes: Uint8Array): TxProof;
     static deserializeBinaryFromReader(message: TxProof, reader: jspb.BinaryReader): TxProof;
@@ -491,10 +487,10 @@ export class TxProof extends jspb.Message {
 
 export namespace TxProof {
     export type AsObject = {
-        rootHash: Uint8Array | string,
-        data: Uint8Array | string,
-        proof?: tendermint_crypto_proof_pb.Proof.AsObject,
-    }
+        rootHash: Uint8Array | string;
+        data: Uint8Array | string;
+        proof?: tendermint_crypto_proof_pb.Proof.AsObject;
+    };
 }
 
 export enum BlockIDFlag {
