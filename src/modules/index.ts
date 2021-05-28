@@ -8,7 +8,7 @@ export class Modules {
     bank?: BankModule;
     tx?: TxModule;
 
-    constructor(modules: Module[], grpcAddress: string) {
-        modules.forEach(m => (this[m] = new (require(`./${m}`).default)(grpcAddress)));
+    constructor(modules: Module[]) {
+        modules.forEach(m => (this[m] = new (require(`./${m}`).default)()));
     }
 }
