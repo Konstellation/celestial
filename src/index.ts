@@ -4,19 +4,21 @@ import { SigningStargateClient, createProtobufRpcClient } from '@cosmjs/stargate
 import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 import { coins, DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { Decimal } from '@cosmjs/math';
-import { Reader, Writer } from 'protobufjs';
 import { TendermintRpc } from './modules/tendermint-rpc';
+import { Context } from './types/Context';
 
 const rpcAddr = '206.81.29.202:26657';
 
 export class Celestial extends Modules {
-    constructor(modules: Module[]) {
-        super(modules);
+    private static ctx: Context;
+
+    constructor(modules: Module[], ctx: Context) {
+        super(modules, ctx);
     }
 
     static async create(rpcAddress: string, modules: Module[]): Promise<Celestial> {
-        await TendermintRpc.connect(rpcAddress);
-        return new this(modules);
+        Celestial.ctx = new Context(await TendermintRpc.connect(rpcAddress));
+        return new this(modules, Celestial.ctx);
     }
 }
 
@@ -40,21 +42,21 @@ export class Celestial extends Modules {
         },
     };
 
-    // const c = await Celestial.create(rpcAddr, [Module.BANK, Module.AUTH]);
-    // const res = await c.bank?.getBalance({ address: 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx', denom: 'udarc' });
-    // console.log(res);
+    const c = await Celestial.create(rpcAddr, [Module.BANK, Module.AUTH]);
+    const res = await c.bank?.getBalance({ address: 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx', denom: 'udarc' });
+    console.log(res);
     // const res1 = await client.getBalance('darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx', 'udarc');
     // console.log(res1);
     // const res1 = await c.auth?.getAccount('darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx');
     // console.log(res1);
     // console.log(client.registry);
-    const dd = await client.signAndBroadcast(
-        'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx',
-        [sendMsg],
-        client.fees.send,
-        '',
-    );
-    console.log(dd);
+    // const dd = await client.signAndBroadcast(
+    //     'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx',
+    //     [sendMsg],
+    //     client.fees.send,
+    //     '',
+    // );
+    // console.log(dd);
     // console.log(
     //     await client.signAndBroadcast('darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx', [sendMsg], client.fees.send, ''),
     // );
