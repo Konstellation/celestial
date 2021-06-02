@@ -6,18 +6,27 @@ import { coins, DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { Decimal } from '@cosmjs/math';
 import { TendermintRpc } from './modules/tendermint-rpc';
 import { Context } from './types/Context';
+import { OfflineDirectSigner } from './types/OfflineDirectSigner';
 
 const rpcAddr = '206.81.29.202:26657';
 
 export class Celestial extends Modules {
-    private static ctx: Context;
+    static ctx: Context;
 
     constructor(modules: Module[], ctx: Context) {
         super(modules, ctx);
     }
 
-    static async create(rpcAddress: string, modules: Module[]): Promise<Celestial> {
-        Celestial.ctx = new Context(await TendermintRpc.connect(rpcAddress));
+    static async create({
+        rpcAddress,
+        modules,
+        signer,
+    }: {
+        rpcAddress: string;
+        modules: Module[];
+        signer: OfflineDirectSigner;
+    }): Promise<Celestial> {
+        Celestial.ctx = new Context(await TendermintRpc.connect(rpcAddress), signer);
         return new this(modules, Celestial.ctx);
     }
 }
@@ -29,6 +38,8 @@ export class Celestial extends Modules {
             prefix: 'darc',
         },
     );
+    const d = await Celestial.create({ rpcAddress: rpcAddr, modules: [Module.BANK, Module.AUTH], signer: wallet });
+    return;
     const client = await SigningStargateClient.connectWithSigner('206.81.29.202:26657', wallet, {
         gasPrice: { amount: Decimal.fromUserInput('0.025', 3), denom: 'udarc' },
     });
@@ -42,7 +53,7 @@ export class Celestial extends Modules {
         },
     };
 
-    const c = await Celestial.create(rpcAddr, [Module.BANK, Module.AUTH]);
+    const c = await Celestial.create({ rpcAddress: rpcAddr, modules: [Module.BANK, Module.AUTH], signer: wallet });
     const res = await c.bank?.getBalance({ address: 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx', denom: 'udarc' });
     console.log(res);
     // const res1 = await client.getBalance('darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx', 'udarc');

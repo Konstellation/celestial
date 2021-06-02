@@ -10,6 +10,10 @@ export class Modules {
     tx?: TxModule;
 
     constructor(modules: Module[], ctx: Context) {
-        modules.forEach(m => (this[m] = new (require(`./${m}`).default)(ctx)));
+        modules.forEach((m, i) => {
+            const c = new (require(`./${m}`).default)(ctx);
+            this[m] = c;
+            if (!i) ctx.modules = this;
+        });
     }
 }
