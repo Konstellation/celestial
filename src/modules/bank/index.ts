@@ -23,8 +23,8 @@ export default class BankModule extends BaseModule {
         super(ctx);
     }
 
-    async getBalance({ address, denom }: { address: string; denom: string }) {
-        const data = QueryBalanceRequest.encode({ address, denom }).finish();
+    async Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
+        const data = QueryBalanceRequest.encode(request).finish();
         const res = await this.ctx.rpc.queryUnverified(this.service + '/Balance', data);
         return QueryBalanceResponse.decode(new Reader(res));
     }

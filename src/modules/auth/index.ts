@@ -13,13 +13,13 @@ export default class AuthModule extends BaseModule {
         super(ctx);
     }
 
-    async getAccount(address: string): Promise<QueryAccountResponse> {
+    async Account(address: string): Promise<QueryAccountResponse> {
         const data = QueryAccountRequest.encode(address).finish();
         const res = await this.ctx.rpc.queryUnverified(this.service + '/Account', data);
         return QueryAccountResponse.decode(new Reader(res));
     }
 
-    async getParams(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+    async Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
         const data = QueryParamsRequest.encode(request).finish();
         const promise = this.ctx.rpc.queryUnverified(this.service + '/Params', data);
         return promise.then(data => QueryParamsResponse.decode(new Reader(data)));
