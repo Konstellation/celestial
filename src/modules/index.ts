@@ -11,8 +11,7 @@ export class Modules {
 
     constructor(modules: Module[], ctx: Context) {
         modules.forEach((m, i) => {
-            const c = new (require(`./${m}`).default)(ctx);
-            this[m] = c;
+            this[m] = new (require(`./${m}`).default)(ctx);
             if (!i) ctx.modules = this;
         });
     }

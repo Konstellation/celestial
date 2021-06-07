@@ -1,4 +1,5 @@
 import { Reader, Writer } from 'protobufjs';
+import { DeepPartial } from '../../../types/deepPartial';
 
 export interface TxRaw {
     /**
@@ -55,6 +56,27 @@ export const TxRaw = {
                 default:
                     reader.skipType(tag & 7);
                     break;
+            }
+        }
+        return message;
+    },
+
+    fromPartial(object: DeepPartial<TxRaw>): TxRaw {
+        const message = {} as TxRaw;
+        message.signatures = [];
+        if (object.bodyBytes !== undefined && object.bodyBytes !== null) {
+            message.bodyBytes = object.bodyBytes;
+        } else {
+            message.bodyBytes = new Uint8Array();
+        }
+        if (object.authInfoBytes !== undefined && object.authInfoBytes !== null) {
+            message.authInfoBytes = object.authInfoBytes;
+        } else {
+            message.authInfoBytes = new Uint8Array();
+        }
+        if (object.signatures !== undefined && object.signatures !== null) {
+            for (const e of object.signatures) {
+                message.signatures.push(e);
             }
         }
         return message;
