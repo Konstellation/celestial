@@ -1,53 +1,27 @@
-import { credentials } from 'grpc';
-import { BaseAccount, Params } from '../../types/auth/auth_pb';
-import { QueryClient } from '../../types/auth/query_grpc_pb';
-import { QueryAccountRequest, QueryAccountsRequest, QueryParamsRequest } from '../../types/auth/query_pb';
+import { QueryAccountRequest } from './types/queryAccountRequest';
+import { Reader } from 'protobufjs';
+import { Context } from '../../types/Context';
+import { BaseModule } from '../../types/BaseModule';
+import { QueryAccountResponse } from './types/queryAccountResponse';
+import { QueryParamsRequest } from './types/queryParamsRequest';
+import { QueryParamsResponse } from './types/queryParamsResponse';
 
-export default class AuthModule {
-    private authClient: QueryClient;
+export default class AuthModule extends BaseModule {
+    private service = '/cosmos.auth.v1beta1.Query';
 
-    constructor(grpcAddress: string) {
-        this.authClient = new QueryClient(grpcAddress, credentials.createInsecure());
+    constructor(ctx: Context) {
+        super(ctx);
     }
 
-    getAccount = (address: string): Promise<BaseAccount.AsObject> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryAccountRequest();
-            request.setAddress(address);
+    async getAccount(address: string): Promise<QueryAccountResponse> {
+        const data = QueryAccountRequest.encode(address).finish();
+        const res = await this.ctx.rpc.queryUnverified(this.service + '/Account', data);
+        return QueryAccountResponse.decode(new Reader(res));
+    }
 
-            this.authClient.account(request, (err, res) => {
-                if (err) return reject(err);
-
-                const accountAny = res.getAccount();
-                const acc = accountAny?.unpack(BaseAccount.deserializeBinary, accountAny?.getTypeName()) as BaseAccount;
-
-                resolve(acc.toObject());
-            });
-        });
-    };
-
-    // UNIMPLEMENTED
-    getAccounts = (): Promise<BaseAccount[]> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryAccountsRequest();
-
-            this.authClient.accounts(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getAccountsList());
-            });
-        });
-    };
-
-    getParams = (): Promise<Params.AsObject | undefined> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryParamsRequest();
-
-            this.authClient.params(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getParams()?.toObject());
-            });
-        });
-    };
+    async getParams(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+        const data = QueryParamsRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/Params', data);
+        return promise.then(data => QueryParamsResponse.decode(new Reader(data)));
+    }
 }

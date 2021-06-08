@@ -1,118 +1,67 @@
-import { credentials } from 'grpc';
-import { Metadata, Params } from '../../types/bank/bank_pb';
-import { QueryClient } from '../../types/bank/query_grpc_pb';
-import {
-    QueryAllBalancesRequest,
-    QueryAllBalancesResponse,
-    QueryBalanceRequest,
-    QueryDenomMetadataRequest,
-    QueryDenomsMetadataRequest,
-    QueryParamsRequest,
-    QuerySupplyOfRequest,
-    QueryTotalSupplyRequest,
-} from '../../types/bank/query_pb';
-import { Coin } from '../../types/coin_pb';
-import { PageRequest } from '../../types/pagination_pb';
+import { QueryBalanceRequest } from './types/QueryBalanceRequest';
+import { Reader } from 'protobufjs';
+import { QueryBalanceResponse } from './types/QueryBalanceResponse';
+import { Context } from '../../types/Context';
+import { BaseModule } from '../../types/BaseModule';
+import { QueryAllBalancesRequest } from './types/QueryAllBalancesRequest';
+import { QueryAllBalancesResponse } from './types/QueryAllBalancesResponse';
+import { QueryTotalSupplyRequest } from './types/QueryTotalSupplyRequest';
+import { QueryTotalSupplyResponse } from './types/QueryTotalSupplyResponse';
+import { QuerySupplyOfRequest } from './types/QuerySupplyOfRequest';
+import { QuerySupplyOfResponse } from './types/QuerySupplyOfResponse';
+import { QueryParamsRequest } from './types/QueryParamsRequest';
+import { QueryParamsResponse } from './types/QueryParamsResponse';
+import { QueryDenomMetadataRequest } from './types/QueryDenomMetadataRequest';
+import { QueryDenomMetadataResponse } from './types/QueryDenomMetadataResponse';
+import { QueryDenomsMetadataRequest } from './types/QueryDenomsMetadataRequest';
+import { QueryDenomsMetadataResponse } from './types/QueryDenomsMetadataResponse';
 
-export default class BankModule {
-    private bankClient: QueryClient;
+export default class BankModule extends BaseModule {
+    private service = '/cosmos.bank.v1beta1.Query';
 
-    constructor(grpcAddress: string) {
-        this.bankClient = new QueryClient(grpcAddress, credentials.createInsecure());
+    constructor(ctx: Context) {
+        super(ctx);
     }
 
-    getBalance = ({ address, denom }: QueryBalanceRequest.AsObject): Promise<Coin.AsObject | undefined> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryBalanceRequest();
-            request.setAddress(address);
-            request.setDenom(denom);
+    async getBalance({ address, denom }: { address: string; denom: string }) {
+        const data = QueryBalanceRequest.encode({ address, denom }).finish();
+        const res = await this.ctx.rpc.queryUnverified(this.service + '/Balance', data);
+        return QueryBalanceResponse.decode(new Reader(res));
+    }
 
-            this.bankClient.balance(request, (err, res) => {
-                if (err) return reject(err);
+    async AllBalances(request: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
+        const data = QueryAllBalancesRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/AllBalances', data);
+        return promise.then(data => QueryAllBalancesResponse.decode(new Reader(data)));
+    }
 
-                resolve(res.getBalance()?.toObject());
-            });
-        });
-    };
+    async TotalSupply(request: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
+        const data = QueryTotalSupplyRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/TotalSupply', data);
+        return promise.then(data => QueryTotalSupplyResponse.decode(new Reader(data)));
+    }
 
-    getAllBalances = ({ address, pagination }: QueryAllBalancesRequest.AsObject): Promise<Coin.AsObject[]> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryAllBalancesRequest();
-            request.setAddress(address);
-            // const page = new PageRequest();
-            // page.setKey(pagination?.key)
+    async SupplyOf(request: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
+        const data = QuerySupplyOfRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/SupplyOf', data);
+        return promise.then(data => QuerySupplyOfResponse.decode(new Reader(data)));
+    }
 
-            // request.setPagination(page);
+    async Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
+        const data = QueryParamsRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/Params', data);
+        return promise.then(data => QueryParamsResponse.decode(new Reader(data)));
+    }
 
-            this.bankClient.allBalances(request, (err, res) => {
-                if (err) return reject(err);
+    async DenomMetadata(request: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
+        const data = QueryDenomMetadataRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/DenomMetadata', data);
+        return promise.then(data => QueryDenomMetadataResponse.decode(new Reader(data)));
+    }
 
-                resolve(res.getBalancesList().map(b => b.toObject()));
-            });
-        });
-    };
-
-    getTotalSupply = (pagination?: PageRequest): Promise<Coin.AsObject[]> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryTotalSupplyRequest();
-            request.setPagination(pagination);
-
-            this.bankClient.totalSupply(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getSupplyList().map(s => s.toObject()));
-            });
-        });
-    };
-
-    getSupplyOf = (denom: string): Promise<Coin.AsObject | undefined> => {
-        return new Promise((resolve, reject) => {
-            const request = new QuerySupplyOfRequest();
-            request.setDenom(denom);
-
-            this.bankClient.supplyOf(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getAmount()?.toObject());
-            });
-        });
-    };
-
-    getParams = (): Promise<Params.AsObject | undefined> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryParamsRequest();
-
-            this.bankClient.params(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getParams()?.toObject());
-            });
-        });
-    };
-
-    getDenomMetadata = (denom: string): Promise<Metadata.AsObject | undefined> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryDenomMetadataRequest();
-            request.setDenom(denom);
-
-            this.bankClient.denomMetadata(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getMetadata()?.toObject());
-            });
-        });
-    };
-
-    getDenomsMetadata = (pagination?: PageRequest): Promise<Metadata.AsObject[]> => {
-        return new Promise((resolve, reject) => {
-            const request = new QueryDenomsMetadataRequest();
-            request.setPagination(pagination);
-
-            this.bankClient.denomsMetadata(request, (err, res) => {
-                if (err) return reject(err);
-
-                resolve(res.getMetadatasList().map(m => m.toObject()));
-            });
-        });
-    };
+    async DenomsMetadata(request: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
+        const data = QueryDenomsMetadataRequest.encode(request).finish();
+        const promise = this.ctx.rpc.queryUnverified(this.service + '/DenomsMetadata', data);
+        return promise.then(data => QueryDenomsMetadataResponse.decode(new Reader(data)));
+    }
 }
