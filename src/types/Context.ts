@@ -3,7 +3,7 @@ import { SequenceResponse } from '../modules/auth/types/sequenceResponse';
 import { TendermintRpc } from '../modules/tendermint-rpc';
 import { OfflineDirectSigner } from './OfflineDirectSigner';
 import { Registry } from '@cosmjs/proto-signing';
-import { buildFeeTable, GasPrice } from '@cosmjs/stargate';
+import { buildFeeTable, defaultRegistryTypes, GasPrice } from '@cosmjs/stargate';
 import { CosmosFeeTable } from '../modules/tx/types/feeTable';
 import { GasLimits } from '../modules/tx/types/gasLimits';
 import { accountFromAny } from '@cosmjs/stargate';
@@ -31,7 +31,7 @@ export class Context {
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     modules?: Modules;
-    registry = new Registry();
+    registry = new Registry(defaultRegistryTypes);
     fees: CosmosFeeTable;
 
     private chainId = '';

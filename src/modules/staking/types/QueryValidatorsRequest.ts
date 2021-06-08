@@ -6,6 +6,8 @@ export interface QueryValidatorsRequest {
     pagination?: PageRequest;
 }
 
+const baseQueryValidatorsRequest = { status: '' };
+
 export const QueryValidatorsRequest = {
     encode(message: QueryValidatorsRequest, writer: Writer = Writer.create()): Writer {
         if (message.status !== '') {
@@ -20,7 +22,7 @@ export const QueryValidatorsRequest = {
     decode(input: Reader | Uint8Array, length?: number): QueryValidatorsRequest {
         const reader = input instanceof Reader ? input : new Reader(input);
         let end = length === undefined ? reader.len : reader.pos + length;
-        const message = {} as QueryValidatorsRequest;
+        const message = { ...baseQueryValidatorsRequest } as QueryValidatorsRequest;
         while (reader.pos < end) {
             const tag = reader.uint32();
             switch (tag >>> 3) {

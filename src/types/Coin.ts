@@ -1,4 +1,5 @@
 import { Reader, Writer } from 'protobufjs';
+import { Uint53 } from '@cosmjs/math';
 
 export interface Coin {
     denom: string;
@@ -37,3 +38,11 @@ export const Coin = {
         return message;
     },
 };
+
+export function coin(amount: number, denom: string): Coin {
+    return { amount: new Uint53(amount).toString(), denom: denom };
+}
+
+export function coins(amount: number, denom: string): Coin[] {
+    return [coin(amount, denom)];
+}
