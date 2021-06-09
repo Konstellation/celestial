@@ -63,13 +63,13 @@ export class Celestial extends Modules {
     //     Celestial.ctx.fees.send,
     // );
     // console.log(response);
-    // const del = MsgDelegate({
-    //     validatorAddress: addr,
-    //     delegatorAddress: heisenberg,
-    //     amount: { amount: '500000', denom: 'udarc' },
-    // });
-    // const response = await d.tx?.signAndBroadcast(heisenberg, [del], Celestial.ctx.fees.delegate);
-    // console.log(response);
-    // const sish = await d.staking?.DelegatorDelegations({ delegatorAddr: heisenberg });
-    // console.log(JSON.stringify(sish));
+    const del = MsgDelegate({
+        validatorAddress: validatorAddr,
+        delegatorAddress: heisenberg,
+        amount: { amount: '2000', denom: 'udarc' },
+    });
+    const response = await d.tx?.signAndBroadcast(heisenberg, [del], Celestial.ctx.fees.delegate);
+    console.log(response);
+    const sish = await d.staking?.DelegatorDelegations({ delegatorAddr: heisenberg });
+    console.log(JSON.stringify(sish));
 })();

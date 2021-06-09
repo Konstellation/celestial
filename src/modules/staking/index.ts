@@ -29,12 +29,27 @@ import { QueryPoolRequest } from './types/QueryPoolRequest';
 import { QueryPoolResponse } from './types/QueryPoolResponse';
 import { QueryParamsRequest } from './types/QueryParamsRequest';
 import { QueryParamsResponse } from './types/QueryParamsResponse';
+import { MsgBeginRedelegate } from './messages/beginRedelegate';
+import { MsgCreateValidator } from './messages/createValidator';
+import { MsgDelegate } from './messages/delegate';
+import { MsgEditValidator } from './messages/editValidator';
+import { MsgUndelegate } from './messages/undelegate';
+import { Registry } from '@cosmjs/proto-signing';
 
 export default class StakingModule extends BaseModule {
     private service = '/cosmos.staking.v1beta1.Query';
+    private defaultRegistryTypes: ReadonlyArray<[string, any]> = [
+        ['/cosmos.staking.v1beta1.MsgBeginRedelegate', MsgBeginRedelegate],
+        ['/cosmos.staking.v1beta1.MsgCreateValidator', MsgCreateValidator],
+        ['/cosmos.staking.v1beta1.MsgDelegate', MsgDelegate],
+        ['/cosmos.staking.v1beta1.MsgEditValidator', MsgEditValidator],
+        ['/cosmos.staking.v1beta1.MsgUndelegate', MsgUndelegate],
+    ];
 
     constructor(ctx: Context) {
         super(ctx);
+        // this.defaultRegistryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
+        // ctx.registry = new Registry(this.defaultRegistryTypes);
     }
 
     async Validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse> {

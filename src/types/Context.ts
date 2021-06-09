@@ -31,8 +31,8 @@ export class Context {
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     modules?: Modules;
-    registry = new Registry(defaultRegistryTypes);
     fees: CosmosFeeTable;
+    registry = new Registry();
 
     private chainId = '';
 

@@ -19,7 +19,9 @@
         "test": "jest",
         "test:dev": "jest --watchAll",
         "proto:win": "sh ./src/scripts/protogen_win.sh",
-        "proto": "sh ./src/scripts/protogen.sh"
+        "proto": "sh ./src/scripts/protogen.sh",
+        "get-proto": "sh ./src/scripts/get-proto.sh",
+        "define-proto": "sh ./src/scripts/define-proto.sh"
     },
     "husky": {
         "hooks": {
