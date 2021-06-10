@@ -1,6 +1,6 @@
 node_modules
 build
-proto/cosmos
+cosmos-sdk
 .vscode
 
 .idea/
