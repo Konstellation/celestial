@@ -31,8 +31,8 @@ export class Context {
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     modules?: Modules;
-    registry = new Registry();
     fees: CosmosFeeTable;
+    registry = new Registry();
 
     private chainId = '';
 
@@ -58,7 +58,7 @@ export class Context {
 
         try {
             if (!this?.modules?.auth) throw new Error('auth module not found in ctx');
-            const { account } = await this.modules.auth.getAccount(address);
+            const { account } = await this.modules.auth.Account(address);
             accountData = account ? accountFromAny(account) : null;
         } catch (error) {
             if (/rpc error: code = NotFound/i.test(error)) {

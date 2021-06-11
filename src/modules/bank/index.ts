@@ -1,20 +1,22 @@
-import { QueryBalanceRequest } from './types/QueryBalanceRequest';
 import { Reader } from 'protobufjs';
-import { QueryBalanceResponse } from './types/QueryBalanceResponse';
 import { Context } from '../../types/Context';
 import { BaseModule } from '../../types/BaseModule';
-import { QueryAllBalancesRequest } from './types/QueryAllBalancesRequest';
-import { QueryAllBalancesResponse } from './types/QueryAllBalancesResponse';
-import { QueryTotalSupplyRequest } from './types/QueryTotalSupplyRequest';
-import { QueryTotalSupplyResponse } from './types/QueryTotalSupplyResponse';
-import { QuerySupplyOfRequest } from './types/QuerySupplyOfRequest';
-import { QuerySupplyOfResponse } from './types/QuerySupplyOfResponse';
-import { QueryParamsRequest } from './types/QueryParamsRequest';
-import { QueryParamsResponse } from './types/QueryParamsResponse';
-import { QueryDenomMetadataRequest } from './types/QueryDenomMetadataRequest';
-import { QueryDenomMetadataResponse } from './types/QueryDenomMetadataResponse';
-import { QueryDenomsMetadataRequest } from './types/QueryDenomsMetadataRequest';
-import { QueryDenomsMetadataResponse } from './types/QueryDenomsMetadataResponse';
+import {
+    QueryAllBalancesRequest,
+    QueryAllBalancesResponse,
+    QueryBalanceRequest,
+    QueryBalanceResponse,
+    QueryDenomMetadataRequest,
+    QueryDenomMetadataResponse,
+    QueryDenomsMetadataRequest,
+    QueryDenomsMetadataResponse,
+    QueryParamsRequest,
+    QueryParamsResponse,
+    QuerySupplyOfRequest,
+    QuerySupplyOfResponse,
+    QueryTotalSupplyRequest,
+    QueryTotalSupplyResponse,
+} from '../../codec/cosmos/bank/v1beta1/query';
 
 export default class BankModule extends BaseModule {
     private service = '/cosmos.bank.v1beta1.Query';
@@ -23,8 +25,8 @@ export default class BankModule extends BaseModule {
         super(ctx);
     }
 
-    async getBalance({ address, denom }: { address: string; denom: string }) {
-        const data = QueryBalanceRequest.encode({ address, denom }).finish();
+    async Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
+        const data = QueryBalanceRequest.encode(request).finish();
         const res = await this.ctx.rpc.queryUnverified(this.service + '/Balance', data);
         return QueryBalanceResponse.decode(new Reader(res));
     }
