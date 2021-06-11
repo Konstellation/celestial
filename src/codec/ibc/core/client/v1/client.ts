@@ -276,7 +276,7 @@ export const ClientConsensusStates = {
         const obj: any = {};
         message.clientId !== undefined && (obj.clientId = message.clientId);
         if (message.consensusStates) {
-            obj.consensusStates = message.consensusStates.map((e) =>
+            obj.consensusStates = message.consensusStates.map(e =>
                 e ? ConsensusStateWithHeight.toJSON(e) : undefined,
             );
         } else {
@@ -525,7 +525,7 @@ export const Params = {
     toJSON(message: Params): unknown {
         const obj: any = {};
         if (message.allowedClients) {
-            obj.allowedClients = message.allowedClients.map((e) => e);
+            obj.allowedClients = message.allowedClients.map(e => e);
         } else {
             obj.allowedClients = [];
         }

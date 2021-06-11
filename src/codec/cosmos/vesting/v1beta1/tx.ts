@@ -109,7 +109,7 @@ export const MsgCreateVestingAccount = {
         message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
         message.toAddress !== undefined && (obj.toAddress = message.toAddress);
         if (message.amount) {
-            obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
+            obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.amount = [];
         }
@@ -206,7 +206,7 @@ export class MsgClientImpl implements Msg {
     CreateVestingAccount(request: MsgCreateVestingAccount): Promise<MsgCreateVestingAccountResponse> {
         const data = MsgCreateVestingAccount.encode(request).finish();
         const promise = this.rpc.request('cosmos.vesting.v1beta1.Msg', 'CreateVestingAccount', data);
-        return promise.then((data) => MsgCreateVestingAccountResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => MsgCreateVestingAccountResponse.decode(new _m0.Reader(data)));
     }
 }
 

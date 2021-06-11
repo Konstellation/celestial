@@ -1,40 +1,43 @@
 import { BaseModule } from '../../types/BaseModule';
 import { Context } from '../../types/Context';
 import { Reader } from 'protobufjs';
-import { QueryValidatorsRequest } from './types/QueryValidatorsRequest';
-import { QueryValidatorsResponse } from './types/QueryValidatorsResponse';
-import { QueryValidatorRequest } from './types/QueryValidatorRequest';
-import { QueryValidatorResponse } from './types/QueryValidatorResponse';
-import { QueryValidatorDelegationsRequest } from './types/QueryValidatorDelegationsRequest';
-import { QueryValidatorDelegationsResponse } from './types/QueryValidatorDelegationsResponse';
-import { QueryValidatorUnbondingDelegationsRequest } from './types/QueryValidatorUnbondingDelegationsRequest';
-import { QueryValidatorUnbondingDelegationsResponse } from './types/QueryValidatorUnbondingDelelgationsResponse';
-import { QueryDelegationRequest } from './types/QueryDelegationRequest';
-import { QueryDelegationResponse } from './types/QueryDelegationResponse';
-import { QueryUnbondingDelegationRequest } from './types/QueryUnbondingDelegationRequest';
-import { QueryUnbondingDelegationResponse } from './types/QueryUnbondingDelegationResponse';
-import { QueryDelegatorDelegationsRequest } from './types/QueryDelegatorDelegationsRequest';
-import { QueryDelegatorDelegationsResponse } from './types/QueryDelegatorDelegationsResponse';
-import { QueryDelegatorUnbondingDelegationsRequest } from './types/QueryDelegatorUnbondingDelegationsRequest';
-import { QueryDelegatorUnbondingDelegationsResponse } from './types/QueryDelegatorUnbondingDelegationsResponse';
-import { QueryRedelegationsRequest } from './types/QueryRedelegationsRequest';
-import { QueryRedelegationsResponse } from './types/QueryRedelegationsResponse';
-import { QueryDelegatorValidatorsRequest } from './types/QueryDelegatorValidatorsRequest';
-import { QueryDelegatorValidatorsResponse } from './types/QueryDelegatorValidatorsResponse';
-import { QueryDelegatorValidatorRequest } from './types/QueryDelegatorValidatorRequest';
-import { QueryDelegatorValidatorResponse } from './types/QueryDelegatorValidatorResponse';
-import { QueryHistoricalInfoResponse } from './types/QueryHistoricalInfoResponse';
-import { QueryHistoricalInfoRequest } from './types/QueryHistoricalInfoRequest';
-import { QueryPoolRequest } from './types/QueryPoolRequest';
-import { QueryPoolResponse } from './types/QueryPoolResponse';
-import { QueryParamsRequest } from './types/QueryParamsRequest';
-import { QueryParamsResponse } from './types/QueryParamsResponse';
-import { MsgBeginRedelegate } from './messages/beginRedelegate';
-import { MsgCreateValidator } from './messages/createValidator';
-import { MsgDelegate } from './messages/delegate';
-import { MsgEditValidator } from './messages/editValidator';
-import { MsgUndelegate } from './messages/undelegate';
-import { Registry } from '@cosmjs/proto-signing';
+import {
+    QueryDelegationRequest,
+    QueryDelegationResponse,
+    QueryDelegatorDelegationsRequest,
+    QueryDelegatorDelegationsResponse,
+    QueryDelegatorUnbondingDelegationsRequest,
+    QueryDelegatorUnbondingDelegationsResponse,
+    QueryDelegatorValidatorRequest,
+    QueryDelegatorValidatorResponse,
+    QueryDelegatorValidatorsRequest,
+    QueryDelegatorValidatorsResponse,
+    QueryHistoricalInfoRequest,
+    QueryHistoricalInfoResponse,
+    QueryParamsRequest,
+    QueryParamsResponse,
+    QueryPoolRequest,
+    QueryPoolResponse,
+    QueryRedelegationsRequest,
+    QueryRedelegationsResponse,
+    QueryUnbondingDelegationRequest,
+    QueryUnbondingDelegationResponse,
+    QueryValidatorDelegationsRequest,
+    QueryValidatorDelegationsResponse,
+    QueryValidatorRequest,
+    QueryValidatorResponse,
+    QueryValidatorsRequest,
+    QueryValidatorsResponse,
+    QueryValidatorUnbondingDelegationsRequest,
+    QueryValidatorUnbondingDelegationsResponse,
+} from '../../codec/cosmos/staking/v1beta1/query';
+import {
+    MsgBeginRedelegate,
+    MsgCreateValidator,
+    MsgDelegate,
+    MsgEditValidator,
+    MsgUndelegate,
+} from '../../codec/cosmos/staking/v1beta1/tx';
 
 export default class StakingModule extends BaseModule {
     private service = '/cosmos.staking.v1beta1.Query';
@@ -48,8 +51,7 @@ export default class StakingModule extends BaseModule {
 
     constructor(ctx: Context) {
         super(ctx);
-        // this.defaultRegistryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
-        // ctx.registry = new Registry(this.defaultRegistryTypes);
+        this.defaultRegistryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
     }
 
     async Validators(request: QueryValidatorsRequest): Promise<QueryValidatorsResponse> {

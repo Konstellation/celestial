@@ -5,7 +5,6 @@ import { BroadcastTxResponse } from './types/broadcastTxResponse';
 import { EncodeObject } from './types/encodeObject';
 import { SignerData } from './types/signerData';
 import { StdFee } from './types/stdFee';
-import { TxRaw } from './types/txRaw';
 import { encodePubkey, makeSignDoc, makeAuthInfoBytes } from '@cosmjs/proto-signing';
 import { encodeSecp256k1Pubkey } from '@cosmjs/amino';
 import { Int53 } from '@cosmjs/math';
@@ -14,6 +13,7 @@ import { TxBodyEncodeObject } from './types/TxBodyEncodeObject';
 import { sleep } from '@cosmjs/utils';
 import { TimeoutError } from '../../types/timeoutError';
 import { IndexedTx } from './types/indexedTx';
+import { TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
 
 export default class TxModule extends BaseModule {
     constructor(ctx: Context) {

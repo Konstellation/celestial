@@ -116,12 +116,12 @@ export const GenesisState = {
         const obj: any = {};
         message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
         if (message.signingInfos) {
-            obj.signingInfos = message.signingInfos.map((e) => (e ? SigningInfo.toJSON(e) : undefined));
+            obj.signingInfos = message.signingInfos.map(e => (e ? SigningInfo.toJSON(e) : undefined));
         } else {
             obj.signingInfos = [];
         }
         if (message.missedBlocks) {
-            obj.missedBlocks = message.missedBlocks.map((e) => (e ? ValidatorMissedBlocks.toJSON(e) : undefined));
+            obj.missedBlocks = message.missedBlocks.map(e => (e ? ValidatorMissedBlocks.toJSON(e) : undefined));
         } else {
             obj.missedBlocks = [];
         }
@@ -281,7 +281,7 @@ export const ValidatorMissedBlocks = {
         const obj: any = {};
         message.address !== undefined && (obj.address = message.address);
         if (message.missedBlocks) {
-            obj.missedBlocks = message.missedBlocks.map((e) => (e ? MissedBlock.toJSON(e) : undefined));
+            obj.missedBlocks = message.missedBlocks.map(e => (e ? MissedBlock.toJSON(e) : undefined));
         } else {
             obj.missedBlocks = [];
         }

@@ -401,19 +401,19 @@ export class QueryClientImpl implements Query {
     CurrentPlan(request: QueryCurrentPlanRequest): Promise<QueryCurrentPlanResponse> {
         const data = QueryCurrentPlanRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.upgrade.v1beta1.Query', 'CurrentPlan', data);
-        return promise.then((data) => QueryCurrentPlanResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryCurrentPlanResponse.decode(new _m0.Reader(data)));
     }
 
     AppliedPlan(request: QueryAppliedPlanRequest): Promise<QueryAppliedPlanResponse> {
         const data = QueryAppliedPlanRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.upgrade.v1beta1.Query', 'AppliedPlan', data);
-        return promise.then((data) => QueryAppliedPlanResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryAppliedPlanResponse.decode(new _m0.Reader(data)));
     }
 
     UpgradedConsensusState(request: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse> {
         const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.upgrade.v1beta1.Query', 'UpgradedConsensusState', data);
-        return promise.then((data) => QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryUpgradedConsensusStateResponse.decode(new _m0.Reader(data)));
     }
 }
 

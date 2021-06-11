@@ -4,8 +4,7 @@ import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { Decimal } from '@cosmjs/math';
 import { TendermintRpc } from './modules/tendermint-rpc';
 import { Context, ContextOptions } from './types/Context';
-import { SendTokens } from './modules/bank/messages/sendTokens';
-import { MsgDelegate } from './modules/staking/messages/delegate';
+import { buildMsgDelegate } from './modules/staking/messages/MsgDelegate';
 
 const rpcAddr = '206.81.29.202:26657';
 
@@ -63,7 +62,7 @@ export class Celestial extends Modules {
     //     Celestial.ctx.fees.send,
     // );
     // console.log(response);
-    const del = MsgDelegate({
+    const del = buildMsgDelegate({
         validatorAddress: validatorAddr,
         delegatorAddress: heisenberg,
         amount: { amount: '2000', denom: 'udarc' },
