@@ -7,4 +7,5 @@ export enum Module {
     SLASHING = 'slashing',
     PARAMS = 'params',
     GOV = 'gov',
+    MINT = 'mint',
 }
