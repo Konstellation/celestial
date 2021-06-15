@@ -20,10 +20,17 @@ interface MsgClient {
 }
 
 export default class DistributionModule {
+    private registryTypes: ReadonlyArray<[string, any]> = [
+        ['/cosmos.distribution.v1beta1.MsgFundCommunityPool', MsgFundCommunityPool],
+        ['/cosmos.distribution.v1beta1.MsgSetWithdrawAddress', MsgSetWithdrawAddress],
+        ['/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward', MsgWithdrawDelegatorReward],
+        ['/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission', MsgWithdrawValidatorCommission],
+    ];
     queries: QueryClientImpl;
     messages: MsgClient;
 
     constructor(ctx: Context) {
+        this.registryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
         this.queries = new QueryClientImpl(ctx.rpc);
         //TODO fix fees
         this.messages = {
