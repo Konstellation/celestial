@@ -23,7 +23,7 @@ interface MsgClient {
 }
 
 export default class StakingModule {
-    private defaultRegistryTypes: ReadonlyArray<[string, any]> = [
+    private registryTypes: ReadonlyArray<[string, any]> = [
         ['/cosmos.staking.v1beta1.MsgBeginRedelegate', MsgBeginRedelegate],
         ['/cosmos.staking.v1beta1.MsgCreateValidator', MsgCreateValidator],
         ['/cosmos.staking.v1beta1.MsgDelegate', MsgDelegate],
@@ -34,7 +34,7 @@ export default class StakingModule {
     messages: MsgClient;
 
     constructor(ctx: Context) {
-        this.defaultRegistryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
+        this.registryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
         this.queries = new QueryClientImpl(ctx.rpc);
         // TODO fix fees
         this.messages = {
