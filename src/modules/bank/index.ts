@@ -1,69 +1,23 @@
-import { Reader } from 'protobufjs';
 import { Context } from '../../types/Context';
-import { BaseModule } from '../../types/BaseModule';
-import {
-    QueryAllBalancesRequest,
-    QueryAllBalancesResponse,
-    QueryBalanceRequest,
-    QueryBalanceResponse,
-    QueryDenomMetadataRequest,
-    QueryDenomMetadataResponse,
-    QueryDenomsMetadataRequest,
-    QueryDenomsMetadataResponse,
-    QueryParamsRequest,
-    QueryParamsResponse,
-    QuerySupplyOfRequest,
-    QuerySupplyOfResponse,
-    QueryTotalSupplyRequest,
-    QueryTotalSupplyResponse,
-} from '../../codec/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '../../codec/cosmos/bank/v1beta1/query';
+import { buildMsgSend } from './messages/MsgSend';
+import { MsgSend } from '../../codec/cosmos/bank/v1beta1/tx';
+import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 
-export default class BankModule extends BaseModule {
-    private service = '/cosmos.bank.v1beta1.Query';
+interface MsgClient {
+    Send(request: MsgSend): Promise<BroadcastTxResponse> | undefined;
+}
+
+export default class BankModule {
+    queries: QueryClientImpl;
+    messages: MsgClient;
 
     constructor(ctx: Context) {
-        super(ctx);
-    }
-
-    async Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
-        const data = QueryBalanceRequest.encode(request).finish();
-        const res = await this.ctx.rpc.queryUnverified(this.service + '/Balance', data);
-        return QueryBalanceResponse.decode(new Reader(res));
-    }
-
-    async AllBalances(request: QueryAllBalancesRequest): Promise<QueryAllBalancesResponse> {
-        const data = QueryAllBalancesRequest.encode(request).finish();
-        const promise = this.ctx.rpc.queryUnverified(this.service + '/AllBalances', data);
-        return promise.then(data => QueryAllBalancesResponse.decode(new Reader(data)));
-    }
-
-    async TotalSupply(request: QueryTotalSupplyRequest): Promise<QueryTotalSupplyResponse> {
-        const data = QueryTotalSupplyRequest.encode(request).finish();
-        const promise = this.ctx.rpc.queryUnverified(this.service + '/TotalSupply', data);
-        return promise.then(data => QueryTotalSupplyResponse.decode(new Reader(data)));
-    }
-
-    async SupplyOf(request: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
-        const data = QuerySupplyOfRequest.encode(request).finish();
-        const promise = this.ctx.rpc.queryUnverified(this.service + '/SupplyOf', data);
-        return promise.then(data => QuerySupplyOfResponse.decode(new Reader(data)));
-    }
-
-    async Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-        const data = QueryParamsRequest.encode(request).finish();
-        const promise = this.ctx.rpc.queryUnverified(this.service + '/Params', data);
-        return promise.then(data => QueryParamsResponse.decode(new Reader(data)));
-    }
-
-    async DenomMetadata(request: QueryDenomMetadataRequest): Promise<QueryDenomMetadataResponse> {
-        const data = QueryDenomMetadataRequest.encode(request).finish();
-        const promise = this.ctx.rpc.queryUnverified(this.service + '/DenomMetadata', data);
-        return promise.then(data => QueryDenomMetadataResponse.decode(new Reader(data)));
-    }
-
-    async DenomsMetadata(request: QueryDenomsMetadataRequest): Promise<QueryDenomsMetadataResponse> {
-        const data = QueryDenomsMetadataRequest.encode(request).finish();
-        const promise = this.ctx.rpc.queryUnverified(this.service + '/DenomsMetadata', data);
-        return promise.then(data => QueryDenomsMetadataResponse.decode(new Reader(data)));
+        this.queries = new QueryClientImpl(ctx.rpc);
+        this.messages = {
+            Send: (request: MsgSend) => {
+                return ctx.modules?.tx?.signAndBroadcast(ctx.signerAddress, [buildMsgSend(request)], ctx.fees.send);
+            },
+        };
     }
 }

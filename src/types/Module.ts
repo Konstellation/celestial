@@ -3,4 +3,5 @@ export enum Module {
     BANK = 'bank',
     TX = 'tx',
     STAKING = 'staking',
+    DISTRIBUTION = 'distribution',
 }

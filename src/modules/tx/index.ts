@@ -1,7 +1,6 @@
 import { toHex } from '../../encoding/hex';
-import { BaseModule } from '../../types/BaseModule';
 import { Context } from '../../types/Context';
-import { BroadcastTxResponse } from './types/broadcastTxResponse';
+import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { EncodeObject } from './types/encodeObject';
 import { SignerData } from './types/signerData';
 import { StdFee } from './types/stdFee';
@@ -15,9 +14,11 @@ import { TimeoutError } from '../../types/timeoutError';
 import { IndexedTx } from './types/indexedTx';
 import { TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
 
-export default class TxModule extends BaseModule {
+export default class TxModule {
+    private ctx: Context;
+
     constructor(ctx: Context) {
-        super(ctx);
+        this.ctx = ctx;
     }
 
     public async signAndBroadcast(
@@ -43,7 +44,7 @@ export default class TxModule extends BaseModule {
             signerData = explicitSignerData;
         } else {
             const { accountNumber, sequence } = await this.ctx.getSequence(signerAddress);
-            const chainId = await this.ctx.getChainId();
+            const chainId = await this.ctx.rpc.getChainId();
             signerData = {
                 accountNumber: accountNumber,
                 sequence: sequence,
