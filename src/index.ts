@@ -53,7 +53,9 @@ export class Celestial extends Modules {
             gasPrice: { amount: Decimal.fromUserInput('0.025', 3), denom: 'udarc' },
         },
     });
-    console.log(JSON.stringify(await d.distribution?.queries.ValidatorCommission({ validatorAddress: validatorAddr })));
+    console.log(await d.slashing?.queries.Params({}));
+    console.log(await d.slashing?.messages.Unjail({ validatorAddr }));
+    // console.log(JSON.stringify(await d.distribution?.queries.ValidatorCommission({ validatorAddress: validatorAddr })));
     // console.log(await d.staking?.Validators({ status: '' }));
 
     // const del = buildMsgDelegate({
