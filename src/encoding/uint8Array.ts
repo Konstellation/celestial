@@ -1,7 +1,7 @@
 export const uint8ArrayToStr = (function() {
     const charCache = new Array(128); // Preallocate the cache for the common single byte chars
     const charFromCodePt = String.fromCodePoint || String.fromCharCode;
-    const result: any[] = [];
+    const result: string[] = [];
 
     return function(array: Uint8Array) {
         let codePt, byte1;
