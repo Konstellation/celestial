@@ -4,6 +4,7 @@ export enum Module {
     TX = 'tx',
     STAKING = 'staking',
     DISTRIBUTION = 'distribution',
+    SLASHING = 'slashing',
     PARAMS = 'params',
     GOV = 'gov',
 }

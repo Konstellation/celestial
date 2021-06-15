@@ -5,6 +5,7 @@ import BankModule from './bank';
 import TxModule from './tx';
 import StakingModule from './staking';
 import DistributionModule from './distribution';
+import SlashingModule from './slashing';
 import ParamsModule from './params';
 import GovModule from './gov';
 
@@ -14,6 +15,7 @@ export class Modules {
     tx?: TxModule;
     staking?: StakingModule;
     distribution?: DistributionModule;
+    slashing?: SlashingModule;
     params?: ParamsModule;
     gov?: GovModule;
 
