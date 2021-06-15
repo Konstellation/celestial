@@ -2,6 +2,7 @@ import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
 export class TendermintRpc {
     private client?: Tendermint34Client;
+    private chainId = '';
 
     constructor(client: Tendermint34Client) {
         this.client = client;
@@ -21,7 +22,7 @@ export class TendermintRpc {
 
     async queryUnverified(path: string, request: Uint8Array): Promise<Uint8Array> {
         const response = await this.get().abciQuery({
-            path: path,
+            path,
             data: request,
             prove: false,
         });
@@ -31,5 +32,21 @@ export class TendermintRpc {
         }
 
         return response.value;
+    }
+
+    request(service: string, method: string, data: Uint8Array): Promise<Uint8Array> {
+        const path = `/${service}/${method}`;
+        return this.queryUnverified(path, data);
+    }
+
+    async getChainId(): Promise<string> {
+        if (!this.chainId) {
+            const response = await this.get().status();
+            const chainId = response.nodeInfo.network;
+            if (!chainId) throw new Error('Chain ID must not be empty');
+            this.chainId = chainId;
+        }
+
+        return this.chainId;
     }
 }

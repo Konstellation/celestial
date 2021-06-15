@@ -18,6 +18,7 @@ const defaultGasLimits: GasLimits<CosmosFeeTable> = {
 
 export interface ContextOptions {
     signer: OfflineDirectSigner;
+    signerAddress: string;
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     fees?: CosmosFeeTable;
@@ -28,29 +29,18 @@ export interface ContextOptions {
 export class Context {
     rpc: TendermintRpc;
     signer: OfflineDirectSigner;
+    signerAddress: string;
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     modules?: Modules;
     fees: CosmosFeeTable;
     registry = new Registry();
 
-    private chainId = '';
-
-    constructor(rpc: TendermintRpc, { signer, gasPrice, gasLimits = {} }: ContextOptions) {
+    constructor(rpc: TendermintRpc, { signer, signerAddress, gasPrice, gasLimits = {} }: ContextOptions) {
         this.rpc = rpc;
         this.signer = signer;
+        this.signerAddress = signerAddress;
         this.fees = buildFeeTable<CosmosFeeTable>(gasPrice, defaultGasLimits, gasLimits);
-    }
-
-    async getChainId(): Promise<string> {
-        if (!this.chainId) {
-            const response = await this.rpc.get().status();
-            const chainId = response.nodeInfo.network;
-            if (!chainId) throw new Error('Chain ID must not be empty');
-            this.chainId = chainId;
-        }
-
-        return this.chainId;
     }
 
     async getSequence(address: string): Promise<SequenceResponse> {
@@ -58,7 +48,7 @@ export class Context {
 
         try {
             if (!this?.modules?.auth) throw new Error('auth module not found in ctx');
-            const { account } = await this.modules.auth.Account(address);
+            const { account } = await this.modules.auth.queries.Account({ address });
             accountData = account ? accountFromAny(account) : null;
         } catch (error) {
             if (/rpc error: code = NotFound/i.test(error)) {
