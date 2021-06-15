@@ -6,6 +6,7 @@ import TxModule from './tx';
 import StakingModule from './staking';
 import DistributionModule from './distribution';
 import ParamsModule from './params';
+import GovModule from './gov';
 
 export class Modules {
     auth?: AuthModule;
@@ -14,6 +15,7 @@ export class Modules {
     staking?: StakingModule;
     distribution?: DistributionModule;
     params?: ParamsModule;
+    gov?: GovModule;
 
     constructor(modules: Module[], ctx: Context) {
         modules.forEach((m, i) => {

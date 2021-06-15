@@ -1,0 +1,34 @@
+import { MsgSend } from '../../codec/cosmos/bank/v1beta1/tx';
+import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
+import { Context } from '../../types/Context';
+
+enum BankMsg {
+    Send = 'Send',
+}
+
+interface MsgClient {
+    [BankMsg.Send](request: MsgSend): Promise<BroadcastTxResponse> | undefined;
+}
+
+export class MsgClientImpl implements MsgClient {
+    private package = '/cosmos.bank.v1beta1';
+
+    ctx: Context;
+
+    constructor(ctx: Context) {
+        this.ctx = ctx;
+    }
+
+    [BankMsg.Send](request: MsgSend) {
+        return this.ctx.modules?.tx?.signAndBroadcast(
+            this.ctx.signerAddress,
+            [
+                {
+                    typeUrl: `${this.package}.Msg${BankMsg.Send}`,
+                    value: request,
+                },
+            ],
+            this.ctx.fees.delegate,
+        );
+    }
+}
