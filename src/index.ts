@@ -46,7 +46,7 @@ export class Celestial extends Modules {
     const anotherAddr = 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx';
     const d = await Celestial.create({
         rpcAddress: rpcAddr,
-        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION],
+        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION, Module.SLASHING],
         options: {
             signer: wallet2,
             signerAddress: heisenberg,
