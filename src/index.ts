@@ -46,14 +46,15 @@ export class Celestial extends Modules {
     const anotherAddr = 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx';
     const d = await Celestial.create({
         rpcAddress: rpcAddr,
-        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION],
+        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION, Module.MINT],
         options: {
             signer: wallet2,
             signerAddress: heisenberg,
             gasPrice: { amount: Decimal.fromUserInput('0.025', 3), denom: 'udarc' },
         },
     });
-    console.log(JSON.stringify(await d.distribution?.queries.ValidatorCommission({ validatorAddress: validatorAddr })));
+    console.log(await d.mint?.queries.Params({}));
+    // console.log(JSON.stringify(await d.distribution?.queries.ValidatorCommission({ validatorAddress: validatorAddr })));
     // console.log(await d.staking?.Validators({ status: '' }));
 
     // const del = buildMsgDelegate({
