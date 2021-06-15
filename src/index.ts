@@ -46,15 +46,16 @@ export class Celestial extends Modules {
     const anotherAddr = 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx';
     const d = await Celestial.create({
         rpcAddress: rpcAddr,
-        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION, Module.SLASHING],
+        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION, Module.SLASHING, Module.PARAMS, Module.GOV],
         options: {
             signer: wallet2,
             signerAddress: heisenberg,
             gasPrice: { amount: Decimal.fromUserInput('0.025', 3), denom: 'udarc' },
         },
     });
-    console.log(await d.slashing?.queries.Params({}));
-    console.log(await d.slashing?.messages.Unjail({ validatorAddr }));
+
+    // console.log(await d.params?.queries.Params({ subspace: 'bank', key: 'sendEnabled' }));
+
     // console.log(JSON.stringify(await d.distribution?.queries.ValidatorCommission({ validatorAddress: validatorAddr })));
     // console.log(await d.staking?.Validators({ status: '' }));
 
