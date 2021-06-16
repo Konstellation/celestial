@@ -4,6 +4,7 @@ import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { Decimal } from '@cosmjs/math';
 import { TendermintRpc } from './modules/tendermint-rpc';
 import { Context, ContextOptions } from './types/Context';
+import { uint8ArrayToStr } from './encoding/uint8Array';
 
 const rpcAddr = '206.81.29.202:26657';
 
@@ -46,16 +47,25 @@ export class Celestial extends Modules {
     const anotherAddr = 'darc1rzdt9wrzwv3x7vv6f7xpyaqqgf3lt6phptqtsx';
     const d = await Celestial.create({
         rpcAddress: rpcAddr,
-        modules: [Module.BANK, Module.AUTH, Module.TX, Module.STAKING, Module.DISTRIBUTION, Module.SLASHING, Module.PARAMS, Module.GOV],
+        modules: [
+            Module.BANK,
+            Module.AUTH,
+            Module.TX,
+            Module.STAKING,
+            Module.DISTRIBUTION,
+            Module.SLASHING,
+            Module.PARAMS,
+            Module.GOV,
+            Module.MINT,
+        ],
         options: {
             signer: wallet2,
             signerAddress: heisenberg,
             gasPrice: { amount: Decimal.fromUserInput('0.025', 3), denom: 'udarc' },
         },
     });
-
-    // console.log(await d.params?.queries.Params({ subspace: 'bank', key: 'sendEnabled' }));
-
+    const res = await d.mint?.queries.Inflation({});
+    console.log(res);
     // console.log(JSON.stringify(await d.distribution?.queries.ValidatorCommission({ validatorAddress: validatorAddr })));
     // console.log(await d.staking?.Validators({ status: '' }));
 

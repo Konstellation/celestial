@@ -12,8 +12,7 @@ interface MsgClient {
 
 export class MsgClientImpl implements MsgClient {
     private package = '/cosmos.bank.v1beta1';
-
-    ctx: Context;
+    private ctx: Context;
 
     constructor(ctx: Context) {
         this.ctx = ctx;

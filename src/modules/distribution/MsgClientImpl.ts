@@ -6,6 +6,7 @@ import {
 } from '../../codec/cosmos/distribution/v1beta1/tx';
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
+import { TsProtoGeneratedType } from '../../types/TsProtoGeneratedType';
 
 enum DistributionMsg {
     SetWithdrawAddress = 'SetWithdrawAddress',
@@ -27,14 +28,13 @@ interface MsgClient {
 
 export class MsgClientImpl implements MsgClient {
     private package = '/cosmos.distribution.v1beta1';
-    protected registryTypes: ReadonlyArray<[string, any]> = [
+    protected registryTypes: ReadonlyArray<[string, TsProtoGeneratedType]> = [
         [`${this.package}.Msg${DistributionMsg.FundCommunityPool}`, MsgFundCommunityPool],
         [`${this.package}.Msg${DistributionMsg.SetWithdrawAddress}`, MsgSetWithdrawAddress],
         [`${this.package}.Msg${DistributionMsg.WithdrawDelegatorReward}`, MsgWithdrawDelegatorReward],
         [`${this.package}.Msg${DistributionMsg.WithdrawValidatorCommission}`, MsgWithdrawValidatorCommission],
     ];
-
-    ctx: Context;
+    private ctx: Context;
 
     constructor(ctx: Context) {
         this.ctx = ctx;

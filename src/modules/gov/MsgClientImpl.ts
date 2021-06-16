@@ -1,6 +1,7 @@
 import { MsgDeposit, MsgSubmitProposal, MsgVote } from '../../codec/cosmos/gov/v1beta1/tx';
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
+import { TsProtoGeneratedType } from '../../types/TsProtoGeneratedType';
 
 enum GovMsg {
     SubmitProposal = 'SubmitProposal',
@@ -16,13 +17,12 @@ interface MsgClient {
 
 export class MsgClientImpl implements MsgClient {
     private package = '/cosmos.gov.v1beta1';
-    protected registryTypes: ReadonlyArray<[string, any]> = [
+    protected registryTypes: ReadonlyArray<[string, TsProtoGeneratedType]> = [
         [`${this.package}.Msg${GovMsg.SubmitProposal}`, MsgSubmitProposal],
         [`${this.package}.Msg${GovMsg.Vote}`, MsgVote],
         [`${this.package}.Msg${GovMsg.Deposit}`, MsgDeposit],
     ];
-
-    ctx: Context;
+    private ctx: Context;
 
     constructor(ctx: Context) {
         this.ctx = ctx;

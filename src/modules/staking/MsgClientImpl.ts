@@ -7,6 +7,7 @@ import {
 } from '../../codec/cosmos/staking/v1beta1/tx';
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
+import { TsProtoGeneratedType } from '../../types/TsProtoGeneratedType';
 
 enum StakingMsg {
     CreateValidator = 'CreateValidator',
@@ -26,15 +27,14 @@ interface MsgClient {
 
 export class MsgClientImpl implements MsgClient {
     private package = '/cosmos.staking.v1beta1';
-    protected registryTypes: ReadonlyArray<[string, any]> = [
+    protected registryTypes: ReadonlyArray<[string, TsProtoGeneratedType]> = [
         [`${this.package}.Msg${StakingMsg.BeginRedelegate}`, MsgBeginRedelegate],
         [`${this.package}.Msg${StakingMsg.CreateValidator}`, MsgCreateValidator],
         [`${this.package}.Msg${StakingMsg.Delegate}`, MsgDelegate],
         [`${this.package}.Msg${StakingMsg.EditValidator}`, MsgEditValidator],
         [`${this.package}.Msg${StakingMsg.Undelegate}`, MsgUndelegate],
     ];
-
-    ctx: Context;
+    private ctx: Context;
 
     constructor(ctx: Context) {
         this.ctx = ctx;
