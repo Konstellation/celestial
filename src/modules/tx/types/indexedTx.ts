@@ -1,3 +1,5 @@
+import { DecodedTxRaw } from '@cosmjs/proto-signing';
+
 /** A transaction that is indexed as part of the transaction history */
 export interface IndexedTx {
     readonly height: number;
@@ -20,7 +22,8 @@ export interface IndexedTx {
      *
      * Use `decodeTxRaw` from @cosmjs/proto-signing to decode this.
      */
-    readonly tx: Uint8Array;
+    readonly tx: DecodedTxRaw;
+    // readonly tx: Uint8Array;
     readonly gasUsed: number;
     readonly gasWanted: number;
 }
