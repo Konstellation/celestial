@@ -2,7 +2,7 @@
     "name": "celestial",
     "version": "1.0.0",
     "description": "Celestial",
-    "main": "index.js",
+    "main": "build/index.js",
     "scripts": {
         "build": "rimraf ./build && tsc",
         "start:dev": "nodemon",
@@ -38,6 +38,7 @@
         "@types/secp256k1": "^4.0.2",
         "@types/sha256": "^0.2.0",
         "@types/unorm": "^1.3.28",
+        "@types/uuid": "^8.3.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "eslint": "^6.8.0",
@@ -57,7 +58,7 @@
         "ts-node": "^8.10.2",
         "ts-proto": "^1.81.1",
         "ts-protoc-gen": "^0.14.0",
-        "typescript": "^4.2.4"
+        "typescript": "^4.3.4"
     },
     "dependencies": {
         "@cosmjs/stargate": "^0.25.2",
@@ -73,15 +74,17 @@
         "eslint-plugin-jest": "^24.3.5",
         "google-protobuf": "^3.15.8",
         "grpc": "^1.24.6",
-        "grpc-web": "^1.2.1",
         "jest": "^26.6.3",
         "libsodium-wrappers": "^0.7.9",
         "pbkdf2": "^3.1.2",
         "protobufjs": "^6.10.2",
         "ripemd160": "^2.0.2",
+        "scrypt.js": "^0.3.0",
         "secp256k1": "^4.0.2",
         "sha256": "^0.2.0",
         "ts-jest": "^26.5.5",
-        "unorm": "^1.6.0"
+        "unorm": "^1.6.0",
+        "uuid": "^8.3.2",
+        "web3-utils": "^1.3.6"
     }
 }

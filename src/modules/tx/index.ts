@@ -4,7 +4,7 @@ import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { EncodeObject } from './types/encodeObject';
 import { SignerData } from './types/signerData';
 import { StdFee } from './types/stdFee';
-import { encodePubkey, makeSignDoc, makeAuthInfoBytes } from '@cosmjs/proto-signing';
+import { encodePubkey, makeSignDoc, makeAuthInfoBytes, decodeTxRaw } from '@cosmjs/proto-signing';
 import { encodeSecp256k1Pubkey } from '@cosmjs/amino';
 import { Int53 } from '@cosmjs/math';
 import { fromBase64 } from '../../encoding/base64';
@@ -26,8 +26,9 @@ export default class TxModule {
         messages: readonly EncodeObject[],
         fee: StdFee,
         memo = '',
+        publicKey?: Uint8Array,
     ): Promise<BroadcastTxResponse> {
-        const txRaw = await this.sign(signerAddress, messages, fee, memo);
+        const txRaw = await this.sign(signerAddress, messages, fee, memo, publicKey);
         const txBytes = TxRaw.encode(txRaw).finish();
         return this.broadcastTx(txBytes, this.ctx.broadcastTimeoutMs, this.ctx.broadcastPollIntervalMs);
     }
@@ -37,9 +38,10 @@ export default class TxModule {
         messages: readonly EncodeObject[],
         fee: StdFee,
         memo: string,
+        publicKey?: Uint8Array,
         explicitSignerData?: SignerData,
     ): Promise<TxRaw> {
-        let signerData: SignerData;
+        let signerData: SignerData = { accountNumber: 1, sequence: 2, chainId: '1' };
         if (explicitSignerData) {
             signerData = explicitSignerData;
         } else {
@@ -52,7 +54,7 @@ export default class TxModule {
             };
         }
 
-        return this.signDirect(signerAddress, messages, fee, memo, signerData);
+        return this.signDirect(signerAddress, messages, fee, memo, signerData, publicKey);
     }
 
     private async signDirect(
@@ -61,14 +63,19 @@ export default class TxModule {
         fee: StdFee,
         memo: string,
         { accountNumber, sequence, chainId }: SignerData,
+        publicKey?: Uint8Array,
     ): Promise<TxRaw> {
         const accountFromSigner = (await this.ctx.signer.getAccounts()).find(
             account => account.address === signerAddress,
         );
-        if (!accountFromSigner) {
-            throw new Error('Failed to retrieve account from signer');
-        }
-        const pubkey = encodePubkey(encodeSecp256k1Pubkey(accountFromSigner.pubkey));
+        // if (!accountFromSigner) {
+        //     throw new Error('Failed to retrieve account from signer');
+        // }
+        if (accountFromSigner)
+            console.log('menmonic pub: ', encodePubkey(encodeSecp256k1Pubkey(accountFromSigner.pubkey)));
+        if (!publicKey) throw new Error('PUB KEY NO');
+        const pubkey = encodePubkey(encodeSecp256k1Pubkey(publicKey));
+        console.log('keystore pubkey: ', pubkey);
         const txBodyEncodeObject: TxBodyEncodeObject = {
             typeUrl: '/cosmos.tx.v1beta1.TxBody',
             value: {
@@ -130,15 +137,16 @@ export default class TxModule {
         return results[0] ?? null;
     }
 
-    private async txsQuery(query: string): Promise<readonly IndexedTx[]> {
+    public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query: query });
+        console.log(results);
         return results.txs.map(tx => {
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),
                 code: tx.result.code,
                 rawLog: tx.result.log || '',
-                tx: tx.tx,
+                tx: decodeTxRaw(tx.tx),
                 gasUsed: tx.result.gasUsed,
                 gasWanted: tx.result.gasWanted,
             };

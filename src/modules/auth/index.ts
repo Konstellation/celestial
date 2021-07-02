@@ -1,5 +1,4 @@
 import { Context } from '../../types/Context';
-import { BaseModule } from '../../types/BaseModule';
 import { QueryClientImpl } from '../../codec/cosmos/auth/v1beta1/query';
 
 export default class AuthModule {
