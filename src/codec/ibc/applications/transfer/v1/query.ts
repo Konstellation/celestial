@@ -274,7 +274,7 @@ export const QueryDenomTracesResponse = {
     toJSON(message: QueryDenomTracesResponse): unknown {
         const obj: any = {};
         if (message.denomTraces) {
-            obj.denomTraces = message.denomTraces.map((e) => (e ? DenomTrace.toJSON(e) : undefined));
+            obj.denomTraces = message.denomTraces.map(e => (e ? DenomTrace.toJSON(e) : undefined));
         } else {
             obj.denomTraces = [];
         }
@@ -414,19 +414,19 @@ export class QueryClientImpl implements Query {
     DenomTrace(request: QueryDenomTraceRequest): Promise<QueryDenomTraceResponse> {
         const data = QueryDenomTraceRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.applications.transfer.v1.Query', 'DenomTrace', data);
-        return promise.then((data) => QueryDenomTraceResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryDenomTraceResponse.decode(new _m0.Reader(data)));
     }
 
     DenomTraces(request: QueryDenomTracesRequest): Promise<QueryDenomTracesResponse> {
         const data = QueryDenomTracesRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.applications.transfer.v1.Query', 'DenomTraces', data);
-        return promise.then((data) => QueryDenomTracesResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryDenomTracesResponse.decode(new _m0.Reader(data)));
     }
 
     Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
         const data = QueryParamsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.applications.transfer.v1.Query', 'Params', data);
-        return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
     }
 }
 

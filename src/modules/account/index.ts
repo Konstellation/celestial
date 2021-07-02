@@ -1,4 +1,5 @@
-import KeyStoreV3, { KeystoreV3 } from '../../crypto/keystore';
+import secp256k1 from 'secp256k1';
+import KeyStoreV3, { KeystoreV3Struct } from '../../crypto/keystore';
 import { Context } from '../../types/Context';
 
 export default class AccountModule {
@@ -10,7 +11,7 @@ export default class AccountModule {
         this.ctx = ctx;
     }
 
-    import({ privateKey, name }: { privateKey: Buffer; name: string }) {
+    private import({ privateKey, name }: { privateKey: Buffer; name: string }) {
         if (privateKey.length === 37) {
             this.privateKey = Buffer.from(privateKey).slice(5, 37);
         } else {
@@ -19,11 +20,20 @@ export default class AccountModule {
         }
     }
 
-    fromV3KeyStore(v3Keystore: KeystoreV3, password: string) {
+    importKeystore(v3Keystore: KeystoreV3Struct, password: string) {
         if (!password) {
             throw new Error('No password given.');
         }
+        this.import(new KeyStoreV3().import(v3Keystore, password));
 
-        return this.import(new KeyStoreV3().import(v3Keystore, password));
+        return this;
+    }
+
+    getPublicKey() {
+        return secp256k1.publicKeyCreate(this.privateKey);
+    }
+
+    getPrivateKey(): Buffer {
+        return this.privateKey;
     }
 }

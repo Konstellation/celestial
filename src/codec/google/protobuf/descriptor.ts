@@ -1155,7 +1155,7 @@ export const FileDescriptorSet = {
     toJSON(message: FileDescriptorSet): unknown {
         const obj: any = {};
         if (message.file) {
-            obj.file = message.file.map((e) => (e ? FileDescriptorProto.toJSON(e) : undefined));
+            obj.file = message.file.map(e => (e ? FileDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.file = [];
         }
@@ -1377,37 +1377,37 @@ export const FileDescriptorProto = {
         message.name !== undefined && (obj.name = message.name);
         message.package !== undefined && (obj.package = message.package);
         if (message.dependency) {
-            obj.dependency = message.dependency.map((e) => e);
+            obj.dependency = message.dependency.map(e => e);
         } else {
             obj.dependency = [];
         }
         if (message.publicDependency) {
-            obj.publicDependency = message.publicDependency.map((e) => e);
+            obj.publicDependency = message.publicDependency.map(e => e);
         } else {
             obj.publicDependency = [];
         }
         if (message.weakDependency) {
-            obj.weakDependency = message.weakDependency.map((e) => e);
+            obj.weakDependency = message.weakDependency.map(e => e);
         } else {
             obj.weakDependency = [];
         }
         if (message.messageType) {
-            obj.messageType = message.messageType.map((e) => (e ? DescriptorProto.toJSON(e) : undefined));
+            obj.messageType = message.messageType.map(e => (e ? DescriptorProto.toJSON(e) : undefined));
         } else {
             obj.messageType = [];
         }
         if (message.enumType) {
-            obj.enumType = message.enumType.map((e) => (e ? EnumDescriptorProto.toJSON(e) : undefined));
+            obj.enumType = message.enumType.map(e => (e ? EnumDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.enumType = [];
         }
         if (message.service) {
-            obj.service = message.service.map((e) => (e ? ServiceDescriptorProto.toJSON(e) : undefined));
+            obj.service = message.service.map(e => (e ? ServiceDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.service = [];
         }
         if (message.extension) {
-            obj.extension = message.extension.map((e) => (e ? FieldDescriptorProto.toJSON(e) : undefined));
+            obj.extension = message.extension.map(e => (e ? FieldDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.extension = [];
         }
@@ -1649,48 +1649,48 @@ export const DescriptorProto = {
         const obj: any = {};
         message.name !== undefined && (obj.name = message.name);
         if (message.field) {
-            obj.field = message.field.map((e) => (e ? FieldDescriptorProto.toJSON(e) : undefined));
+            obj.field = message.field.map(e => (e ? FieldDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.field = [];
         }
         if (message.extension) {
-            obj.extension = message.extension.map((e) => (e ? FieldDescriptorProto.toJSON(e) : undefined));
+            obj.extension = message.extension.map(e => (e ? FieldDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.extension = [];
         }
         if (message.nestedType) {
-            obj.nestedType = message.nestedType.map((e) => (e ? DescriptorProto.toJSON(e) : undefined));
+            obj.nestedType = message.nestedType.map(e => (e ? DescriptorProto.toJSON(e) : undefined));
         } else {
             obj.nestedType = [];
         }
         if (message.enumType) {
-            obj.enumType = message.enumType.map((e) => (e ? EnumDescriptorProto.toJSON(e) : undefined));
+            obj.enumType = message.enumType.map(e => (e ? EnumDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.enumType = [];
         }
         if (message.extensionRange) {
-            obj.extensionRange = message.extensionRange.map((e) =>
+            obj.extensionRange = message.extensionRange.map(e =>
                 e ? DescriptorProto_ExtensionRange.toJSON(e) : undefined,
             );
         } else {
             obj.extensionRange = [];
         }
         if (message.oneofDecl) {
-            obj.oneofDecl = message.oneofDecl.map((e) => (e ? OneofDescriptorProto.toJSON(e) : undefined));
+            obj.oneofDecl = message.oneofDecl.map(e => (e ? OneofDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.oneofDecl = [];
         }
         message.options !== undefined &&
             (obj.options = message.options ? MessageOptions.toJSON(message.options) : undefined);
         if (message.reservedRange) {
-            obj.reservedRange = message.reservedRange.map((e) =>
+            obj.reservedRange = message.reservedRange.map(e =>
                 e ? DescriptorProto_ReservedRange.toJSON(e) : undefined,
             );
         } else {
             obj.reservedRange = [];
         }
         if (message.reservedName) {
-            obj.reservedName = message.reservedName.map((e) => e);
+            obj.reservedName = message.reservedName.map(e => e);
         } else {
             obj.reservedName = [];
         }
@@ -1966,7 +1966,7 @@ export const ExtensionRangeOptions = {
     toJSON(message: ExtensionRangeOptions): unknown {
         const obj: any = {};
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -2389,21 +2389,21 @@ export const EnumDescriptorProto = {
         const obj: any = {};
         message.name !== undefined && (obj.name = message.name);
         if (message.value) {
-            obj.value = message.value.map((e) => (e ? EnumValueDescriptorProto.toJSON(e) : undefined));
+            obj.value = message.value.map(e => (e ? EnumValueDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.value = [];
         }
         message.options !== undefined &&
             (obj.options = message.options ? EnumOptions.toJSON(message.options) : undefined);
         if (message.reservedRange) {
-            obj.reservedRange = message.reservedRange.map((e) =>
+            obj.reservedRange = message.reservedRange.map(e =>
                 e ? EnumDescriptorProto_EnumReservedRange.toJSON(e) : undefined,
             );
         } else {
             obj.reservedRange = [];
         }
         if (message.reservedName) {
-            obj.reservedName = message.reservedName.map((e) => e);
+            obj.reservedName = message.reservedName.map(e => e);
         } else {
             obj.reservedName = [];
         }
@@ -2672,7 +2672,7 @@ export const ServiceDescriptorProto = {
         const obj: any = {};
         message.name !== undefined && (obj.name = message.name);
         if (message.method) {
-            obj.method = message.method.map((e) => (e ? MethodDescriptorProto.toJSON(e) : undefined));
+            obj.method = message.method.map(e => (e ? MethodDescriptorProto.toJSON(e) : undefined));
         } else {
             obj.method = [];
         }
@@ -3155,7 +3155,7 @@ export const FileOptions = {
         message.phpMetadataNamespace !== undefined && (obj.phpMetadataNamespace = message.phpMetadataNamespace);
         message.rubyPackage !== undefined && (obj.rubyPackage = message.rubyPackage);
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3373,7 +3373,7 @@ export const MessageOptions = {
         message.deprecated !== undefined && (obj.deprecated = message.deprecated);
         message.mapEntry !== undefined && (obj.mapEntry = message.mapEntry);
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3529,7 +3529,7 @@ export const FieldOptions = {
         message.deprecated !== undefined && (obj.deprecated = message.deprecated);
         message.weak !== undefined && (obj.weak = message.weak);
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3623,7 +3623,7 @@ export const OneofOptions = {
     toJSON(message: OneofOptions): unknown {
         const obj: any = {};
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3711,7 +3711,7 @@ export const EnumOptions = {
         message.allowAlias !== undefined && (obj.allowAlias = message.allowAlias);
         message.deprecated !== undefined && (obj.deprecated = message.deprecated);
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3797,7 +3797,7 @@ export const EnumValueOptions = {
         const obj: any = {};
         message.deprecated !== undefined && (obj.deprecated = message.deprecated);
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3878,7 +3878,7 @@ export const ServiceOptions = {
         const obj: any = {};
         message.deprecated !== undefined && (obj.deprecated = message.deprecated);
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -3972,7 +3972,7 @@ export const MethodOptions = {
         message.idempotencyLevel !== undefined &&
             (obj.idempotencyLevel = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel));
         if (message.uninterpretedOption) {
-            obj.uninterpretedOption = message.uninterpretedOption.map((e) =>
+            obj.uninterpretedOption = message.uninterpretedOption.map(e =>
                 e ? UninterpretedOption.toJSON(e) : undefined,
             );
         } else {
@@ -4118,7 +4118,7 @@ export const UninterpretedOption = {
     toJSON(message: UninterpretedOption): unknown {
         const obj: any = {};
         if (message.name) {
-            obj.name = message.name.map((e) => (e ? UninterpretedOption_NamePart.toJSON(e) : undefined));
+            obj.name = message.name.map(e => (e ? UninterpretedOption_NamePart.toJSON(e) : undefined));
         } else {
             obj.name = [];
         }
@@ -4293,7 +4293,7 @@ export const SourceCodeInfo = {
     toJSON(message: SourceCodeInfo): unknown {
         const obj: any = {};
         if (message.location) {
-            obj.location = message.location.map((e) => (e ? SourceCodeInfo_Location.toJSON(e) : undefined));
+            obj.location = message.location.map(e => (e ? SourceCodeInfo_Location.toJSON(e) : undefined));
         } else {
             obj.location = [];
         }
@@ -4427,19 +4427,19 @@ export const SourceCodeInfo_Location = {
     toJSON(message: SourceCodeInfo_Location): unknown {
         const obj: any = {};
         if (message.path) {
-            obj.path = message.path.map((e) => e);
+            obj.path = message.path.map(e => e);
         } else {
             obj.path = [];
         }
         if (message.span) {
-            obj.span = message.span.map((e) => e);
+            obj.span = message.span.map(e => e);
         } else {
             obj.span = [];
         }
         message.leadingComments !== undefined && (obj.leadingComments = message.leadingComments);
         message.trailingComments !== undefined && (obj.trailingComments = message.trailingComments);
         if (message.leadingDetachedComments) {
-            obj.leadingDetachedComments = message.leadingDetachedComments.map((e) => e);
+            obj.leadingDetachedComments = message.leadingDetachedComments.map(e => e);
         } else {
             obj.leadingDetachedComments = [];
         }
@@ -4523,7 +4523,7 @@ export const GeneratedCodeInfo = {
     toJSON(message: GeneratedCodeInfo): unknown {
         const obj: any = {};
         if (message.annotation) {
-            obj.annotation = message.annotation.map((e) => (e ? GeneratedCodeInfo_Annotation.toJSON(e) : undefined));
+            obj.annotation = message.annotation.map(e => (e ? GeneratedCodeInfo_Annotation.toJSON(e) : undefined));
         } else {
             obj.annotation = [];
         }
@@ -4627,7 +4627,7 @@ export const GeneratedCodeInfo_Annotation = {
     toJSON(message: GeneratedCodeInfo_Annotation): unknown {
         const obj: any = {};
         if (message.path) {
-            obj.path = message.path.map((e) => e);
+            obj.path = message.path.map(e => e);
         } else {
             obj.path = [];
         }
@@ -4675,7 +4675,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -4686,7 +4686,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

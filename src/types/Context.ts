@@ -2,12 +2,12 @@ import { Modules } from '../modules';
 import { SequenceResponse } from '../modules/auth/types/sequenceResponse';
 import { TendermintRpc } from '../modules/tendermint-rpc';
 import { OfflineDirectSigner } from './OfflineDirectSigner';
+import { Decimal } from '@cosmjs/math';
 import { Registry } from '@cosmjs/proto-signing';
-import { buildFeeTable } from '@cosmjs/stargate';
+import { buildFeeTable, accountFromAny } from '@cosmjs/stargate';
 import { CosmosFeeTable } from '../modules/tx/types/feeTable';
 import { GasLimits } from '../modules/tx/types/gasLimits';
-import { accountFromAny } from '@cosmjs/stargate';
-import { Decimal } from '@cosmjs/math';
+import { KeystoreV3Struct } from '../crypto/keystore';
 
 const defaultGasLimits: GasLimits<CosmosFeeTable> = {
     send: 80_000,
@@ -17,29 +17,34 @@ const defaultGasLimits: GasLimits<CosmosFeeTable> = {
     withdraw: 160_000,
 };
 
+interface GasPrice {
+    amount: string;
+    denom: string;
+}
+
 export interface ContextOptions {
-    signer: OfflineDirectSigner;
+    keystore: KeystoreV3Struct;
     signerAddress: string;
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     fees?: CosmosFeeTable;
-    gasPrice: { amount: string; denom: string };
+    gasPrice: GasPrice;
     gasLimits?: Partial<GasLimits<CosmosFeeTable>>;
 }
 
 export class Context {
     rpc: TendermintRpc;
-    signer: OfflineDirectSigner;
+    keystore?: KeystoreV3Struct;
     signerAddress: string;
     broadcastTimeoutMs?: number;
     broadcastPollIntervalMs?: number;
     modules?: Modules;
     fees: CosmosFeeTable;
     registry = new Registry();
-    constructor(rpc: TendermintRpc, { signer, signerAddress, gasPrice, gasLimits = {} }: ContextOptions) {
+
+    constructor(rpc: TendermintRpc, { signerAddress, gasPrice, gasLimits = {} }: ContextOptions) {
         if (!/^[0-9]*[.][0-9]+$/.test(gasPrice?.amount)) throw new Error('invalid gas price amount format');
         this.rpc = rpc;
-        this.signer = signer;
         this.signerAddress = signerAddress;
         const gPrice = {
             amount: Decimal.fromUserInput(gasPrice.amount, gasPrice.amount.split('.')[1].split('').length),

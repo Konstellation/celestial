@@ -16,7 +16,7 @@ export const SCRYPT_R = 8;
 export const SCRYPT_P = 1;
 export const PBKDF2_C = 262144;
 
-export type KeystoreV3 = Keystore | string;
+export type KeystoreV3Struct = Keystore | string;
 type Salt = Buffer | string;
 
 enum AlgoType {
@@ -148,8 +148,8 @@ class Pbkdf2 extends KDF {
     }
 }
 
-export default class KeyStoreV3 {
-    import(keystoreV3: KeystoreV3, password: string, nonStrict = false) {
+export default class KeystoreV3 {
+    import(keystoreV3: KeystoreV3Struct, password: string, nonStrict = false) {
         if (!password) {
             throw new Error('No password given.');
         }
@@ -228,7 +228,9 @@ export default class KeyStoreV3 {
     getCipherText({ ciphertext, mac }: Partial<KeystoreCrypto>, derivedKey: Buffer): Buffer {
         if (!ciphertext) throw new Error('ciphertext is undefined');
         const cipherText = Buffer.from(ciphertext, 'hex');
-        const macCheck = web3Utils.sha3(Buffer.concat([derivedKey.slice(16, 32), cipherText]))?.replace('0x', '');
+        const macCheck = web3Utils
+            .sha3(Buffer.concat([derivedKey.slice(16, 32), cipherText]).toString('hex'))
+            ?.replace('0x', '');
         if (macCheck !== mac) {
             throw new Error('Key derivation failed - possibly wrong password');
         }
@@ -237,7 +239,9 @@ export default class KeyStoreV3 {
     }
 
     checksum(derivedKey: Buffer, cipherText: Buffer): string | undefined {
-        return web3Utils.sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]))?.replace('0x', '');
+        return web3Utils
+            .sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]).toString('hex'))
+            ?.replace('0x', '');
     }
 
     encrypt(derivedKey: Buffer, data: BinaryLike, { cipher, cipherparams }: Partial<KeystoreCrypto>): Buffer {

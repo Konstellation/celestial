@@ -7,7 +7,7 @@ enum BankMsg {
 }
 
 interface MsgClient {
-    [BankMsg.Send](request: MsgSend, publicKey: Uint8Array): Promise<BroadcastTxResponse> | undefined;
+    [BankMsg.Send](request: MsgSend, password: string): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -18,9 +18,8 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    [BankMsg.Send](request: MsgSend, publicKey: Uint8Array) {
+    [BankMsg.Send](request: MsgSend, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${BankMsg.Send}`,
@@ -28,8 +27,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            '',
-            publicKey,
+            password,
         );
     }
 }

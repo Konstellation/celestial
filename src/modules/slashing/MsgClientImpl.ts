@@ -8,7 +8,7 @@ enum SlashingMsg {
 }
 
 interface MsgClient {
-    [SlashingMsg.Unjail](request: MsgUnjail): Promise<BroadcastTxResponse> | undefined;
+    [SlashingMsg.Unjail](request: MsgUnjail, password: string): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -23,9 +23,8 @@ export class MsgClientImpl implements MsgClient {
     }
 
     // TODO fix fees
-    [SlashingMsg.Unjail](request: MsgUnjail) {
+    [SlashingMsg.Unjail](request: MsgUnjail, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${SlashingMsg.Unjail}`,
@@ -33,6 +32,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 }
