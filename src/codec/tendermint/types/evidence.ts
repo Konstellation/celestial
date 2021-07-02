@@ -326,7 +326,7 @@ export const LightClientAttackEvidence = {
             (obj.conflictingBlock = message.conflictingBlock ? LightBlock.toJSON(message.conflictingBlock) : undefined);
         message.commonHeight !== undefined && (obj.commonHeight = (message.commonHeight || Long.ZERO).toString());
         if (message.byzantineValidators) {
-            obj.byzantineValidators = message.byzantineValidators.map(e => (e ? Validator.toJSON(e) : undefined));
+            obj.byzantineValidators = message.byzantineValidators.map((e) => (e ? Validator.toJSON(e) : undefined));
         } else {
             obj.byzantineValidators = [];
         }
@@ -411,7 +411,7 @@ export const EvidenceList = {
     toJSON(message: EvidenceList): unknown {
         const obj: any = {};
         if (message.evidence) {
-            obj.evidence = message.evidence.map(e => (e ? Evidence.toJSON(e) : undefined));
+            obj.evidence = message.evidence.map((e) => (e ? Evidence.toJSON(e) : undefined));
         } else {
             obj.evidence = [];
         }

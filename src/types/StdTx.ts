@@ -31,7 +31,7 @@ export default class StdTx {
             const [{ pub_key }] = this.signatures;
             if (pub_key.type !== 'tendermint/PubKeySecp256k1') {
                 // @ts-ignore
-                sigs = this.signatures.map(s => s.toJSON());
+                sigs = this.signatures.map((s) => s.toJSON());
             }
         }
 

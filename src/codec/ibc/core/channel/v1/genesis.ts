@@ -160,37 +160,37 @@ export const GenesisState = {
     toJSON(message: GenesisState): unknown {
         const obj: any = {};
         if (message.channels) {
-            obj.channels = message.channels.map(e => (e ? IdentifiedChannel.toJSON(e) : undefined));
+            obj.channels = message.channels.map((e) => (e ? IdentifiedChannel.toJSON(e) : undefined));
         } else {
             obj.channels = [];
         }
         if (message.acknowledgements) {
-            obj.acknowledgements = message.acknowledgements.map(e => (e ? PacketState.toJSON(e) : undefined));
+            obj.acknowledgements = message.acknowledgements.map((e) => (e ? PacketState.toJSON(e) : undefined));
         } else {
             obj.acknowledgements = [];
         }
         if (message.commitments) {
-            obj.commitments = message.commitments.map(e => (e ? PacketState.toJSON(e) : undefined));
+            obj.commitments = message.commitments.map((e) => (e ? PacketState.toJSON(e) : undefined));
         } else {
             obj.commitments = [];
         }
         if (message.receipts) {
-            obj.receipts = message.receipts.map(e => (e ? PacketState.toJSON(e) : undefined));
+            obj.receipts = message.receipts.map((e) => (e ? PacketState.toJSON(e) : undefined));
         } else {
             obj.receipts = [];
         }
         if (message.sendSequences) {
-            obj.sendSequences = message.sendSequences.map(e => (e ? PacketSequence.toJSON(e) : undefined));
+            obj.sendSequences = message.sendSequences.map((e) => (e ? PacketSequence.toJSON(e) : undefined));
         } else {
             obj.sendSequences = [];
         }
         if (message.recvSequences) {
-            obj.recvSequences = message.recvSequences.map(e => (e ? PacketSequence.toJSON(e) : undefined));
+            obj.recvSequences = message.recvSequences.map((e) => (e ? PacketSequence.toJSON(e) : undefined));
         } else {
             obj.recvSequences = [];
         }
         if (message.ackSequences) {
-            obj.ackSequences = message.ackSequences.map(e => (e ? PacketSequence.toJSON(e) : undefined));
+            obj.ackSequences = message.ackSequences.map((e) => (e ? PacketSequence.toJSON(e) : undefined));
         } else {
             obj.ackSequences = [];
         }

@@ -78,7 +78,7 @@ export const GenesisState = {
         const obj: any = {};
         message.portId !== undefined && (obj.portId = message.portId);
         if (message.denomTraces) {
-            obj.denomTraces = message.denomTraces.map(e => (e ? DenomTrace.toJSON(e) : undefined));
+            obj.denomTraces = message.denomTraces.map((e) => (e ? DenomTrace.toJSON(e) : undefined));
         } else {
             obj.denomTraces = [];
         }

@@ -236,7 +236,7 @@ export const ConnectionEnd = {
         const obj: any = {};
         message.clientId !== undefined && (obj.clientId = message.clientId);
         if (message.versions) {
-            obj.versions = message.versions.map(e => (e ? Version.toJSON(e) : undefined));
+            obj.versions = message.versions.map((e) => (e ? Version.toJSON(e) : undefined));
         } else {
             obj.versions = [];
         }
@@ -379,7 +379,7 @@ export const IdentifiedConnection = {
         message.id !== undefined && (obj.id = message.id);
         message.clientId !== undefined && (obj.clientId = message.clientId);
         if (message.versions) {
-            obj.versions = message.versions.map(e => (e ? Version.toJSON(e) : undefined));
+            obj.versions = message.versions.map((e) => (e ? Version.toJSON(e) : undefined));
         } else {
             obj.versions = [];
         }
@@ -559,7 +559,7 @@ export const ClientPaths = {
     toJSON(message: ClientPaths): unknown {
         const obj: any = {};
         if (message.paths) {
-            obj.paths = message.paths.map(e => e);
+            obj.paths = message.paths.map((e) => e);
         } else {
             obj.paths = [];
         }
@@ -633,7 +633,7 @@ export const ConnectionPaths = {
         const obj: any = {};
         message.clientId !== undefined && (obj.clientId = message.clientId);
         if (message.paths) {
-            obj.paths = message.paths.map(e => e);
+            obj.paths = message.paths.map((e) => e);
         } else {
             obj.paths = [];
         }
@@ -712,7 +712,7 @@ export const Version = {
         const obj: any = {};
         message.identifier !== undefined && (obj.identifier = message.identifier);
         if (message.features) {
-            obj.features = message.features.map(e => e);
+            obj.features = message.features.map((e) => e);
         } else {
             obj.features = [];
         }

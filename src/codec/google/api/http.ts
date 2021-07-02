@@ -353,7 +353,7 @@ export const Http = {
     toJSON(message: Http): unknown {
         const obj: any = {};
         if (message.rules) {
-            obj.rules = message.rules.map(e => (e ? HttpRule.toJSON(e) : undefined));
+            obj.rules = message.rules.map((e) => (e ? HttpRule.toJSON(e) : undefined));
         } else {
             obj.rules = [];
         }
@@ -531,7 +531,7 @@ export const HttpRule = {
         message.body !== undefined && (obj.body = message.body);
         message.responseBody !== undefined && (obj.responseBody = message.responseBody);
         if (message.additionalBindings) {
-            obj.additionalBindings = message.additionalBindings.map(e => (e ? HttpRule.toJSON(e) : undefined));
+            obj.additionalBindings = message.additionalBindings.map((e) => (e ? HttpRule.toJSON(e) : undefined));
         } else {
             obj.additionalBindings = [];
         }

@@ -66,7 +66,7 @@ export default class TxModule {
         publicKey?: Uint8Array,
     ): Promise<TxRaw> {
         const accountFromSigner = (await this.ctx.signer.getAccounts()).find(
-            account => account.address === signerAddress,
+            (account) => account.address === signerAddress,
         );
         // if (!accountFromSigner) {
         //     throw new Error('Failed to retrieve account from signer');
@@ -140,7 +140,7 @@ export default class TxModule {
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query: query });
         console.log(results);
-        return results.txs.map(tx => {
+        return results.txs.map((tx) => {
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),

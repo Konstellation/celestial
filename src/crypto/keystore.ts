@@ -16,158 +16,135 @@ export const SCRYPT_R = 8;
 export const SCRYPT_P = 1;
 export const PBKDF2_C = 262144;
 
-type Salt = Buffer | string;
 export type KeystoreV3 = Keystore | string;
+type Salt = Buffer | string;
 
 enum AlgoType {
     PRF = 'hmac-sha256',
     SHA256 = 'sha256',
-    AES128CTR = 'aes-128-ctr'
+    AES128CTR = 'aes-128-ctr',
 }
 enum KdfType {
     SCRYPT = 'scrypt',
-    PBKDF2 = 'pbkdf2'
+    PBKDF2 = 'pbkdf2',
 }
 
-interface KdfParams {
+abstract class KdfParams {
     salt: Salt;
     dklen: number;
-}
-interface ScryptKdfParams {
-    n: number;
-    r: number;
-    p: number;
-}
-interface Pbkdf2Params {
-    prf: string;
-    c: number;
-}
-interface KeystoreCrypto {
-    cipher: AlgoType,
-    ciphertext: string,
-    cipherparams: {
-      iv: Buffer
-    },
-    kdf: KdfType,
-    kdfparams: {
-      dklen: number,
-      n: number,
-      p: number,
-      r: number,
-      salt: string
-    },
-    mac: string
-  }
-  interface ExportKeystoreCrypto {
-    cipher: AlgoType,
-    ciphertext: string,
-    cipherparams: {
-      iv: string
-    },
-    kdf: KdfType,
-    kdfparams: {
-      dklen: number,
-      n: number,
-      p: number,
-      r: number,
-      salt: string
-    },
-    mac: string
-  }
-interface Keystore {
-    address: string,
-    crypto: KeystoreCrypto,
-    id: string,
-    version: number,
-    name: string
-}		
-interface ExportKeystore {
-    address: string,
-    crypto: ExportKeystoreCrypto,
-    id: string,
-    version: number,
-    name: string
-}
 
-class KDF  {
-    protected kdfParams: KdfParams;
-
-    constructor({ salt, dklen = DKLEN }: KdfParams) {
-        if (typeof salt === 'string') {
-            salt = Buffer.from(salt, 'hex');
-        }
-        
-        this.kdfParams = {
-            salt,
-            dklen,
-        };
-    }
-
-    getDerivedKey(arg?: any) {
-        throw new Error('Not implemented');
-    }
-
-    getKdfParams() {
-        throw new Error('Not implemented');
+    constructor({ salt, dklen }: { salt: Salt; dklen: number }) {
+        this.salt = salt;
+        this.dklen = dklen;
     }
 }
-
-class ScryptKdf extends KDF implements ScryptKdfParams {
+class ScryptKdfParams extends KdfParams {
     n: number;
     r: number;
     p: number;
 
-    constructor({ n = SCRYPT_N, r = SCRYPT_R, p = SCRYPT_P, dklen, salt }: KdfParams & ScryptKdfParams) {
+    constructor({ n, r, p, salt, dklen }: { n: number; r: number; p: number; salt: Salt; dklen: number }) {
         super({ salt, dklen });
 
         this.n = n;
-        this.r =r;
+        this.r = r;
         this.p = p;
     }
-
-    override getDerivedKey(password: string): Buffer {
-        return scryptsy(Buffer.from(password), this.kdfParams.salt, this.n, this.r, this.p, this.kdfParams.dklen);
-    }
-
-    getKdfParams(): KdfParams & ScryptKdfParams {
-        return {
-            salt: this.kdfParams.salt.toString('hex'),
-            n: this.n,
-            r: this.r,
-            p: this.p,
-            dklen: this.kdfParams.dklen,
-        };
-    }
 }
-
-class Pbkdf2 extends KDF implements Pbkdf2Params {
-    c: number;
+class Pbkdf2Params extends KdfParams {
     prf: string;
+    c: number;
     digest: string;
 
-    constructor({ prf = AlgoType.PRF, c = PBKDF2_C, dklen = DKLEN, digest = AlgoType.SHA256, salt }: KdfParams & Pbkdf2Params & { digest: string }) {
-        super({ dklen, salt });
+    constructor({
+        prf,
+        c,
+        digest,
+        salt,
+        dklen,
+    }: {
+        prf: string;
+        c: number;
+        digest: string;
+        salt: Salt;
+        dklen: number;
+    }) {
+        super({ salt, dklen });
 
         this.prf = prf;
         this.c = c;
         this.digest = digest;
     }
+}
+interface KeystoreCrypto {
+    cipher: AlgoType;
+    ciphertext: string;
+    cipherparams: {
+        iv: Buffer | string;
+    };
+    kdf: KdfType;
+    kdfparams: KdfParams;
+    mac: string;
+}
+
+interface Keystore {
+    address: string;
+    crypto: KeystoreCrypto;
+    id: string;
+    version: number;
+    public_key: string;
+    name: string;
+}
+
+abstract class KDF {
+    protected kdfParams: KdfParams;
+
+    constructor(params: KdfParams) {
+        if (typeof params.salt === 'string') {
+            params.salt = Buffer.from(params.salt, 'hex');
+        }
+        this.kdfParams = params;
+    }
+
+    abstract getDerivedKey(password: string): Buffer;
+    abstract getKdfParams(): KdfParams;
+}
+
+class ScryptKdf extends KDF {
+    constructor({ n = SCRYPT_N, r = SCRYPT_R, p = SCRYPT_P, dklen, salt }: ScryptKdfParams) {
+        super({ salt, dklen, n, r, p } as ScryptKdfParams);
+    }
 
     getDerivedKey(password: string): Buffer {
-        if (this.prf !== AlgoType.PRF) {
+        const params = this.kdfParams as ScryptKdfParams;
+        return scryptsy(Buffer.from(password), params.salt, params.n, params.r, params.p, params.dklen);
+    }
+
+    getKdfParams(): KdfParams {
+        const params = this.kdfParams;
+        params.salt = params.salt.toString('hex');
+        return params;
+    }
+}
+
+class Pbkdf2 extends KDF {
+    constructor({ prf = AlgoType.PRF, c = PBKDF2_C, dklen = DKLEN, digest = AlgoType.SHA256, salt }: Pbkdf2Params) {
+        super({ dklen, salt, digest, prf, c } as Pbkdf2Params);
+    }
+
+    getDerivedKey(password: string): Buffer {
+        const params = this.kdfParams as Pbkdf2Params;
+        if (params.prf !== AlgoType.PRF) {
             throw new Error('Unsupported parameters to PBKDF2');
         }
 
-        return pbkdf2Sync(Buffer.from(password), this.kdfParams.salt, this.c, this.kdfParams.dklen, this.digest);
+        return pbkdf2Sync(Buffer.from(password), params.salt, params.c, params.dklen, params.digest);
     }
 
-    getKdfParams(): KdfParams & Pbkdf2Params {
-        return {
-            salt: this.kdfParams.salt.toString('hex'),
-            c: this.c,
-            dklen: this.kdfParams.dklen,
-            prf: this.prf,
-        };
+    getKdfParams(): KdfParams {
+        const params = this.kdfParams;
+        params.salt = params.salt.toString('hex');
+        return params;
     }
 }
 
@@ -178,7 +155,9 @@ export default class KeyStoreV3 {
         }
 
         const { version, crypto, name } =
-            typeof keystoreV3 === 'object' ? keystoreV3 : JSON.parse(nonStrict ? keystoreV3.toLowerCase() : keystoreV3) as Keystore;
+            typeof keystoreV3 === 'object'
+                ? keystoreV3
+                : (JSON.parse(nonStrict ? keystoreV3.toLowerCase() : keystoreV3) as Keystore);
         if (version !== VERSION) {
             throw new Error('Not a valid V3 wallet');
         }
@@ -204,14 +183,14 @@ export default class KeyStoreV3 {
             salt = randomBytes(SALT_SIZE),
             iv = randomBytes(IV_SIZE),
         } = {},
-    ): ExportKeystore {
+    ): Keystore {
         if (!password) {
             throw new Error('No password given.');
         }
 
-        const keyDF = this.getKdf({kdf, kdfparams: { dklen, salt }});
+        const keyDF = this.getKdf({ kdf, kdfparams: { dklen, salt } });
         const derivedKey = keyDF.getDerivedKey(password);
-        const ciphertext = this.encrypt(derivedKey, privateKey, { cipher: AlgoType.AES128CTR, cipherparams: {iv} });
+        const ciphertext = this.encrypt(derivedKey, privateKey, { cipher: AlgoType.AES128CTR, cipherparams: { iv } });
         const mac = this.checksum(derivedKey, ciphertext);
 
         return {
@@ -229,19 +208,18 @@ export default class KeyStoreV3 {
                 },
                 cipher,
                 kdf,
-                // @ts-ignore
                 kdfparams: keyDF.getKdfParams(),
                 mac: mac?.toString() || '',
             },
         };
     }
 
-    getKdf({kdf, kdfparams}: {kdf: KdfType, kdfparams: KdfParams}): ScryptKdf | Pbkdf2 {
+    getKdf({ kdf, kdfparams }: { kdf: KdfType; kdfparams: KdfParams }): KDF {
         switch (kdf) {
             case KdfType.SCRYPT:
-                return new ScryptKdf(kdfparams as KdfParams & ScryptKdfParams);
+                return new ScryptKdf(kdfparams as ScryptKdfParams);
             case KdfType.PBKDF2:
-                return new Pbkdf2(kdfparams as KdfParams & Pbkdf2Params & { digest: string });
+                return new Pbkdf2(kdfparams as Pbkdf2Params);
             default:
                 throw new Error('Unsupported key derivation scheme');
         }
@@ -262,8 +240,8 @@ export default class KeyStoreV3 {
         return web3Utils.sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]))?.replace('0x', '');
     }
 
-    encrypt(derivedKey: Buffer, data: BinaryLike, {cipher, cipherparams }: Partial<KeystoreCrypto>): Buffer {
-        if (!cipher || !cipherparams) throw new Error('cipher data is undefined')
+    encrypt(derivedKey: Buffer, data: BinaryLike, { cipher, cipherparams }: Partial<KeystoreCrypto>): Buffer {
+        if (!cipher || !cipherparams) throw new Error('cipher data is undefined');
         const cipheriv = createCipheriv(cipher, derivedKey.slice(0, 16), cipherparams.iv);
         if (!cipheriv) {
             throw new Error('Unsupported cipher');

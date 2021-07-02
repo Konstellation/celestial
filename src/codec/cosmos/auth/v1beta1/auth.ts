@@ -207,7 +207,7 @@ export const ModuleAccount = {
             (obj.baseAccount = message.baseAccount ? BaseAccount.toJSON(message.baseAccount) : undefined);
         message.name !== undefined && (obj.name = message.name);
         if (message.permissions) {
-            obj.permissions = message.permissions.map(e => e);
+            obj.permissions = message.permissions.map((e) => e);
         } else {
             obj.permissions = [];
         }

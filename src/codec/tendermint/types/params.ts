@@ -417,7 +417,7 @@ export const ValidatorParams = {
     toJSON(message: ValidatorParams): unknown {
         const obj: any = {};
         if (message.pubKeyTypes) {
-            obj.pubKeyTypes = message.pubKeyTypes.map(e => e);
+            obj.pubKeyTypes = message.pubKeyTypes.map((e) => e);
         } else {
             obj.pubKeyTypes = [];
         }

@@ -419,7 +419,7 @@ export const ExistenceProof = {
             (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
         message.leaf !== undefined && (obj.leaf = message.leaf ? LeafOp.toJSON(message.leaf) : undefined);
         if (message.path) {
-            obj.path = message.path.map(e => (e ? InnerOp.toJSON(e) : undefined));
+            obj.path = message.path.map((e) => (e ? InnerOp.toJSON(e) : undefined));
         } else {
             obj.path = [];
         }
@@ -1081,7 +1081,7 @@ export const InnerSpec = {
     toJSON(message: InnerSpec): unknown {
         const obj: any = {};
         if (message.childOrder) {
-            obj.childOrder = message.childOrder.map(e => e);
+            obj.childOrder = message.childOrder.map((e) => e);
         } else {
             obj.childOrder = [];
         }
@@ -1176,7 +1176,7 @@ export const BatchProof = {
     toJSON(message: BatchProof): unknown {
         const obj: any = {};
         if (message.entries) {
-            obj.entries = message.entries.map(e => (e ? BatchEntry.toJSON(e) : undefined));
+            obj.entries = message.entries.map((e) => (e ? BatchEntry.toJSON(e) : undefined));
         } else {
             obj.entries = [];
         }
@@ -1324,12 +1324,12 @@ export const CompressedBatchProof = {
     toJSON(message: CompressedBatchProof): unknown {
         const obj: any = {};
         if (message.entries) {
-            obj.entries = message.entries.map(e => (e ? CompressedBatchEntry.toJSON(e) : undefined));
+            obj.entries = message.entries.map((e) => (e ? CompressedBatchEntry.toJSON(e) : undefined));
         } else {
             obj.entries = [];
         }
         if (message.lookupInners) {
-            obj.lookupInners = message.lookupInners.map(e => (e ? InnerOp.toJSON(e) : undefined));
+            obj.lookupInners = message.lookupInners.map((e) => (e ? InnerOp.toJSON(e) : undefined));
         } else {
             obj.lookupInners = [];
         }
@@ -1518,7 +1518,7 @@ export const CompressedExistenceProof = {
             (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
         message.leaf !== undefined && (obj.leaf = message.leaf ? LeafOp.toJSON(message.leaf) : undefined);
         if (message.path) {
-            obj.path = message.path.map(e => e);
+            obj.path = message.path.map((e) => e);
         } else {
             obj.path = [];
         }
@@ -1655,7 +1655,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1666,7 +1666,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

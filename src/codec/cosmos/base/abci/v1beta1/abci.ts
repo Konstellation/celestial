@@ -320,7 +320,7 @@ export const TxResponse = {
         message.data !== undefined && (obj.data = message.data);
         message.rawLog !== undefined && (obj.rawLog = message.rawLog);
         if (message.logs) {
-            obj.logs = message.logs.map(e => (e ? ABCIMessageLog.toJSON(e) : undefined));
+            obj.logs = message.logs.map((e) => (e ? ABCIMessageLog.toJSON(e) : undefined));
         } else {
             obj.logs = [];
         }
@@ -466,7 +466,7 @@ export const ABCIMessageLog = {
         message.msgIndex !== undefined && (obj.msgIndex = message.msgIndex);
         message.log !== undefined && (obj.log = message.log);
         if (message.events) {
-            obj.events = message.events.map(e => (e ? StringEvent.toJSON(e) : undefined));
+            obj.events = message.events.map((e) => (e ? StringEvent.toJSON(e) : undefined));
         } else {
             obj.events = [];
         }
@@ -550,7 +550,7 @@ export const StringEvent = {
         const obj: any = {};
         message.type !== undefined && (obj.type = message.type);
         if (message.attributes) {
-            obj.attributes = message.attributes.map(e => (e ? Attribute.toJSON(e) : undefined));
+            obj.attributes = message.attributes.map((e) => (e ? Attribute.toJSON(e) : undefined));
         } else {
             obj.attributes = [];
         }
@@ -786,7 +786,7 @@ export const Result = {
             (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
         message.log !== undefined && (obj.log = message.log);
         if (message.events) {
-            obj.events = message.events.map(e => (e ? Event.toJSON(e) : undefined));
+            obj.events = message.events.map((e) => (e ? Event.toJSON(e) : undefined));
         } else {
             obj.events = [];
         }
@@ -1003,7 +1003,7 @@ export const TxMsgData = {
     toJSON(message: TxMsgData): unknown {
         const obj: any = {};
         if (message.data) {
-            obj.data = message.data.map(e => (e ? MsgData.toJSON(e) : undefined));
+            obj.data = message.data.map((e) => (e ? MsgData.toJSON(e) : undefined));
         } else {
             obj.data = [];
         }
@@ -1131,7 +1131,7 @@ export const SearchTxsResult = {
         message.pageTotal !== undefined && (obj.pageTotal = (message.pageTotal || Long.UZERO).toString());
         message.limit !== undefined && (obj.limit = (message.limit || Long.UZERO).toString());
         if (message.txs) {
-            obj.txs = message.txs.map(e => (e ? TxResponse.toJSON(e) : undefined));
+            obj.txs = message.txs.map((e) => (e ? TxResponse.toJSON(e) : undefined));
         } else {
             obj.txs = [];
         }
@@ -1186,7 +1186,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1197,7 +1197,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

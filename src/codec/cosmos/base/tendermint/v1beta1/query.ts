@@ -243,7 +243,7 @@ export const GetValidatorSetByHeightResponse = {
         const obj: any = {};
         message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.ZERO).toString());
         if (message.validators) {
-            obj.validators = message.validators.map(e => (e ? Validator.toJSON(e) : undefined));
+            obj.validators = message.validators.map((e) => (e ? Validator.toJSON(e) : undefined));
         } else {
             obj.validators = [];
         }
@@ -396,7 +396,7 @@ export const GetLatestValidatorSetResponse = {
         const obj: any = {};
         message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.ZERO).toString());
         if (message.validators) {
-            obj.validators = message.validators.map(e => (e ? Validator.toJSON(e) : undefined));
+            obj.validators = message.validators.map((e) => (e ? Validator.toJSON(e) : undefined));
         } else {
             obj.validators = [];
         }
@@ -1095,7 +1095,7 @@ export const VersionInfo = {
         message.buildTags !== undefined && (obj.buildTags = message.buildTags);
         message.goVersion !== undefined && (obj.goVersion = message.goVersion);
         if (message.buildDeps) {
-            obj.buildDeps = message.buildDeps.map(e => (e ? Module.toJSON(e) : undefined));
+            obj.buildDeps = message.buildDeps.map((e) => (e ? Module.toJSON(e) : undefined));
         } else {
             obj.buildDeps = [];
         }
@@ -1263,37 +1263,37 @@ export class ServiceClientImpl implements Service {
     GetNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponse> {
         const data = GetNodeInfoRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.tendermint.v1beta1.Service', 'GetNodeInfo', data);
-        return promise.then(data => GetNodeInfoResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetNodeInfoResponse.decode(new _m0.Reader(data)));
     }
 
     GetSyncing(request: GetSyncingRequest): Promise<GetSyncingResponse> {
         const data = GetSyncingRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.tendermint.v1beta1.Service', 'GetSyncing', data);
-        return promise.then(data => GetSyncingResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetSyncingResponse.decode(new _m0.Reader(data)));
     }
 
     GetLatestBlock(request: GetLatestBlockRequest): Promise<GetLatestBlockResponse> {
         const data = GetLatestBlockRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.tendermint.v1beta1.Service', 'GetLatestBlock', data);
-        return promise.then(data => GetLatestBlockResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetLatestBlockResponse.decode(new _m0.Reader(data)));
     }
 
     GetBlockByHeight(request: GetBlockByHeightRequest): Promise<GetBlockByHeightResponse> {
         const data = GetBlockByHeightRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.tendermint.v1beta1.Service', 'GetBlockByHeight', data);
-        return promise.then(data => GetBlockByHeightResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetBlockByHeightResponse.decode(new _m0.Reader(data)));
     }
 
     GetLatestValidatorSet(request: GetLatestValidatorSetRequest): Promise<GetLatestValidatorSetResponse> {
         const data = GetLatestValidatorSetRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.tendermint.v1beta1.Service', 'GetLatestValidatorSet', data);
-        return promise.then(data => GetLatestValidatorSetResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetLatestValidatorSetResponse.decode(new _m0.Reader(data)));
     }
 
     GetValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse> {
         const data = GetValidatorSetByHeightRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.tendermint.v1beta1.Service', 'GetValidatorSetByHeight', data);
-        return promise.then(data => GetValidatorSetByHeightResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetValidatorSetByHeightResponse.decode(new _m0.Reader(data)));
     }
 }
 

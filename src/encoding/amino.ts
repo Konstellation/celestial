@@ -1,4 +1,3 @@
-import { encodeUint8 } from '@node-a-team/ts-amino/dist/encoder';
 import { ClassLikeDeclaration } from 'typescript';
 
 export enum PubKeyMeta {

@@ -349,7 +349,7 @@ export const HistoricalInfo = {
         const obj: any = {};
         message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
         if (message.valset) {
-            obj.valset = message.valset.map(e => (e ? Validator.toJSON(e) : undefined));
+            obj.valset = message.valset.map((e) => (e ? Validator.toJSON(e) : undefined));
         } else {
             obj.valset = [];
         }
@@ -940,7 +940,7 @@ export const ValAddresses = {
     toJSON(message: ValAddresses): unknown {
         const obj: any = {};
         if (message.addresses) {
-            obj.addresses = message.addresses.map(e => e);
+            obj.addresses = message.addresses.map((e) => e);
         } else {
             obj.addresses = [];
         }
@@ -1074,7 +1074,7 @@ export const DVPairs = {
     toJSON(message: DVPairs): unknown {
         const obj: any = {};
         if (message.pairs) {
-            obj.pairs = message.pairs.map(e => (e ? DVPair.toJSON(e) : undefined));
+            obj.pairs = message.pairs.map((e) => (e ? DVPair.toJSON(e) : undefined));
         } else {
             obj.pairs = [];
         }
@@ -1225,7 +1225,7 @@ export const DVVTriplets = {
     toJSON(message: DVVTriplets): unknown {
         const obj: any = {};
         if (message.triplets) {
-            obj.triplets = message.triplets.map(e => (e ? DVVTriplet.toJSON(e) : undefined));
+            obj.triplets = message.triplets.map((e) => (e ? DVVTriplet.toJSON(e) : undefined));
         } else {
             obj.triplets = [];
         }
@@ -1400,7 +1400,7 @@ export const UnbondingDelegation = {
         message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
         message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
         if (message.entries) {
-            obj.entries = message.entries.map(e => (e ? UnbondingDelegationEntry.toJSON(e) : undefined));
+            obj.entries = message.entries.map((e) => (e ? UnbondingDelegationEntry.toJSON(e) : undefined));
         } else {
             obj.entries = [];
         }
@@ -1720,7 +1720,7 @@ export const Redelegation = {
         message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
         message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
         if (message.entries) {
-            obj.entries = message.entries.map(e => (e ? RedelegationEntry.toJSON(e) : undefined));
+            obj.entries = message.entries.map((e) => (e ? RedelegationEntry.toJSON(e) : undefined));
         } else {
             obj.entries = [];
         }
@@ -2082,7 +2082,7 @@ export const RedelegationResponse = {
         message.redelegation !== undefined &&
             (obj.redelegation = message.redelegation ? Redelegation.toJSON(message.redelegation) : undefined);
         if (message.entries) {
-            obj.entries = message.entries.map(e => (e ? RedelegationEntryResponse.toJSON(e) : undefined));
+            obj.entries = message.entries.map((e) => (e ? RedelegationEntryResponse.toJSON(e) : undefined));
         } else {
             obj.entries = [];
         }

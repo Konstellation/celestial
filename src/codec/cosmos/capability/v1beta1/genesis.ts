@@ -152,7 +152,7 @@ export const GenesisState = {
         const obj: any = {};
         message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
         if (message.owners) {
-            obj.owners = message.owners.map(e => (e ? GenesisOwners.toJSON(e) : undefined));
+            obj.owners = message.owners.map((e) => (e ? GenesisOwners.toJSON(e) : undefined));
         } else {
             obj.owners = [];
         }
