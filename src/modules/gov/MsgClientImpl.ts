@@ -10,9 +10,9 @@ enum GovMsg {
 }
 
 interface MsgClient {
-    [GovMsg.SubmitProposal](request: MsgSubmitProposal): Promise<BroadcastTxResponse> | undefined;
-    [GovMsg.Vote](request: MsgVote): Promise<BroadcastTxResponse> | undefined;
-    [GovMsg.Deposit](request: MsgDeposit): Promise<BroadcastTxResponse> | undefined;
+    [GovMsg.SubmitProposal](request: MsgSubmitProposal, password: string): Promise<BroadcastTxResponse> | undefined;
+    [GovMsg.Vote](request: MsgVote, password: string): Promise<BroadcastTxResponse> | undefined;
+    [GovMsg.Deposit](request: MsgDeposit, password: string): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -29,9 +29,8 @@ export class MsgClientImpl implements MsgClient {
     }
 
     // TODO fix fees
-    [GovMsg.SubmitProposal](request: MsgSubmitProposal) {
+    [GovMsg.SubmitProposal](request: MsgSubmitProposal, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${GovMsg.SubmitProposal}`,
@@ -39,12 +38,12 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 
-    [GovMsg.Vote](request: MsgVote) {
+    [GovMsg.Vote](request: MsgVote, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${GovMsg.SubmitProposal}`,
@@ -52,12 +51,12 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 
-    [GovMsg.Deposit](request: MsgDeposit) {
+    [GovMsg.Deposit](request: MsgDeposit, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${GovMsg.Deposit}`,
@@ -65,6 +64,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 }

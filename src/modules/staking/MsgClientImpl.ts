@@ -18,11 +18,17 @@ enum StakingMsg {
 }
 
 interface MsgClient {
-    [StakingMsg.CreateValidator](request: MsgCreateValidator): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.EditValidator](request: MsgEditValidator): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.Delegate](request: MsgDelegate): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.BeginRedelegate](request: MsgBeginRedelegate): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.Undelegate](request: MsgUndelegate): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.CreateValidator](
+        request: MsgCreateValidator,
+        password: string,
+    ): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.EditValidator](request: MsgEditValidator, password: string): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.Delegate](request: MsgDelegate, password: string): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.BeginRedelegate](
+        request: MsgBeginRedelegate,
+        password: string,
+    ): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.Undelegate](request: MsgUndelegate, password: string): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -40,9 +46,8 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    [StakingMsg.CreateValidator](request: MsgCreateValidator) {
+    [StakingMsg.CreateValidator](request: MsgCreateValidator, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${StakingMsg.CreateValidator}`,
@@ -50,11 +55,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
-    [StakingMsg.EditValidator](request: MsgEditValidator) {
+    [StakingMsg.EditValidator](request: MsgEditValidator, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${StakingMsg.EditValidator}`,
@@ -62,11 +67,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
-    [StakingMsg.Delegate](request: MsgDelegate) {
+    [StakingMsg.Delegate](request: MsgDelegate, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${StakingMsg.Delegate}`,
@@ -74,11 +79,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
-    [StakingMsg.BeginRedelegate](request: MsgBeginRedelegate) {
+    [StakingMsg.BeginRedelegate](request: MsgBeginRedelegate, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${StakingMsg.BeginRedelegate}`,
@@ -86,11 +91,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
-    [StakingMsg.Undelegate](request: MsgUndelegate) {
+    [StakingMsg.Undelegate](request: MsgUndelegate, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${StakingMsg.Undelegate}`,
@@ -98,6 +103,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.undelegate,
+            password,
         );
     }
 }

@@ -16,14 +16,22 @@ enum DistributionMsg {
 }
 
 interface MsgClient {
-    [DistributionMsg.SetWithdrawAddress](request: MsgSetWithdrawAddress): Promise<BroadcastTxResponse> | undefined;
+    [DistributionMsg.SetWithdrawAddress](
+        request: MsgSetWithdrawAddress,
+        password: string,
+    ): Promise<BroadcastTxResponse> | undefined;
     [DistributionMsg.WithdrawDelegatorReward](
         request: MsgWithdrawDelegatorReward,
+        password: string,
     ): Promise<BroadcastTxResponse> | undefined;
     [DistributionMsg.WithdrawValidatorCommission](
         request: MsgWithdrawValidatorCommission,
+        password: string,
     ): Promise<BroadcastTxResponse> | undefined;
-    [DistributionMsg.FundCommunityPool](request: MsgFundCommunityPool): Promise<BroadcastTxResponse> | undefined;
+    [DistributionMsg.FundCommunityPool](
+        request: MsgFundCommunityPool,
+        password: string,
+    ): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -40,9 +48,8 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    [DistributionMsg.SetWithdrawAddress](request: MsgSetWithdrawAddress) {
+    [DistributionMsg.SetWithdrawAddress](request: MsgSetWithdrawAddress, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${DistributionMsg.SetWithdrawAddress}`,
@@ -50,12 +57,12 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 
-    [DistributionMsg.WithdrawDelegatorReward](request: MsgWithdrawDelegatorReward) {
+    [DistributionMsg.WithdrawDelegatorReward](request: MsgWithdrawDelegatorReward, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${DistributionMsg.WithdrawDelegatorReward}`,
@@ -63,12 +70,12 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 
-    [DistributionMsg.WithdrawValidatorCommission](request: MsgWithdrawValidatorCommission) {
+    [DistributionMsg.WithdrawValidatorCommission](request: MsgWithdrawValidatorCommission, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${DistributionMsg.WithdrawValidatorCommission}`,
@@ -76,12 +83,12 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 
-    [DistributionMsg.FundCommunityPool](request: MsgFundCommunityPool) {
+    [DistributionMsg.FundCommunityPool](request: MsgFundCommunityPool, password: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
-            this.ctx.signerAddress,
             [
                 {
                     typeUrl: `${this.package}.Msg${DistributionMsg.FundCommunityPool}`,
@@ -89,6 +96,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
+            password,
         );
     }
 }
