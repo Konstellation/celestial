@@ -1,7 +1,7 @@
 // @ts-ignore
 import scryptsy from 'scrypt.js';
-import { BinaryLike, CipherGCMTypes, createCipheriv, createDecipheriv, pbkdf2Sync, randomBytes } from 'crypto';
-import web3Utils from 'web3-utils';
+import { BinaryLike, createCipheriv, createDecipheriv, pbkdf2Sync, randomBytes } from 'crypto';
+import { sha3 } from 'web3-utils';
 import { v4 } from 'uuid';
 import { bech32ifyAccPub } from '../encoding/bech32';
 import { marshalBinaryBare, PubKeyMeta } from '../encoding/amino';
@@ -17,14 +17,14 @@ export const SCRYPT_P = 1;
 export const PBKDF2_C = 262144;
 
 export type KeystoreV3Struct = Keystore | string;
-type Salt = Buffer | string;
+export type Salt = Buffer | string;
 
-enum AlgoType {
+export enum AlgoType {
     PRF = 'hmac-sha256',
     SHA256 = 'sha256',
     AES128CTR = 'aes-128-ctr',
 }
-enum KdfType {
+export enum KdfType {
     SCRYPT = 'scrypt',
     PBKDF2 = 'pbkdf2',
 }
@@ -38,7 +38,7 @@ abstract class KdfParams {
         this.dklen = dklen;
     }
 }
-class ScryptKdfParams extends KdfParams {
+export class ScryptKdfParams extends KdfParams {
     n: number;
     r: number;
     p: number;
@@ -51,7 +51,7 @@ class ScryptKdfParams extends KdfParams {
         this.p = p;
     }
 }
-class Pbkdf2Params extends KdfParams {
+export class Pbkdf2Params extends KdfParams {
     prf: string;
     c: number;
     digest: string;
@@ -110,13 +110,14 @@ abstract class KDF {
     abstract getKdfParams(): KdfParams;
 }
 
-class ScryptKdf extends KDF {
+export class ScryptKdf extends KDF {
     constructor({ n = SCRYPT_N, r = SCRYPT_R, p = SCRYPT_P, dklen, salt }: ScryptKdfParams) {
         super({ salt, dklen, n, r, p } as ScryptKdfParams);
     }
 
     getDerivedKey(password: string): Buffer {
         const params = this.kdfParams as ScryptKdfParams;
+
         return scryptsy(Buffer.from(password), params.salt, params.n, params.r, params.p, params.dklen);
     }
 
@@ -127,7 +128,7 @@ class ScryptKdf extends KDF {
     }
 }
 
-class Pbkdf2 extends KDF {
+export class Pbkdf2 extends KDF {
     constructor({ prf = AlgoType.PRF, c = PBKDF2_C, dklen = DKLEN, digest = AlgoType.SHA256, salt }: Pbkdf2Params) {
         super({ dklen, salt, digest, prf, c } as Pbkdf2Params);
     }
@@ -228,9 +229,7 @@ export default class KeystoreV3 {
     getCipherText({ ciphertext, mac }: Partial<KeystoreCrypto>, derivedKey: Buffer): Buffer {
         if (!ciphertext) throw new Error('ciphertext is undefined');
         const cipherText = Buffer.from(ciphertext, 'hex');
-        const macCheck = web3Utils
-            .sha3(Buffer.concat([derivedKey.slice(16, 32), cipherText]).toString('hex'))
-            ?.replace('0x', '');
+        const macCheck = sha3(Buffer.concat([derivedKey.slice(16, 32), cipherText]))?.replace('0x', '');
         if (macCheck !== mac) {
             throw new Error('Key derivation failed - possibly wrong password');
         }
@@ -239,14 +238,12 @@ export default class KeystoreV3 {
     }
 
     checksum(derivedKey: Buffer, cipherText: Buffer): string | undefined {
-        return web3Utils
-            .sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]).toString('hex'))
-            ?.replace('0x', '');
+        return sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]))?.replace('0x', '');
     }
 
     encrypt(derivedKey: Buffer, data: BinaryLike, { cipher, cipherparams }: Partial<KeystoreCrypto>): Buffer {
         if (!cipher || !cipherparams) throw new Error('cipher data is undefined');
-        const cipheriv = createCipheriv(cipher, derivedKey.slice(0, 16), cipherparams.iv);
+        const cipheriv = createCipheriv(cipher, derivedKey.slice(0, 16), Buffer.from(cipherparams.iv as string, 'hex'));
         if (!cipheriv) {
             throw new Error('Unsupported cipher');
         }
@@ -255,7 +252,7 @@ export default class KeystoreV3 {
     }
 
     decrypt({ cipher, cipherparams: { iv } }: KeystoreCrypto, derivedKey: Buffer, cipherText: Buffer): Buffer {
-        const decipher = createDecipheriv(cipher, derivedKey.slice(0, 16), Buffer.from(iv));
+        const decipher = createDecipheriv(cipher, derivedKey.slice(0, 16), Buffer.from(iv as string, 'hex'));
 
         return Buffer.concat([decipher.update(cipherText), decipher.final()]);
     }
