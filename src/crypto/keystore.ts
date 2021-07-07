@@ -229,6 +229,7 @@ export default class KeystoreV3 {
     getCipherText({ ciphertext, mac }: Partial<KeystoreCrypto>, derivedKey: Buffer): Buffer {
         if (!ciphertext) throw new Error('ciphertext is undefined');
         const cipherText = Buffer.from(ciphertext, 'hex');
+        // @ts-ignore
         const macCheck = sha3(Buffer.concat([derivedKey.slice(16, 32), cipherText]))?.replace('0x', '');
         if (macCheck !== mac) {
             throw new Error('Key derivation failed - possibly wrong password');
@@ -238,6 +239,7 @@ export default class KeystoreV3 {
     }
 
     checksum(derivedKey: Buffer, cipherText: Buffer): string | undefined {
+        // @ts-ignore
         return sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]))?.replace('0x', '');
     }
 
