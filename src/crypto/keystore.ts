@@ -150,7 +150,7 @@ export class Pbkdf2 extends KDF {
 }
 
 export default class KeystoreV3 {
-    import(keystoreV3: KeystoreV3Struct, password: string, nonStrict = false) {
+    static import(keystoreV3: KeystoreV3Struct, password: string, nonStrict = false) {
         if (!password) {
             throw new Error('No password given.');
         }
@@ -171,7 +171,7 @@ export default class KeystoreV3 {
         };
     }
 
-    export(
+    static export(
         password: string,
         privateKey: Buffer,
         publicKey: Buffer,
@@ -215,7 +215,7 @@ export default class KeystoreV3 {
         };
     }
 
-    getKdf({ kdf, kdfparams }: { kdf: KdfType; kdfparams: KdfParams }): KDF {
+    static getKdf({ kdf, kdfparams }: { kdf: KdfType; kdfparams: KdfParams }): KDF {
         switch (kdf) {
             case KdfType.SCRYPT:
                 return new ScryptKdf(kdfparams as ScryptKdfParams);
@@ -226,7 +226,7 @@ export default class KeystoreV3 {
         }
     }
 
-    getCipherText({ ciphertext, mac }: Partial<KeystoreCrypto>, derivedKey: Buffer): Buffer {
+    static getCipherText({ ciphertext, mac }: Partial<KeystoreCrypto>, derivedKey: Buffer): Buffer {
         if (!ciphertext) throw new Error('ciphertext is undefined');
         const cipherText = Buffer.from(ciphertext, 'hex');
         // @ts-ignore
@@ -238,12 +238,12 @@ export default class KeystoreV3 {
         return cipherText;
     }
 
-    checksum(derivedKey: Buffer, cipherText: Buffer): string | undefined {
+    static checksum(derivedKey: Buffer, cipherText: Buffer): string | undefined {
         // @ts-ignore
         return sha3(Buffer.concat([derivedKey.slice(16, 32), Buffer.from(cipherText)]))?.replace('0x', '');
     }
 
-    encrypt(derivedKey: Buffer, data: BinaryLike, { cipher, cipherparams }: Partial<KeystoreCrypto>): Buffer {
+    static encrypt(derivedKey: Buffer, data: BinaryLike, { cipher, cipherparams }: Partial<KeystoreCrypto>): Buffer {
         if (!cipher || !cipherparams) throw new Error('cipher data is undefined');
         const cipheriv = createCipheriv(cipher, derivedKey.slice(0, 16), Buffer.from(cipherparams.iv as string, 'hex'));
         if (!cipheriv) {
@@ -253,7 +253,7 @@ export default class KeystoreV3 {
         return Buffer.concat([cipheriv.update(data), cipheriv.final()]);
     }
 
-    decrypt({ cipher, cipherparams: { iv } }: KeystoreCrypto, derivedKey: Buffer, cipherText: Buffer): Buffer {
+    static decrypt({ cipher, cipherparams: { iv } }: KeystoreCrypto, derivedKey: Buffer, cipherText: Buffer): Buffer {
         const decipher = createDecipheriv(cipher, derivedKey.slice(0, 16), Buffer.from(iv as string, 'hex'));
 
         return Buffer.concat([decipher.update(cipherText), decipher.final()]);
