@@ -89,7 +89,7 @@ describe('pbKdf2', () => {
 });
 
 describe('keystore', () => {
-    const ks = new KeystoreV3();
+    const ks = KeystoreV3;
 
     it('import', () => {
         // @ts-ignore
