@@ -117,7 +117,7 @@ export default class TxModule {
                 .get()
                 .broadcastTxSync({ tx })
                 .then(({ hash, ...rest }) => {
-                    console.log(rest);
+                    if (rest.code) reject(rest.log);
                     return pollForTx(toHex(hash).toUpperCase());
                 })
                 .then(resolve, reject)
