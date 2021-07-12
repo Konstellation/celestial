@@ -52,7 +52,6 @@ export default class TxModule {
                 chainId: chainId,
             };
         }
-
         const { accountNumber, sequence, chainId } = signerData;
         const account = this.ctx.modules?.account.importKeystore(this.ctx.keystore!, password);
 
@@ -132,7 +131,7 @@ export default class TxModule {
     }
 
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
-        const results = await this.ctx.rpc.get().txSearchAll({ query: query });
+        const results = await this.ctx.rpc.get().txSearchAll({ query });
         return results.txs.map(tx => {
             return {
                 height: tx.height,
