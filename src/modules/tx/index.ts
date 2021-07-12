@@ -117,7 +117,10 @@ export default class TxModule {
             this.ctx.rpc
                 .get()
                 .broadcastTxSync({ tx })
-                .then(({ hash }) => pollForTx(toHex(hash).toUpperCase()))
+                .then(({ hash, ...rest }) => {
+                    if (rest.code) reject(rest.log);
+                    return pollForTx(toHex(hash).toUpperCase());
+                })
                 .then(resolve, reject)
                 .finally(() => clearTimeout(txPollTimeout)),
         );
