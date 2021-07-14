@@ -144,4 +144,12 @@ export default class TxModule {
             };
         });
     }
+
+    public async queryOutboundTxs(address: string): Promise<readonly IndexedTx[]> {
+        return this.txsQuery(`message.sender='${address}'`);
+    }
+
+    public async queryInboundTxs(address: string): Promise<readonly IndexedTx[]> {
+        return this.txsQuery(`transfer.recipient='${address}'`);
+    }
 }
