@@ -22,4 +22,9 @@ export class Celestial extends Modules {
         Celestial.ctx = new Context(await TendermintRpc.connect(rpcAddress), options);
         return new this(modules, Celestial.ctx);
     }
+
+    static async fetchInfo() {
+        const status = await Celestial.ctx.rpc.get().status();
+        return status.nodeInfo;
+    }
 }
