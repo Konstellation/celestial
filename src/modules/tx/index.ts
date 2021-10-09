@@ -1,3 +1,5 @@
+// @ts-ignore
+import Account from '@konstellation/cosmosjs/src/types/Account';
 import { toHex } from '../../encoding/hex';
 import { Context } from '../../types/Context';
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
@@ -25,10 +27,10 @@ export default class TxModule {
     public async signAndBroadcast(
         messages: readonly EncodeObject[],
         fee: StdFee,
-        password: string,
+        account: string,
         memo = '',
     ): Promise<BroadcastTxResponse> {
-        const txRaw = await this.sign(messages, fee, memo, password);
+        const txRaw = await this.sign(messages, fee, memo, account);
         const txBytes = TxRaw.encode(txRaw).finish();
         return this.broadcastTx(txBytes, this.ctx.broadcastTimeoutMs, this.ctx.broadcastPollIntervalMs);
     }
@@ -37,14 +39,14 @@ export default class TxModule {
         messages: readonly EncodeObject[],
         fee: StdFee,
         memo: string,
-        password: string,
+        account: Account,
         explicitSignerData?: SignerData,
     ): Promise<TxRaw> {
         let signerData: SignerData = { accountNumber: 1, sequence: 2, chainId: '1' };
         if (explicitSignerData) {
             signerData = explicitSignerData;
         } else {
-            const { accountNumber, sequence } = await this.ctx.getSequence(this.ctx.signerAddress);
+            const { accountNumber, sequence } = await this.ctx.getSequence(account.getAddress());
             const chainId = await this.ctx.rpc.getChainId();
             signerData = {
                 accountNumber: accountNumber,
@@ -53,7 +55,7 @@ export default class TxModule {
             };
         }
         const { accountNumber, sequence, chainId } = signerData;
-        const account = this.ctx.modules?.account.importKeystore(this.ctx.keystore!, password);
+        // const account = this.ctx.modules?.account.importKeystore(this.ctx.keystore!, password);
 
         const privkey = account?.getPrivateKey();
         const pubkey = account?.getPublicKey();

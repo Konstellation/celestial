@@ -1,13 +1,15 @@
 import { MsgSend } from '../../codec/cosmos/bank/v1beta1/tx';
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
+// @ts-ignore
+import Account from '@konstellation/cosmosjs/src/types/Account';
 
 enum BankMsg {
     Send = 'Send',
 }
 
 interface MsgClient {
-    [BankMsg.Send](request: MsgSend, password: string): Promise<BroadcastTxResponse> | undefined;
+    [BankMsg.Send](request: MsgSend, account: Account, memo?: string): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -18,7 +20,7 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    [BankMsg.Send](request: MsgSend, password: string) {
+    [BankMsg.Send](request: MsgSend, account: Account, memo?: string) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -27,7 +29,8 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
+            memo
         );
     }
 }
