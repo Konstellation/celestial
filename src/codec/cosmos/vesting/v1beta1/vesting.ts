@@ -145,17 +145,17 @@ export const BaseVestingAccount = {
         message.baseAccount !== undefined &&
             (obj.baseAccount = message.baseAccount ? BaseAccount.toJSON(message.baseAccount) : undefined);
         if (message.originalVesting) {
-            obj.originalVesting = message.originalVesting.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.originalVesting = message.originalVesting.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.originalVesting = [];
         }
         if (message.delegatedFree) {
-            obj.delegatedFree = message.delegatedFree.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.delegatedFree = message.delegatedFree.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.delegatedFree = [];
         }
         if (message.delegatedVesting) {
-            obj.delegatedVesting = message.delegatedVesting.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.delegatedVesting = message.delegatedVesting.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.delegatedVesting = [];
         }
@@ -385,7 +385,7 @@ export const Period = {
         const obj: any = {};
         message.length !== undefined && (obj.length = (message.length || Long.ZERO).toString());
         if (message.amount) {
-            obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.amount = [];
         }
@@ -479,7 +479,7 @@ export const PeriodicVestingAccount = {
                 : undefined);
         message.startTime !== undefined && (obj.startTime = (message.startTime || Long.ZERO).toString());
         if (message.vestingPeriods) {
-            obj.vestingPeriods = message.vestingPeriods.map(e => (e ? Period.toJSON(e) : undefined));
+            obj.vestingPeriods = message.vestingPeriods.map((e) => (e ? Period.toJSON(e) : undefined));
         } else {
             obj.vestingPeriods = [];
         }

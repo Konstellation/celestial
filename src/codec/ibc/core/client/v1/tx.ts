@@ -668,25 +668,25 @@ export class MsgClientImpl implements Msg {
     CreateClient(request: MsgCreateClient): Promise<MsgCreateClientResponse> {
         const data = MsgCreateClient.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Msg', 'CreateClient', data);
-        return promise.then(data => MsgCreateClientResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgCreateClientResponse.decode(new _m0.Reader(data)));
     }
 
     UpdateClient(request: MsgUpdateClient): Promise<MsgUpdateClientResponse> {
         const data = MsgUpdateClient.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Msg', 'UpdateClient', data);
-        return promise.then(data => MsgUpdateClientResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgUpdateClientResponse.decode(new _m0.Reader(data)));
     }
 
     UpgradeClient(request: MsgUpgradeClient): Promise<MsgUpgradeClientResponse> {
         const data = MsgUpgradeClient.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Msg', 'UpgradeClient', data);
-        return promise.then(data => MsgUpgradeClientResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgUpgradeClientResponse.decode(new _m0.Reader(data)));
     }
 
     SubmitMisbehaviour(request: MsgSubmitMisbehaviour): Promise<MsgSubmitMisbehaviourResponse> {
         const data = MsgSubmitMisbehaviour.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Msg', 'SubmitMisbehaviour', data);
-        return promise.then(data => MsgSubmitMisbehaviourResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgSubmitMisbehaviourResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -705,7 +705,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -716,7 +716,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

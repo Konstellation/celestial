@@ -275,7 +275,7 @@ export const Tx = {
         message.authInfo !== undefined &&
             (obj.authInfo = message.authInfo ? AuthInfo.toJSON(message.authInfo) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+            obj.signatures = message.signatures.map((e) => base64FromBytes(e !== undefined ? e : new Uint8Array()));
         } else {
             obj.signatures = [];
         }
@@ -375,7 +375,7 @@ export const TxRaw = {
                 message.authInfoBytes !== undefined ? message.authInfoBytes : new Uint8Array(),
             ));
         if (message.signatures) {
-            obj.signatures = message.signatures.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+            obj.signatures = message.signatures.map((e) => base64FromBytes(e !== undefined ? e : new Uint8Array()));
         } else {
             obj.signatures = [];
         }
@@ -605,19 +605,19 @@ export const TxBody = {
     toJSON(message: TxBody): unknown {
         const obj: any = {};
         if (message.messages) {
-            obj.messages = message.messages.map(e => (e ? Any.toJSON(e) : undefined));
+            obj.messages = message.messages.map((e) => (e ? Any.toJSON(e) : undefined));
         } else {
             obj.messages = [];
         }
         message.memo !== undefined && (obj.memo = message.memo);
         message.timeoutHeight !== undefined && (obj.timeoutHeight = (message.timeoutHeight || Long.UZERO).toString());
         if (message.extensionOptions) {
-            obj.extensionOptions = message.extensionOptions.map(e => (e ? Any.toJSON(e) : undefined));
+            obj.extensionOptions = message.extensionOptions.map((e) => (e ? Any.toJSON(e) : undefined));
         } else {
             obj.extensionOptions = [];
         }
         if (message.nonCriticalExtensionOptions) {
-            obj.nonCriticalExtensionOptions = message.nonCriticalExtensionOptions.map(e =>
+            obj.nonCriticalExtensionOptions = message.nonCriticalExtensionOptions.map((e) =>
                 e ? Any.toJSON(e) : undefined,
             );
         } else {
@@ -714,7 +714,7 @@ export const AuthInfo = {
     toJSON(message: AuthInfo): unknown {
         const obj: any = {};
         if (message.signerInfos) {
-            obj.signerInfos = message.signerInfos.map(e => (e ? SignerInfo.toJSON(e) : undefined));
+            obj.signerInfos = message.signerInfos.map((e) => (e ? SignerInfo.toJSON(e) : undefined));
         } else {
             obj.signerInfos = [];
         }
@@ -1014,7 +1014,7 @@ export const ModeInfo_Multi = {
         message.bitarray !== undefined &&
             (obj.bitarray = message.bitarray ? CompactBitArray.toJSON(message.bitarray) : undefined);
         if (message.modeInfos) {
-            obj.modeInfos = message.modeInfos.map(e => (e ? ModeInfo.toJSON(e) : undefined));
+            obj.modeInfos = message.modeInfos.map((e) => (e ? ModeInfo.toJSON(e) : undefined));
         } else {
             obj.modeInfos = [];
         }
@@ -1114,7 +1114,7 @@ export const Fee = {
     toJSON(message: Fee): unknown {
         const obj: any = {};
         if (message.amount) {
-            obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.amount = [];
         }
@@ -1162,7 +1162,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1173,7 +1173,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

@@ -70,7 +70,7 @@ export const LegacyAminoPubKey = {
         const obj: any = {};
         message.threshold !== undefined && (obj.threshold = message.threshold);
         if (message.publicKeys) {
-            obj.publicKeys = message.publicKeys.map(e => (e ? Any.toJSON(e) : undefined));
+            obj.publicKeys = message.publicKeys.map((e) => (e ? Any.toJSON(e) : undefined));
         } else {
             obj.publicKeys = [];
         }

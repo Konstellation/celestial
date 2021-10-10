@@ -1838,61 +1838,61 @@ export class MsgClientImpl implements Msg {
     ChannelOpenInit(request: MsgChannelOpenInit): Promise<MsgChannelOpenInitResponse> {
         const data = MsgChannelOpenInit.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'ChannelOpenInit', data);
-        return promise.then(data => MsgChannelOpenInitResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgChannelOpenInitResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelOpenTry(request: MsgChannelOpenTry): Promise<MsgChannelOpenTryResponse> {
         const data = MsgChannelOpenTry.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'ChannelOpenTry', data);
-        return promise.then(data => MsgChannelOpenTryResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgChannelOpenTryResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelOpenAck(request: MsgChannelOpenAck): Promise<MsgChannelOpenAckResponse> {
         const data = MsgChannelOpenAck.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'ChannelOpenAck', data);
-        return promise.then(data => MsgChannelOpenAckResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgChannelOpenAckResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelOpenConfirm(request: MsgChannelOpenConfirm): Promise<MsgChannelOpenConfirmResponse> {
         const data = MsgChannelOpenConfirm.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'ChannelOpenConfirm', data);
-        return promise.then(data => MsgChannelOpenConfirmResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgChannelOpenConfirmResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelCloseInit(request: MsgChannelCloseInit): Promise<MsgChannelCloseInitResponse> {
         const data = MsgChannelCloseInit.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'ChannelCloseInit', data);
-        return promise.then(data => MsgChannelCloseInitResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgChannelCloseInitResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelCloseConfirm(request: MsgChannelCloseConfirm): Promise<MsgChannelCloseConfirmResponse> {
         const data = MsgChannelCloseConfirm.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'ChannelCloseConfirm', data);
-        return promise.then(data => MsgChannelCloseConfirmResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgChannelCloseConfirmResponse.decode(new _m0.Reader(data)));
     }
 
     RecvPacket(request: MsgRecvPacket): Promise<MsgRecvPacketResponse> {
         const data = MsgRecvPacket.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'RecvPacket', data);
-        return promise.then(data => MsgRecvPacketResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgRecvPacketResponse.decode(new _m0.Reader(data)));
     }
 
     Timeout(request: MsgTimeout): Promise<MsgTimeoutResponse> {
         const data = MsgTimeout.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'Timeout', data);
-        return promise.then(data => MsgTimeoutResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgTimeoutResponse.decode(new _m0.Reader(data)));
     }
 
     TimeoutOnClose(request: MsgTimeoutOnClose): Promise<MsgTimeoutOnCloseResponse> {
         const data = MsgTimeoutOnClose.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'TimeoutOnClose', data);
-        return promise.then(data => MsgTimeoutOnCloseResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgTimeoutOnCloseResponse.decode(new _m0.Reader(data)));
     }
 
     Acknowledgement(request: MsgAcknowledgement): Promise<MsgAcknowledgementResponse> {
         const data = MsgAcknowledgement.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Msg', 'Acknowledgement', data);
-        return promise.then(data => MsgAcknowledgementResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgAcknowledgementResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -1911,7 +1911,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1922,7 +1922,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

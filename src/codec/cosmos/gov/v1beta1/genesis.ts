@@ -138,17 +138,17 @@ export const GenesisState = {
         message.startingProposalId !== undefined &&
             (obj.startingProposalId = (message.startingProposalId || Long.UZERO).toString());
         if (message.deposits) {
-            obj.deposits = message.deposits.map(e => (e ? Deposit.toJSON(e) : undefined));
+            obj.deposits = message.deposits.map((e) => (e ? Deposit.toJSON(e) : undefined));
         } else {
             obj.deposits = [];
         }
         if (message.votes) {
-            obj.votes = message.votes.map(e => (e ? Vote.toJSON(e) : undefined));
+            obj.votes = message.votes.map((e) => (e ? Vote.toJSON(e) : undefined));
         } else {
             obj.votes = [];
         }
         if (message.proposals) {
-            obj.proposals = message.proposals.map(e => (e ? Proposal.toJSON(e) : undefined));
+            obj.proposals = message.proposals.map((e) => (e ? Proposal.toJSON(e) : undefined));
         } else {
             obj.proposals = [];
         }

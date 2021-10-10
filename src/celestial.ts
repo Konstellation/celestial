@@ -11,10 +11,10 @@ export class Celestial extends Modules {
     }
 
     static async create({
-                            rpcAddress,
-                            modules,
-                            options
-                        }: {
+        rpcAddress,
+        modules,
+        options,
+    }: {
         rpcAddress: string;
         modules: Module[];
         options: ContextOptions;

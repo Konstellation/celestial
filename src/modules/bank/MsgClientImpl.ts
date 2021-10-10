@@ -30,7 +30,7 @@ export class MsgClientImpl implements MsgClient {
             ],
             this.ctx.fees.delegate,
             account,
-            memo
+            memo,
         );
     }
 }

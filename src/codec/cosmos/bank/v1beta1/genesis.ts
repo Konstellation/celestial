@@ -110,17 +110,17 @@ export const GenesisState = {
         const obj: any = {};
         message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
         if (message.balances) {
-            obj.balances = message.balances.map(e => (e ? Balance.toJSON(e) : undefined));
+            obj.balances = message.balances.map((e) => (e ? Balance.toJSON(e) : undefined));
         } else {
             obj.balances = [];
         }
         if (message.supply) {
-            obj.supply = message.supply.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.supply = message.supply.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.supply = [];
         }
         if (message.denomMetadata) {
-            obj.denomMetadata = message.denomMetadata.map(e => (e ? Metadata.toJSON(e) : undefined));
+            obj.denomMetadata = message.denomMetadata.map((e) => (e ? Metadata.toJSON(e) : undefined));
         } else {
             obj.denomMetadata = [];
         }
@@ -211,7 +211,7 @@ export const Balance = {
         const obj: any = {};
         message.address !== undefined && (obj.address = message.address);
         if (message.coins) {
-            obj.coins = message.coins.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.coins = message.coins.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.coins = [];
         }

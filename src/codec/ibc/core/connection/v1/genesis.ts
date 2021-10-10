@@ -80,12 +80,12 @@ export const GenesisState = {
     toJSON(message: GenesisState): unknown {
         const obj: any = {};
         if (message.connections) {
-            obj.connections = message.connections.map(e => (e ? IdentifiedConnection.toJSON(e) : undefined));
+            obj.connections = message.connections.map((e) => (e ? IdentifiedConnection.toJSON(e) : undefined));
         } else {
             obj.connections = [];
         }
         if (message.clientConnectionPaths) {
-            obj.clientConnectionPaths = message.clientConnectionPaths.map(e =>
+            obj.clientConnectionPaths = message.clientConnectionPaths.map((e) =>
                 e ? ConnectionPaths.toJSON(e) : undefined,
             );
         } else {

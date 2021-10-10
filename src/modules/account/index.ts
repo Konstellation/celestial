@@ -2,6 +2,9 @@ import secp256k1 from 'secp256k1';
 import KeyStoreV3, { KeystoreV3Struct } from '../../crypto/keystore';
 import { Context } from '../../types/Context';
 
+// @ts-ignore
+import Account from '@konstellation/cosmosjs/src/types/Account';
+
 export default class AccountModule {
     private ctx: Context;
     private privateKey: Buffer = Buffer.alloc(0);
@@ -28,6 +31,15 @@ export default class AccountModule {
         this.import(KeyStoreV3.import(v3Keystore, password));
 
         return this;
+    }
+
+    exportKeystore(account: Account, password: string): KeystoreV3Struct {
+        if (!password) {
+            throw new Error('No password given.');
+        }
+
+        return account.toV3KeyStore(password);
+        // return KeyStoreV3.export(password, this.getPrivateKey(), this.getPublicKey(), this.getAddress(), this.name);
     }
 
     getPublicKey(): Uint8Array {

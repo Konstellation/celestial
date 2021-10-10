@@ -366,7 +366,7 @@ export const QuerySigningInfosResponse = {
     toJSON(message: QuerySigningInfosResponse): unknown {
         const obj: any = {};
         if (message.info) {
-            obj.info = message.info.map(e => (e ? ValidatorSigningInfo.toJSON(e) : undefined));
+            obj.info = message.info.map((e) => (e ? ValidatorSigningInfo.toJSON(e) : undefined));
         } else {
             obj.info = [];
         }
@@ -413,19 +413,19 @@ export class QueryClientImpl implements Query {
     Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
         const data = QueryParamsRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.slashing.v1beta1.Query', 'Params', data);
-        return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
     }
 
     SigningInfo(request: QuerySigningInfoRequest): Promise<QuerySigningInfoResponse> {
         const data = QuerySigningInfoRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.slashing.v1beta1.Query', 'SigningInfo', data);
-        return promise.then(data => QuerySigningInfoResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QuerySigningInfoResponse.decode(new _m0.Reader(data)));
     }
 
     SigningInfos(request: QuerySigningInfosRequest): Promise<QuerySigningInfosResponse> {
         const data = QuerySigningInfosRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.slashing.v1beta1.Query', 'SigningInfos', data);
-        return promise.then(data => QuerySigningInfosResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QuerySigningInfosResponse.decode(new _m0.Reader(data)));
     }
 }
 

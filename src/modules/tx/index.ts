@@ -134,7 +134,7 @@ export default class TxModule {
 
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query });
-        return results.txs.map(tx => {
+        return results.txs.map((tx) => {
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),

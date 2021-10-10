@@ -124,7 +124,7 @@ export class MsgClientImpl implements Msg {
     Unjail(request: MsgUnjail): Promise<MsgUnjailResponse> {
         const data = MsgUnjail.encode(request).finish();
         const promise = this.rpc.request('cosmos.slashing.v1beta1.Msg', 'Unjail', data);
-        return promise.then(data => MsgUnjailResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgUnjailResponse.decode(new _m0.Reader(data)));
     }
 }
 

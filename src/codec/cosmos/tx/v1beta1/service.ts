@@ -199,7 +199,7 @@ export const GetTxsEventRequest = {
     toJSON(message: GetTxsEventRequest): unknown {
         const obj: any = {};
         if (message.events) {
-            obj.events = message.events.map(e => e);
+            obj.events = message.events.map((e) => e);
         } else {
             obj.events = [];
         }
@@ -292,12 +292,12 @@ export const GetTxsEventResponse = {
     toJSON(message: GetTxsEventResponse): unknown {
         const obj: any = {};
         if (message.txs) {
-            obj.txs = message.txs.map(e => (e ? Tx.toJSON(e) : undefined));
+            obj.txs = message.txs.map((e) => (e ? Tx.toJSON(e) : undefined));
         } else {
             obj.txs = [];
         }
         if (message.txResponses) {
-            obj.txResponses = message.txResponses.map(e => (e ? TxResponse.toJSON(e) : undefined));
+            obj.txResponses = message.txResponses.map((e) => (e ? TxResponse.toJSON(e) : undefined));
         } else {
             obj.txResponses = [];
         }
@@ -737,25 +737,25 @@ export class ServiceClientImpl implements Service {
     Simulate(request: SimulateRequest): Promise<SimulateResponse> {
         const data = SimulateRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.tx.v1beta1.Service', 'Simulate', data);
-        return promise.then(data => SimulateResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => SimulateResponse.decode(new _m0.Reader(data)));
     }
 
     GetTx(request: GetTxRequest): Promise<GetTxResponse> {
         const data = GetTxRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.tx.v1beta1.Service', 'GetTx', data);
-        return promise.then(data => GetTxResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetTxResponse.decode(new _m0.Reader(data)));
     }
 
     BroadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse> {
         const data = BroadcastTxRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.tx.v1beta1.Service', 'BroadcastTx', data);
-        return promise.then(data => BroadcastTxResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => BroadcastTxResponse.decode(new _m0.Reader(data)));
     }
 
     GetTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse> {
         const data = GetTxsEventRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.tx.v1beta1.Service', 'GetTxsEvent', data);
-        return promise.then(data => GetTxsEventResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => GetTxsEventResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -774,7 +774,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -785,7 +785,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

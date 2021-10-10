@@ -69,7 +69,7 @@ export const GenesisState = {
         const obj: any = {};
         message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
         if (message.accounts) {
-            obj.accounts = message.accounts.map(e => (e ? Any.toJSON(e) : undefined));
+            obj.accounts = message.accounts.map((e) => (e ? Any.toJSON(e) : undefined));
         } else {
             obj.accounts = [];
         }

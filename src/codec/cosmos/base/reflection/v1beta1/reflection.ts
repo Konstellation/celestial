@@ -111,7 +111,7 @@ export const ListAllInterfacesResponse = {
     toJSON(message: ListAllInterfacesResponse): unknown {
         const obj: any = {};
         if (message.interfaceNames) {
-            obj.interfaceNames = message.interfaceNames.map(e => e);
+            obj.interfaceNames = message.interfaceNames.map((e) => e);
         } else {
             obj.interfaceNames = [];
         }
@@ -228,7 +228,7 @@ export const ListImplementationsResponse = {
     toJSON(message: ListImplementationsResponse): unknown {
         const obj: any = {};
         if (message.implementationMessageNames) {
-            obj.implementationMessageNames = message.implementationMessageNames.map(e => e);
+            obj.implementationMessageNames = message.implementationMessageNames.map((e) => e);
         } else {
             obj.implementationMessageNames = [];
         }
@@ -271,7 +271,7 @@ export class ReflectionServiceClientImpl implements ReflectionService {
     ListAllInterfaces(request: ListAllInterfacesRequest): Promise<ListAllInterfacesResponse> {
         const data = ListAllInterfacesRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.base.reflection.v1beta1.ReflectionService', 'ListAllInterfaces', data);
-        return promise.then(data => ListAllInterfacesResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => ListAllInterfacesResponse.decode(new _m0.Reader(data)));
     }
 
     ListImplementations(request: ListImplementationsRequest): Promise<ListImplementationsResponse> {
@@ -281,7 +281,7 @@ export class ReflectionServiceClientImpl implements ReflectionService {
             'ListImplementations',
             data,
         );
-        return promise.then(data => ListImplementationsResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => ListImplementationsResponse.decode(new _m0.Reader(data)));
     }
 }
 
