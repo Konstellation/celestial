@@ -7,6 +7,8 @@ import {
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
 import { TsProtoGeneratedType } from '../../types/TsProtoGeneratedType';
+// @ts-ignore
+import Account from '@konstellation/cosmosjs/src/types/Account';
 
 enum DistributionMsg {
     SetWithdrawAddress = 'SetWithdrawAddress',
@@ -18,19 +20,19 @@ enum DistributionMsg {
 interface MsgClient {
     [DistributionMsg.SetWithdrawAddress](
         request: MsgSetWithdrawAddress,
-        password: string,
+        account: Account,
     ): Promise<BroadcastTxResponse> | undefined;
     [DistributionMsg.WithdrawDelegatorReward](
         request: MsgWithdrawDelegatorReward,
-        password: string,
+        account: Account,
     ): Promise<BroadcastTxResponse> | undefined;
     [DistributionMsg.WithdrawValidatorCommission](
         request: MsgWithdrawValidatorCommission,
-        password: string,
+        account: Account,
     ): Promise<BroadcastTxResponse> | undefined;
     [DistributionMsg.FundCommunityPool](
         request: MsgFundCommunityPool,
-        password: string,
+        account: Account,
     ): Promise<BroadcastTxResponse> | undefined;
 }
 
@@ -48,7 +50,7 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    [DistributionMsg.SetWithdrawAddress](request: MsgSetWithdrawAddress, password: string) {
+    [DistributionMsg.SetWithdrawAddress](request: MsgSetWithdrawAddress, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -57,11 +59,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
 
-    [DistributionMsg.WithdrawDelegatorReward](request: MsgWithdrawDelegatorReward, password: string) {
+    [DistributionMsg.WithdrawDelegatorReward](request: MsgWithdrawDelegatorReward, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -70,11 +72,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
 
-    [DistributionMsg.WithdrawValidatorCommission](request: MsgWithdrawValidatorCommission, password: string) {
+    [DistributionMsg.WithdrawValidatorCommission](request: MsgWithdrawValidatorCommission, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -83,11 +85,11 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
 
-    [DistributionMsg.FundCommunityPool](request: MsgFundCommunityPool, password: string) {
+    [DistributionMsg.FundCommunityPool](request: MsgFundCommunityPool, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -96,7 +98,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
 }

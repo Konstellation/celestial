@@ -8,6 +8,8 @@ import {
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
 import { TsProtoGeneratedType } from '../../types/TsProtoGeneratedType';
+// @ts-ignore
+import Account from '@konstellation/cosmosjs/src/types/Account';
 
 enum StakingMsg {
     CreateValidator = 'CreateValidator',
@@ -20,15 +22,15 @@ enum StakingMsg {
 interface MsgClient {
     [StakingMsg.CreateValidator](
         request: MsgCreateValidator,
-        password: string,
+        account: Account,
     ): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.EditValidator](request: MsgEditValidator, password: string): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.Delegate](request: MsgDelegate, password: string): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.EditValidator](request: MsgEditValidator, account: Account): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.Delegate](request: MsgDelegate, account: Account): Promise<BroadcastTxResponse> | undefined;
     [StakingMsg.BeginRedelegate](
         request: MsgBeginRedelegate,
-        password: string,
+        account: Account,
     ): Promise<BroadcastTxResponse> | undefined;
-    [StakingMsg.Undelegate](request: MsgUndelegate, password: string): Promise<BroadcastTxResponse> | undefined;
+    [StakingMsg.Undelegate](request: MsgUndelegate, account: Account): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -46,7 +48,7 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    [StakingMsg.CreateValidator](request: MsgCreateValidator, password: string) {
+    [StakingMsg.CreateValidator](request: MsgCreateValidator, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -55,10 +57,10 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
-    [StakingMsg.EditValidator](request: MsgEditValidator, password: string) {
+    [StakingMsg.EditValidator](request: MsgEditValidator, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -67,10 +69,10 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
-    [StakingMsg.Delegate](request: MsgDelegate, password: string) {
+    [StakingMsg.Delegate](request: MsgDelegate, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -79,10 +81,10 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
-    [StakingMsg.BeginRedelegate](request: MsgBeginRedelegate, password: string) {
+    [StakingMsg.BeginRedelegate](request: MsgBeginRedelegate, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -91,10 +93,10 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
-    [StakingMsg.Undelegate](request: MsgUndelegate, password: string) {
+    [StakingMsg.Undelegate](request: MsgUndelegate, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -103,7 +105,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.undelegate,
-            password,
+            account,
         );
     }
 }
