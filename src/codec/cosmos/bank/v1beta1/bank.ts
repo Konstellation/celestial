@@ -130,7 +130,7 @@ export const Params = {
     toJSON(message: Params): unknown {
         const obj: any = {};
         if (message.sendEnabled) {
-            obj.sendEnabled = message.sendEnabled.map((e) => (e ? SendEnabled.toJSON(e) : undefined));
+            obj.sendEnabled = message.sendEnabled.map(e => (e ? SendEnabled.toJSON(e) : undefined));
         } else {
             obj.sendEnabled = [];
         }
@@ -282,7 +282,7 @@ export const Input = {
         const obj: any = {};
         message.address !== undefined && (obj.address = message.address);
         if (message.coins) {
-            obj.coins = message.coins.map((e) => (e ? Coin.toJSON(e) : undefined));
+            obj.coins = message.coins.map(e => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.coins = [];
         }
@@ -361,7 +361,7 @@ export const Output = {
         const obj: any = {};
         message.address !== undefined && (obj.address = message.address);
         if (message.coins) {
-            obj.coins = message.coins.map((e) => (e ? Coin.toJSON(e) : undefined));
+            obj.coins = message.coins.map(e => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.coins = [];
         }
@@ -428,7 +428,7 @@ export const Supply = {
     toJSON(message: Supply): unknown {
         const obj: any = {};
         if (message.total) {
-            obj.total = message.total.map((e) => (e ? Coin.toJSON(e) : undefined));
+            obj.total = message.total.map(e => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.total = [];
         }
@@ -514,7 +514,7 @@ export const DenomUnit = {
         message.denom !== undefined && (obj.denom = message.denom);
         message.exponent !== undefined && (obj.exponent = message.exponent);
         if (message.aliases) {
-            obj.aliases = message.aliases.map((e) => e);
+            obj.aliases = message.aliases.map(e => e);
         } else {
             obj.aliases = [];
         }
@@ -620,7 +620,7 @@ export const Metadata = {
         const obj: any = {};
         message.description !== undefined && (obj.description = message.description);
         if (message.denomUnits) {
-            obj.denomUnits = message.denomUnits.map((e) => (e ? DenomUnit.toJSON(e) : undefined));
+            obj.denomUnits = message.denomUnits.map(e => (e ? DenomUnit.toJSON(e) : undefined));
         } else {
             obj.denomUnits = [];
         }

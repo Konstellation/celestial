@@ -412,7 +412,7 @@ export const QueryProposalsResponse = {
     toJSON(message: QueryProposalsResponse): unknown {
         const obj: any = {};
         if (message.proposals) {
-            obj.proposals = message.proposals.map((e) => (e ? Proposal.toJSON(e) : undefined));
+            obj.proposals = message.proposals.map(e => (e ? Proposal.toJSON(e) : undefined));
         } else {
             obj.proposals = [];
         }
@@ -692,7 +692,7 @@ export const QueryVotesResponse = {
     toJSON(message: QueryVotesResponse): unknown {
         const obj: any = {};
         if (message.votes) {
-            obj.votes = message.votes.map((e) => (e ? Vote.toJSON(e) : undefined));
+            obj.votes = message.votes.map(e => (e ? Vote.toJSON(e) : undefined));
         } else {
             obj.votes = [];
         }
@@ -1119,7 +1119,7 @@ export const QueryDepositsResponse = {
     toJSON(message: QueryDepositsResponse): unknown {
         const obj: any = {};
         if (message.deposits) {
-            obj.deposits = message.deposits.map((e) => (e ? Deposit.toJSON(e) : undefined));
+            obj.deposits = message.deposits.map(e => (e ? Deposit.toJSON(e) : undefined));
         } else {
             obj.deposits = [];
         }
@@ -1291,49 +1291,49 @@ export class QueryClientImpl implements Query {
     Proposal(request: QueryProposalRequest): Promise<QueryProposalResponse> {
         const data = QueryProposalRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Proposal', data);
-        return promise.then((data) => QueryProposalResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryProposalResponse.decode(new _m0.Reader(data)));
     }
 
     Proposals(request: QueryProposalsRequest): Promise<QueryProposalsResponse> {
         const data = QueryProposalsRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Proposals', data);
-        return promise.then((data) => QueryProposalsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryProposalsResponse.decode(new _m0.Reader(data)));
     }
 
     Vote(request: QueryVoteRequest): Promise<QueryVoteResponse> {
         const data = QueryVoteRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Vote', data);
-        return promise.then((data) => QueryVoteResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryVoteResponse.decode(new _m0.Reader(data)));
     }
 
     Votes(request: QueryVotesRequest): Promise<QueryVotesResponse> {
         const data = QueryVotesRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Votes', data);
-        return promise.then((data) => QueryVotesResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryVotesResponse.decode(new _m0.Reader(data)));
     }
 
     Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
         const data = QueryParamsRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Params', data);
-        return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
     }
 
     Deposit(request: QueryDepositRequest): Promise<QueryDepositResponse> {
         const data = QueryDepositRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Deposit', data);
-        return promise.then((data) => QueryDepositResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryDepositResponse.decode(new _m0.Reader(data)));
     }
 
     Deposits(request: QueryDepositsRequest): Promise<QueryDepositsResponse> {
         const data = QueryDepositsRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Deposits', data);
-        return promise.then((data) => QueryDepositsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryDepositsResponse.decode(new _m0.Reader(data)));
     }
 
     TallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse> {
         const data = QueryTallyResultRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'TallyResult', data);
-        return promise.then((data) => QueryTallyResultResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryTallyResultResponse.decode(new _m0.Reader(data)));
     }
 }
 

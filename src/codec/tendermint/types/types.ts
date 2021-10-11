@@ -804,7 +804,7 @@ export const Data = {
     toJSON(message: Data): unknown {
         const obj: any = {};
         if (message.txs) {
-            obj.txs = message.txs.map((e) => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+            obj.txs = message.txs.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
         } else {
             obj.txs = [];
         }
@@ -1080,7 +1080,7 @@ export const Commit = {
         message.round !== undefined && (obj.round = message.round);
         message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
         if (message.signatures) {
-            obj.signatures = message.signatures.map((e) => (e ? CommitSig.toJSON(e) : undefined));
+            obj.signatures = message.signatures.map(e => (e ? CommitSig.toJSON(e) : undefined));
         } else {
             obj.signatures = [];
         }
@@ -1736,7 +1736,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1747,7 +1747,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

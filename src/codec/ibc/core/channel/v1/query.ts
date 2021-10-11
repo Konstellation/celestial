@@ -611,7 +611,7 @@ export const QueryChannelsResponse = {
     toJSON(message: QueryChannelsResponse): unknown {
         const obj: any = {};
         if (message.channels) {
-            obj.channels = message.channels.map((e) => (e ? IdentifiedChannel.toJSON(e) : undefined));
+            obj.channels = message.channels.map(e => (e ? IdentifiedChannel.toJSON(e) : undefined));
         } else {
             obj.channels = [];
         }
@@ -781,7 +781,7 @@ export const QueryConnectionChannelsResponse = {
     toJSON(message: QueryConnectionChannelsResponse): unknown {
         const obj: any = {};
         if (message.channels) {
-            obj.channels = message.channels.map((e) => (e ? IdentifiedChannel.toJSON(e) : undefined));
+            obj.channels = message.channels.map(e => (e ? IdentifiedChannel.toJSON(e) : undefined));
         } else {
             obj.channels = [];
         }
@@ -1539,7 +1539,7 @@ export const QueryPacketCommitmentsResponse = {
     toJSON(message: QueryPacketCommitmentsResponse): unknown {
         const obj: any = {};
         if (message.commitments) {
-            obj.commitments = message.commitments.map((e) => (e ? PacketState.toJSON(e) : undefined));
+            obj.commitments = message.commitments.map(e => (e ? PacketState.toJSON(e) : undefined));
         } else {
             obj.commitments = [];
         }
@@ -2089,7 +2089,7 @@ export const QueryPacketAcknowledgementsResponse = {
     toJSON(message: QueryPacketAcknowledgementsResponse): unknown {
         const obj: any = {};
         if (message.acknowledgements) {
-            obj.acknowledgements = message.acknowledgements.map((e) => (e ? PacketState.toJSON(e) : undefined));
+            obj.acknowledgements = message.acknowledgements.map(e => (e ? PacketState.toJSON(e) : undefined));
         } else {
             obj.acknowledgements = [];
         }
@@ -2197,7 +2197,7 @@ export const QueryUnreceivedPacketsRequest = {
         message.portId !== undefined && (obj.portId = message.portId);
         message.channelId !== undefined && (obj.channelId = message.channelId);
         if (message.packetCommitmentSequences) {
-            obj.packetCommitmentSequences = message.packetCommitmentSequences.map((e) => (e || Long.UZERO).toString());
+            obj.packetCommitmentSequences = message.packetCommitmentSequences.map(e => (e || Long.UZERO).toString());
         } else {
             obj.packetCommitmentSequences = [];
         }
@@ -2289,7 +2289,7 @@ export const QueryUnreceivedPacketsResponse = {
     toJSON(message: QueryUnreceivedPacketsResponse): unknown {
         const obj: any = {};
         if (message.sequences) {
-            obj.sequences = message.sequences.map((e) => (e || Long.UZERO).toString());
+            obj.sequences = message.sequences.map(e => (e || Long.UZERO).toString());
         } else {
             obj.sequences = [];
         }
@@ -2390,7 +2390,7 @@ export const QueryUnreceivedAcksRequest = {
         message.portId !== undefined && (obj.portId = message.portId);
         message.channelId !== undefined && (obj.channelId = message.channelId);
         if (message.packetAckSequences) {
-            obj.packetAckSequences = message.packetAckSequences.map((e) => (e || Long.UZERO).toString());
+            obj.packetAckSequences = message.packetAckSequences.map(e => (e || Long.UZERO).toString());
         } else {
             obj.packetAckSequences = [];
         }
@@ -2482,7 +2482,7 @@ export const QueryUnreceivedAcksResponse = {
     toJSON(message: QueryUnreceivedAcksResponse): unknown {
         const obj: any = {};
         if (message.sequences) {
-            obj.sequences = message.sequences.map((e) => (e || Long.UZERO).toString());
+            obj.sequences = message.sequences.map(e => (e || Long.UZERO).toString());
         } else {
             obj.sequences = [];
         }
@@ -2743,79 +2743,79 @@ export class QueryClientImpl implements Query {
     Channel(request: QueryChannelRequest): Promise<QueryChannelResponse> {
         const data = QueryChannelRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'Channel', data);
-        return promise.then((data) => QueryChannelResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryChannelResponse.decode(new _m0.Reader(data)));
     }
 
     Channels(request: QueryChannelsRequest): Promise<QueryChannelsResponse> {
         const data = QueryChannelsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'Channels', data);
-        return promise.then((data) => QueryChannelsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryChannelsResponse.decode(new _m0.Reader(data)));
     }
 
     ConnectionChannels(request: QueryConnectionChannelsRequest): Promise<QueryConnectionChannelsResponse> {
         const data = QueryConnectionChannelsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'ConnectionChannels', data);
-        return promise.then((data) => QueryConnectionChannelsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryConnectionChannelsResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelClientState(request: QueryChannelClientStateRequest): Promise<QueryChannelClientStateResponse> {
         const data = QueryChannelClientStateRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'ChannelClientState', data);
-        return promise.then((data) => QueryChannelClientStateResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryChannelClientStateResponse.decode(new _m0.Reader(data)));
     }
 
     ChannelConsensusState(request: QueryChannelConsensusStateRequest): Promise<QueryChannelConsensusStateResponse> {
         const data = QueryChannelConsensusStateRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'ChannelConsensusState', data);
-        return promise.then((data) => QueryChannelConsensusStateResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryChannelConsensusStateResponse.decode(new _m0.Reader(data)));
     }
 
     PacketCommitment(request: QueryPacketCommitmentRequest): Promise<QueryPacketCommitmentResponse> {
         const data = QueryPacketCommitmentRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'PacketCommitment', data);
-        return promise.then((data) => QueryPacketCommitmentResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryPacketCommitmentResponse.decode(new _m0.Reader(data)));
     }
 
     PacketCommitments(request: QueryPacketCommitmentsRequest): Promise<QueryPacketCommitmentsResponse> {
         const data = QueryPacketCommitmentsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'PacketCommitments', data);
-        return promise.then((data) => QueryPacketCommitmentsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryPacketCommitmentsResponse.decode(new _m0.Reader(data)));
     }
 
     PacketReceipt(request: QueryPacketReceiptRequest): Promise<QueryPacketReceiptResponse> {
         const data = QueryPacketReceiptRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'PacketReceipt', data);
-        return promise.then((data) => QueryPacketReceiptResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryPacketReceiptResponse.decode(new _m0.Reader(data)));
     }
 
     PacketAcknowledgement(request: QueryPacketAcknowledgementRequest): Promise<QueryPacketAcknowledgementResponse> {
         const data = QueryPacketAcknowledgementRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'PacketAcknowledgement', data);
-        return promise.then((data) => QueryPacketAcknowledgementResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryPacketAcknowledgementResponse.decode(new _m0.Reader(data)));
     }
 
     PacketAcknowledgements(request: QueryPacketAcknowledgementsRequest): Promise<QueryPacketAcknowledgementsResponse> {
         const data = QueryPacketAcknowledgementsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'PacketAcknowledgements', data);
-        return promise.then((data) => QueryPacketAcknowledgementsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryPacketAcknowledgementsResponse.decode(new _m0.Reader(data)));
     }
 
     UnreceivedPackets(request: QueryUnreceivedPacketsRequest): Promise<QueryUnreceivedPacketsResponse> {
         const data = QueryUnreceivedPacketsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'UnreceivedPackets', data);
-        return promise.then((data) => QueryUnreceivedPacketsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryUnreceivedPacketsResponse.decode(new _m0.Reader(data)));
     }
 
     UnreceivedAcks(request: QueryUnreceivedAcksRequest): Promise<QueryUnreceivedAcksResponse> {
         const data = QueryUnreceivedAcksRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'UnreceivedAcks', data);
-        return promise.then((data) => QueryUnreceivedAcksResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryUnreceivedAcksResponse.decode(new _m0.Reader(data)));
     }
 
     NextSequenceReceive(request: QueryNextSequenceReceiveRequest): Promise<QueryNextSequenceReceiveResponse> {
         const data = QueryNextSequenceReceiveRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.channel.v1.Query', 'NextSequenceReceive', data);
-        return promise.then((data) => QueryNextSequenceReceiveResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryNextSequenceReceiveResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -2834,7 +2834,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -2845,7 +2845,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

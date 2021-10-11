@@ -239,7 +239,7 @@ export const ValidatorOutstandingRewardsRecord = {
         const obj: any = {};
         message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
         if (message.outstandingRewards) {
-            obj.outstandingRewards = message.outstandingRewards.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.outstandingRewards = message.outstandingRewards.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.outstandingRewards = [];
         }
@@ -860,7 +860,7 @@ export const GenesisState = {
         message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
         message.feePool !== undefined && (obj.feePool = message.feePool ? FeePool.toJSON(message.feePool) : undefined);
         if (message.delegatorWithdrawInfos) {
-            obj.delegatorWithdrawInfos = message.delegatorWithdrawInfos.map((e) =>
+            obj.delegatorWithdrawInfos = message.delegatorWithdrawInfos.map(e =>
                 e ? DelegatorWithdrawInfo.toJSON(e) : undefined,
             );
         } else {
@@ -868,42 +868,42 @@ export const GenesisState = {
         }
         message.previousProposer !== undefined && (obj.previousProposer = message.previousProposer);
         if (message.outstandingRewards) {
-            obj.outstandingRewards = message.outstandingRewards.map((e) =>
+            obj.outstandingRewards = message.outstandingRewards.map(e =>
                 e ? ValidatorOutstandingRewardsRecord.toJSON(e) : undefined,
             );
         } else {
             obj.outstandingRewards = [];
         }
         if (message.validatorAccumulatedCommissions) {
-            obj.validatorAccumulatedCommissions = message.validatorAccumulatedCommissions.map((e) =>
+            obj.validatorAccumulatedCommissions = message.validatorAccumulatedCommissions.map(e =>
                 e ? ValidatorAccumulatedCommissionRecord.toJSON(e) : undefined,
             );
         } else {
             obj.validatorAccumulatedCommissions = [];
         }
         if (message.validatorHistoricalRewards) {
-            obj.validatorHistoricalRewards = message.validatorHistoricalRewards.map((e) =>
+            obj.validatorHistoricalRewards = message.validatorHistoricalRewards.map(e =>
                 e ? ValidatorHistoricalRewardsRecord.toJSON(e) : undefined,
             );
         } else {
             obj.validatorHistoricalRewards = [];
         }
         if (message.validatorCurrentRewards) {
-            obj.validatorCurrentRewards = message.validatorCurrentRewards.map((e) =>
+            obj.validatorCurrentRewards = message.validatorCurrentRewards.map(e =>
                 e ? ValidatorCurrentRewardsRecord.toJSON(e) : undefined,
             );
         } else {
             obj.validatorCurrentRewards = [];
         }
         if (message.delegatorStartingInfos) {
-            obj.delegatorStartingInfos = message.delegatorStartingInfos.map((e) =>
+            obj.delegatorStartingInfos = message.delegatorStartingInfos.map(e =>
                 e ? DelegatorStartingInfoRecord.toJSON(e) : undefined,
             );
         } else {
             obj.delegatorStartingInfos = [];
         }
         if (message.validatorSlashEvents) {
-            obj.validatorSlashEvents = message.validatorSlashEvents.map((e) =>
+            obj.validatorSlashEvents = message.validatorSlashEvents.map(e =>
                 e ? ValidatorSlashEventRecord.toJSON(e) : undefined,
             );
         } else {
