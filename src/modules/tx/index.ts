@@ -27,7 +27,7 @@ export default class TxModule {
     public async signAndBroadcast(
         messages: readonly EncodeObject[],
         fee: StdFee,
-        account: string,
+        account: Account,
         memo = '',
     ): Promise<BroadcastTxResponse> {
         const txRaw = await this.sign(messages, fee, memo, account);
