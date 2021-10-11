@@ -16,6 +16,7 @@ import { sleep } from '@cosmjs/utils';
 import { TimeoutError } from '../../types/timeoutError';
 import { IndexedTx } from './types/indexedTx';
 import { TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
+// import Account from '../../types/Account';
 
 export default class TxModule {
     private ctx: Context;
@@ -134,7 +135,7 @@ export default class TxModule {
 
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query });
-        return results.txs.map((tx) => {
+        return results.txs.map(tx => {
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),

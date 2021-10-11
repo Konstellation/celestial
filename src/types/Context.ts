@@ -59,7 +59,7 @@ export class Context {
             const { account } = await this.modules.auth.queries.Account({ address });
             accountData = account ? accountFromAny(account) : null;
         } catch (error) {
-            if (/rpc error: code = NotFound/i.test(error)) {
+            if (/rpc error: code = NotFound/i.test(error as string)) {
                 accountData = null;
             }
             throw error;

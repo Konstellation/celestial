@@ -275,12 +275,12 @@ export const ClientState = {
         message.latestHeight !== undefined &&
             (obj.latestHeight = message.latestHeight ? Height.toJSON(message.latestHeight) : undefined);
         if (message.proofSpecs) {
-            obj.proofSpecs = message.proofSpecs.map((e) => (e ? ProofSpec.toJSON(e) : undefined));
+            obj.proofSpecs = message.proofSpecs.map(e => (e ? ProofSpec.toJSON(e) : undefined));
         } else {
             obj.proofSpecs = [];
         }
         if (message.upgradePath) {
-            obj.upgradePath = message.upgradePath.map((e) => e);
+            obj.upgradePath = message.upgradePath.map(e => e);
         } else {
             obj.upgradePath = [];
         }
@@ -729,7 +729,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -740,7 +740,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

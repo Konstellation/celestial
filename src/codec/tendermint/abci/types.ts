@@ -1203,7 +1203,7 @@ export const RequestInitChain = {
                 ? ConsensusParams.toJSON(message.consensusParams)
                 : undefined);
         if (message.validators) {
-            obj.validators = message.validators.map((e) => (e ? ValidatorUpdate.toJSON(e) : undefined));
+            obj.validators = message.validators.map(e => (e ? ValidatorUpdate.toJSON(e) : undefined));
         } else {
             obj.validators = [];
         }
@@ -1440,7 +1440,7 @@ export const RequestBeginBlock = {
         message.lastCommitInfo !== undefined &&
             (obj.lastCommitInfo = message.lastCommitInfo ? LastCommitInfo.toJSON(message.lastCommitInfo) : undefined);
         if (message.byzantineValidators) {
-            obj.byzantineValidators = message.byzantineValidators.map((e) => (e ? Evidence.toJSON(e) : undefined));
+            obj.byzantineValidators = message.byzantineValidators.map(e => (e ? Evidence.toJSON(e) : undefined));
         } else {
             obj.byzantineValidators = [];
         }
@@ -2750,7 +2750,7 @@ export const ResponseInitChain = {
                 ? ConsensusParams.toJSON(message.consensusParams)
                 : undefined);
         if (message.validators) {
-            obj.validators = message.validators.map((e) => (e ? ValidatorUpdate.toJSON(e) : undefined));
+            obj.validators = message.validators.map(e => (e ? ValidatorUpdate.toJSON(e) : undefined));
         } else {
             obj.validators = [];
         }
@@ -3018,7 +3018,7 @@ export const ResponseBeginBlock = {
     toJSON(message: ResponseBeginBlock): unknown {
         const obj: any = {};
         if (message.events) {
-            obj.events = message.events.map((e) => (e ? Event.toJSON(e) : undefined));
+            obj.events = message.events.map(e => (e ? Event.toJSON(e) : undefined));
         } else {
             obj.events = [];
         }
@@ -3171,7 +3171,7 @@ export const ResponseCheckTx = {
         message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || Long.ZERO).toString());
         message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.ZERO).toString());
         if (message.events) {
-            obj.events = message.events.map((e) => (e ? Event.toJSON(e) : undefined));
+            obj.events = message.events.map(e => (e ? Event.toJSON(e) : undefined));
         } else {
             obj.events = [];
         }
@@ -3360,7 +3360,7 @@ export const ResponseDeliverTx = {
         message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || Long.ZERO).toString());
         message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.ZERO).toString());
         if (message.events) {
-            obj.events = message.events.map((e) => (e ? Event.toJSON(e) : undefined));
+            obj.events = message.events.map(e => (e ? Event.toJSON(e) : undefined));
         } else {
             obj.events = [];
         }
@@ -3482,7 +3482,7 @@ export const ResponseEndBlock = {
     toJSON(message: ResponseEndBlock): unknown {
         const obj: any = {};
         if (message.validatorUpdates) {
-            obj.validatorUpdates = message.validatorUpdates.map((e) => (e ? ValidatorUpdate.toJSON(e) : undefined));
+            obj.validatorUpdates = message.validatorUpdates.map(e => (e ? ValidatorUpdate.toJSON(e) : undefined));
         } else {
             obj.validatorUpdates = [];
         }
@@ -3491,7 +3491,7 @@ export const ResponseEndBlock = {
                 ? ConsensusParams.toJSON(message.consensusParamUpdates)
                 : undefined);
         if (message.events) {
-            obj.events = message.events.map((e) => (e ? Event.toJSON(e) : undefined));
+            obj.events = message.events.map(e => (e ? Event.toJSON(e) : undefined));
         } else {
             obj.events = [];
         }
@@ -3637,7 +3637,7 @@ export const ResponseListSnapshots = {
     toJSON(message: ResponseListSnapshots): unknown {
         const obj: any = {};
         if (message.snapshots) {
-            obj.snapshots = message.snapshots.map((e) => (e ? Snapshot.toJSON(e) : undefined));
+            obj.snapshots = message.snapshots.map(e => (e ? Snapshot.toJSON(e) : undefined));
         } else {
             obj.snapshots = [];
         }
@@ -3844,12 +3844,12 @@ export const ResponseApplySnapshotChunk = {
         const obj: any = {};
         message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
         if (message.refetchChunks) {
-            obj.refetchChunks = message.refetchChunks.map((e) => e);
+            obj.refetchChunks = message.refetchChunks.map(e => e);
         } else {
             obj.refetchChunks = [];
         }
         if (message.rejectSenders) {
-            obj.rejectSenders = message.rejectSenders.map((e) => e);
+            obj.rejectSenders = message.rejectSenders.map(e => e);
         } else {
             obj.rejectSenders = [];
         }
@@ -4115,7 +4115,7 @@ export const LastCommitInfo = {
         const obj: any = {};
         message.round !== undefined && (obj.round = message.round);
         if (message.votes) {
-            obj.votes = message.votes.map((e) => (e ? VoteInfo.toJSON(e) : undefined));
+            obj.votes = message.votes.map(e => (e ? VoteInfo.toJSON(e) : undefined));
         } else {
             obj.votes = [];
         }
@@ -4194,7 +4194,7 @@ export const Event = {
         const obj: any = {};
         message.type !== undefined && (obj.type = message.type);
         if (message.attributes) {
-            obj.attributes = message.attributes.map((e) => (e ? EventAttribute.toJSON(e) : undefined));
+            obj.attributes = message.attributes.map(e => (e ? EventAttribute.toJSON(e) : undefined));
         } else {
             obj.attributes = [];
         }
@@ -4926,91 +4926,91 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     Echo(request: RequestEcho): Promise<ResponseEcho> {
         const data = RequestEcho.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'Echo', data);
-        return promise.then((data) => ResponseEcho.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseEcho.decode(new _m0.Reader(data)));
     }
 
     Flush(request: RequestFlush): Promise<ResponseFlush> {
         const data = RequestFlush.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'Flush', data);
-        return promise.then((data) => ResponseFlush.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseFlush.decode(new _m0.Reader(data)));
     }
 
     Info(request: RequestInfo): Promise<ResponseInfo> {
         const data = RequestInfo.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'Info', data);
-        return promise.then((data) => ResponseInfo.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseInfo.decode(new _m0.Reader(data)));
     }
 
     SetOption(request: RequestSetOption): Promise<ResponseSetOption> {
         const data = RequestSetOption.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'SetOption', data);
-        return promise.then((data) => ResponseSetOption.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseSetOption.decode(new _m0.Reader(data)));
     }
 
     DeliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
         const data = RequestDeliverTx.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'DeliverTx', data);
-        return promise.then((data) => ResponseDeliverTx.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseDeliverTx.decode(new _m0.Reader(data)));
     }
 
     CheckTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
         const data = RequestCheckTx.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'CheckTx', data);
-        return promise.then((data) => ResponseCheckTx.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseCheckTx.decode(new _m0.Reader(data)));
     }
 
     Query(request: RequestQuery): Promise<ResponseQuery> {
         const data = RequestQuery.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'Query', data);
-        return promise.then((data) => ResponseQuery.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseQuery.decode(new _m0.Reader(data)));
     }
 
     Commit(request: RequestCommit): Promise<ResponseCommit> {
         const data = RequestCommit.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'Commit', data);
-        return promise.then((data) => ResponseCommit.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseCommit.decode(new _m0.Reader(data)));
     }
 
     InitChain(request: RequestInitChain): Promise<ResponseInitChain> {
         const data = RequestInitChain.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'InitChain', data);
-        return promise.then((data) => ResponseInitChain.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseInitChain.decode(new _m0.Reader(data)));
     }
 
     BeginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
         const data = RequestBeginBlock.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'BeginBlock', data);
-        return promise.then((data) => ResponseBeginBlock.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseBeginBlock.decode(new _m0.Reader(data)));
     }
 
     EndBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
         const data = RequestEndBlock.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'EndBlock', data);
-        return promise.then((data) => ResponseEndBlock.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseEndBlock.decode(new _m0.Reader(data)));
     }
 
     ListSnapshots(request: RequestListSnapshots): Promise<ResponseListSnapshots> {
         const data = RequestListSnapshots.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'ListSnapshots', data);
-        return promise.then((data) => ResponseListSnapshots.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseListSnapshots.decode(new _m0.Reader(data)));
     }
 
     OfferSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
         const data = RequestOfferSnapshot.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'OfferSnapshot', data);
-        return promise.then((data) => ResponseOfferSnapshot.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseOfferSnapshot.decode(new _m0.Reader(data)));
     }
 
     LoadSnapshotChunk(request: RequestLoadSnapshotChunk): Promise<ResponseLoadSnapshotChunk> {
         const data = RequestLoadSnapshotChunk.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'LoadSnapshotChunk', data);
-        return promise.then((data) => ResponseLoadSnapshotChunk.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseLoadSnapshotChunk.decode(new _m0.Reader(data)));
     }
 
     ApplySnapshotChunk(request: RequestApplySnapshotChunk): Promise<ResponseApplySnapshotChunk> {
         const data = RequestApplySnapshotChunk.encode(request).finish();
         const promise = this.rpc.request('tendermint.abci.ABCIApplication', 'ApplySnapshotChunk', data);
-        return promise.then((data) => ResponseApplySnapshotChunk.decode(new _m0.Reader(data)));
+        return promise.then(data => ResponseApplySnapshotChunk.decode(new _m0.Reader(data)));
     }
 }
 
@@ -5029,7 +5029,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -5040,7 +5040,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

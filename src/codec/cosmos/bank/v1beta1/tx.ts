@@ -92,7 +92,7 @@ export const MsgSend = {
         message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
         message.toAddress !== undefined && (obj.toAddress = message.toAddress);
         if (message.amount) {
-            obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
+            obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.amount = [];
         }
@@ -215,12 +215,12 @@ export const MsgMultiSend = {
     toJSON(message: MsgMultiSend): unknown {
         const obj: any = {};
         if (message.inputs) {
-            obj.inputs = message.inputs.map((e) => (e ? Input.toJSON(e) : undefined));
+            obj.inputs = message.inputs.map(e => (e ? Input.toJSON(e) : undefined));
         } else {
             obj.inputs = [];
         }
         if (message.outputs) {
-            obj.outputs = message.outputs.map((e) => (e ? Output.toJSON(e) : undefined));
+            obj.outputs = message.outputs.map(e => (e ? Output.toJSON(e) : undefined));
         } else {
             obj.outputs = [];
         }
@@ -301,13 +301,13 @@ export class MsgClientImpl implements Msg {
     Send(request: MsgSend): Promise<MsgSendResponse> {
         const data = MsgSend.encode(request).finish();
         const promise = this.rpc.request('cosmos.bank.v1beta1.Msg', 'Send', data);
-        return promise.then((data) => MsgSendResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
     }
 
     MultiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse> {
         const data = MsgMultiSend.encode(request).finish();
         const promise = this.rpc.request('cosmos.bank.v1beta1.Msg', 'MultiSend', data);
-        return promise.then((data) => MsgMultiSendResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => MsgMultiSendResponse.decode(new _m0.Reader(data)));
     }
 }
 
