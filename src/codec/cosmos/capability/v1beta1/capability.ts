@@ -199,7 +199,7 @@ export const CapabilityOwners = {
     toJSON(message: CapabilityOwners): unknown {
         const obj: any = {};
         if (message.owners) {
-            obj.owners = message.owners.map((e) => (e ? Owner.toJSON(e) : undefined));
+            obj.owners = message.owners.map(e => (e ? Owner.toJSON(e) : undefined));
         } else {
             obj.owners = [];
         }

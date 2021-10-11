@@ -1,4 +1,7 @@
 import { MsgUnjail } from '../../codec/cosmos/slashing/v1beta1/tx';
+// import Account from '../../types/Account';
+// @ts-ignore
+import Account from '@konstellation/cosmosjs/src/types/Account';
 import { BroadcastTxResponse } from '../../types/broadcastTxResponse';
 import { Context } from '../../types/Context';
 import { TsProtoGeneratedType } from '../../types/TsProtoGeneratedType';
@@ -8,7 +11,7 @@ enum SlashingMsg {
 }
 
 interface MsgClient {
-    [SlashingMsg.Unjail](request: MsgUnjail, password: string): Promise<BroadcastTxResponse> | undefined;
+    [SlashingMsg.Unjail](request: MsgUnjail, account: Account): Promise<BroadcastTxResponse> | undefined;
 }
 
 export class MsgClientImpl implements MsgClient {
@@ -23,7 +26,7 @@ export class MsgClientImpl implements MsgClient {
     }
 
     // TODO fix fees
-    [SlashingMsg.Unjail](request: MsgUnjail, password: string) {
+    [SlashingMsg.Unjail](request: MsgUnjail, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
                 {
@@ -32,7 +35,7 @@ export class MsgClientImpl implements MsgClient {
                 },
             ],
             this.ctx.fees.delegate,
-            password,
+            account,
         );
     }
 }

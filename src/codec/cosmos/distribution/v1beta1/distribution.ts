@@ -291,7 +291,7 @@ export const ValidatorHistoricalRewards = {
     toJSON(message: ValidatorHistoricalRewards): unknown {
         const obj: any = {};
         if (message.cumulativeRewardRatio) {
-            obj.cumulativeRewardRatio = message.cumulativeRewardRatio.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.cumulativeRewardRatio = message.cumulativeRewardRatio.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.cumulativeRewardRatio = [];
         }
@@ -370,7 +370,7 @@ export const ValidatorCurrentRewards = {
     toJSON(message: ValidatorCurrentRewards): unknown {
         const obj: any = {};
         if (message.rewards) {
-            obj.rewards = message.rewards.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.rewards = message.rewards.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.rewards = [];
         }
@@ -438,7 +438,7 @@ export const ValidatorAccumulatedCommission = {
     toJSON(message: ValidatorAccumulatedCommission): unknown {
         const obj: any = {};
         if (message.commission) {
-            obj.commission = message.commission.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.commission = message.commission.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.commission = [];
         }
@@ -500,7 +500,7 @@ export const ValidatorOutstandingRewards = {
     toJSON(message: ValidatorOutstandingRewards): unknown {
         const obj: any = {};
         if (message.rewards) {
-            obj.rewards = message.rewards.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.rewards = message.rewards.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.rewards = [];
         }
@@ -635,7 +635,7 @@ export const ValidatorSlashEvents = {
     toJSON(message: ValidatorSlashEvents): unknown {
         const obj: any = {};
         if (message.validatorSlashEvents) {
-            obj.validatorSlashEvents = message.validatorSlashEvents.map((e) =>
+            obj.validatorSlashEvents = message.validatorSlashEvents.map(e =>
                 e ? ValidatorSlashEvent.toJSON(e) : undefined,
             );
         } else {
@@ -699,7 +699,7 @@ export const FeePool = {
     toJSON(message: FeePool): unknown {
         const obj: any = {};
         if (message.communityPool) {
-            obj.communityPool = message.communityPool.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.communityPool = message.communityPool.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.communityPool = [];
         }
@@ -797,7 +797,7 @@ export const CommunityPoolSpendProposal = {
         message.description !== undefined && (obj.description = message.description);
         message.recipient !== undefined && (obj.recipient = message.recipient);
         if (message.amount) {
-            obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
+            obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.amount = [];
         }
@@ -976,7 +976,7 @@ export const DelegationDelegatorReward = {
         const obj: any = {};
         message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
         if (message.reward) {
-            obj.reward = message.reward.map((e) => (e ? DecCoin.toJSON(e) : undefined));
+            obj.reward = message.reward.map(e => (e ? DecCoin.toJSON(e) : undefined));
         } else {
             obj.reward = [];
         }

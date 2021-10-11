@@ -370,7 +370,7 @@ export const QueryClientStatesResponse = {
     toJSON(message: QueryClientStatesResponse): unknown {
         const obj: any = {};
         if (message.clientStates) {
-            obj.clientStates = message.clientStates.map((e) => (e ? IdentifiedClientState.toJSON(e) : undefined));
+            obj.clientStates = message.clientStates.map(e => (e ? IdentifiedClientState.toJSON(e) : undefined));
         } else {
             obj.clientStates = [];
         }
@@ -728,7 +728,7 @@ export const QueryConsensusStatesResponse = {
     toJSON(message: QueryConsensusStatesResponse): unknown {
         const obj: any = {};
         if (message.consensusStates) {
-            obj.consensusStates = message.consensusStates.map((e) =>
+            obj.consensusStates = message.consensusStates.map(e =>
                 e ? ConsensusStateWithHeight.toJSON(e) : undefined,
             );
         } else {
@@ -882,31 +882,31 @@ export class QueryClientImpl implements Query {
     ClientState(request: QueryClientStateRequest): Promise<QueryClientStateResponse> {
         const data = QueryClientStateRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Query', 'ClientState', data);
-        return promise.then((data) => QueryClientStateResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryClientStateResponse.decode(new _m0.Reader(data)));
     }
 
     ClientStates(request: QueryClientStatesRequest): Promise<QueryClientStatesResponse> {
         const data = QueryClientStatesRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Query', 'ClientStates', data);
-        return promise.then((data) => QueryClientStatesResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryClientStatesResponse.decode(new _m0.Reader(data)));
     }
 
     ConsensusState(request: QueryConsensusStateRequest): Promise<QueryConsensusStateResponse> {
         const data = QueryConsensusStateRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Query', 'ConsensusState', data);
-        return promise.then((data) => QueryConsensusStateResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryConsensusStateResponse.decode(new _m0.Reader(data)));
     }
 
     ConsensusStates(request: QueryConsensusStatesRequest): Promise<QueryConsensusStatesResponse> {
         const data = QueryConsensusStatesRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Query', 'ConsensusStates', data);
-        return promise.then((data) => QueryConsensusStatesResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryConsensusStatesResponse.decode(new _m0.Reader(data)));
     }
 
     ClientParams(request: QueryClientParamsRequest): Promise<QueryClientParamsResponse> {
         const data = QueryClientParamsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.client.v1.Query', 'ClientParams', data);
-        return promise.then((data) => QueryClientParamsResponse.decode(new _m0.Reader(data)));
+        return promise.then(data => QueryClientParamsResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -925,7 +925,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -936,7 +936,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

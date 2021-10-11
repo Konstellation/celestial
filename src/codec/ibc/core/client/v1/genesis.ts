@@ -139,19 +139,17 @@ export const GenesisState = {
     toJSON(message: GenesisState): unknown {
         const obj: any = {};
         if (message.clients) {
-            obj.clients = message.clients.map((e) => (e ? IdentifiedClientState.toJSON(e) : undefined));
+            obj.clients = message.clients.map(e => (e ? IdentifiedClientState.toJSON(e) : undefined));
         } else {
             obj.clients = [];
         }
         if (message.clientsConsensus) {
-            obj.clientsConsensus = message.clientsConsensus.map((e) =>
-                e ? ClientConsensusStates.toJSON(e) : undefined,
-            );
+            obj.clientsConsensus = message.clientsConsensus.map(e => (e ? ClientConsensusStates.toJSON(e) : undefined));
         } else {
             obj.clientsConsensus = [];
         }
         if (message.clientsMetadata) {
-            obj.clientsMetadata = message.clientsMetadata.map((e) =>
+            obj.clientsMetadata = message.clientsMetadata.map(e =>
                 e ? IdentifiedGenesisMetadata.toJSON(e) : undefined,
             );
         } else {
@@ -332,7 +330,7 @@ export const IdentifiedGenesisMetadata = {
         const obj: any = {};
         message.clientId !== undefined && (obj.clientId = message.clientId);
         if (message.clientMetadata) {
-            obj.clientMetadata = message.clientMetadata.map((e) => (e ? GenesisMetadata.toJSON(e) : undefined));
+            obj.clientMetadata = message.clientMetadata.map(e => (e ? GenesisMetadata.toJSON(e) : undefined));
         } else {
             obj.clientMetadata = [];
         }
@@ -367,7 +365,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -378,7 +376,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

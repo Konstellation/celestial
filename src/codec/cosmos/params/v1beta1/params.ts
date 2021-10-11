@@ -88,7 +88,7 @@ export const ParameterChangeProposal = {
         message.title !== undefined && (obj.title = message.title);
         message.description !== undefined && (obj.description = message.description);
         if (message.changes) {
-            obj.changes = message.changes.map((e) => (e ? ParamChange.toJSON(e) : undefined));
+            obj.changes = message.changes.map(e => (e ? ParamChange.toJSON(e) : undefined));
         } else {
             obj.changes = [];
         }
