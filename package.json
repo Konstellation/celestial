@@ -1,8 +1,16 @@
 {
-    "name": "celestial",
+    "name": "@konstellation/celestial",
     "version": "1.0.0",
-    "description": "Celestial",
+    "description": "Celestial: A Typescript Open Source Library for Konstellation Network",
     "main": "build/index.js",
+    "types": "build/index.d.ts",
+    "directories": {
+        "src": "src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Konstellation/celestial.git"
+    },
     "scripts": {
         "build": "rimraf ./build && tsc",
         "start:dev": "nodemon",
@@ -25,7 +33,20 @@
             "pre-commit": "npm run test && npm run prettier-format:win32"
         }
     },
-    "keywords": [],
+    "keywords": [
+        "cosmosjs",
+        "cosmos",
+        "tendermint",
+        "darc",
+        "konstellation"
+    ],
+    "bugs": {
+        "url": "https://github.com/Konstellation/celestial/issues"
+    },
+    "homepage": "https://github.com/Konstellation/celestial#readme",
+    "engines": {
+        "node": ">=14.0.0"
+    },
     "author": "",
     "license": "ISC",
     "devDependencies": {
