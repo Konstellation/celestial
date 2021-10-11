@@ -1,6 +1,6 @@
 import { QueryClientImpl } from '../../codec/cosmos/distribution/v1beta1/query';
 import { Context } from '../../types/Context';
-import { MsgClientImpl } from '../gov/MsgClientImpl';
+import { MsgClientImpl } from './MsgClientImpl';
 
 export default class DistributionModule extends MsgClientImpl {
     queries: QueryClientImpl;
