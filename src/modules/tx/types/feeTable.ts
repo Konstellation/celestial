@@ -8,4 +8,7 @@ export interface CosmosFeeTable extends FeeTable {
     readonly transfer: StdFee;
     readonly undelegate: StdFee;
     readonly withdraw: StdFee;
+    readonly submitProposal: StdFee;
+    readonly voteProposal: StdFee;
+    readonly depositProposal: StdFee;
 }

@@ -30,7 +30,6 @@ export class MsgClientImpl implements MsgClient {
         this.ctx = ctx;
     }
 
-    // TODO fix fees
     [GovMsg.SubmitProposal](request: MsgSubmitProposal, account: Account) {
         return this.ctx.modules?.tx?.signAndBroadcast(
             [
@@ -39,7 +38,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.submitProposal,
             account,
         );
     }
@@ -52,7 +51,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.voteProposal,
             account,
         );
     }
@@ -65,7 +64,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.depositProposal,
             account,
         );
     }
