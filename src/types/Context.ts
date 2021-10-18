@@ -15,6 +15,9 @@ const defaultGasLimits: GasLimits<CosmosFeeTable> = {
     transfer: 160_000,
     undelegate: 160_000,
     withdraw: 160_000,
+    submitProposal: 160_000,
+    voteProposal: 160_000,
+    depositProposal: 160_000,
 };
 
 interface GasPrice {
