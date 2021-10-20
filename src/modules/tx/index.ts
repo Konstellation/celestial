@@ -1,4 +1,3 @@
-// @ts-ignore
 import { DecodedTxRaw } from '@cosmjs/proto-signing/build/decode';
 // @ts-ignore
 import Account from '@konstellation/cosmosjs/src/types/Account';
