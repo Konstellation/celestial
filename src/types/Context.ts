@@ -1,6 +1,7 @@
 import { Modules } from '../modules';
 import { SequenceResponse } from '../modules/auth/types/sequenceResponse';
 import { TendermintRpc } from '../modules/tendermint-rpc';
+import { StdFee } from '../modules/tx/types/stdFee';
 import { OfflineDirectSigner } from './OfflineDirectSigner';
 import { Decimal } from '@cosmjs/math';
 import { Registry } from '@cosmjs/proto-signing';
@@ -11,10 +12,17 @@ import { KeystoreV3Struct } from '../crypto/keystore';
 
 const defaultGasLimits: GasLimits<CosmosFeeTable> = {
     send: 80_000,
-    delegate: 160_000,
     transfer: 160_000,
+    delegate: 160_000,
+    redelegate: 160_000,
     undelegate: 160_000,
-    withdraw: 160_000,
+    withdrawDelegatorReward: 160_000,
+    setWithdrawAddress: 160_000,
+    withdrawValidatorCommission: 160_000,
+    fundCommunityPool: 160_000,
+    createValidator: 4_000_000,
+    editValidator: 160_000,
+    unjail: 160_000,
     submitProposal: 160_000,
     voteProposal: 160_000,
     depositProposal: 160_000,
@@ -55,6 +63,7 @@ export class Context {
         };
         this.fees = buildFeeTable<CosmosFeeTable>(gPrice, defaultGasLimits, gasLimits);
     }
+
     async getSequence(address: string): Promise<SequenceResponse> {
         let accountData;
         try {

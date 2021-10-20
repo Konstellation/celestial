@@ -58,7 +58,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.setWithdrawAddress,
             account,
         );
     }
@@ -71,7 +71,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.withdrawDelegatorReward,
             account,
         );
     }
@@ -84,7 +84,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.withdrawValidatorCommission,
             account,
         );
     }
@@ -97,7 +97,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.fundCommunityPool,
             account,
         );
     }

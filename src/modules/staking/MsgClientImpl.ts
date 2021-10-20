@@ -56,7 +56,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.createValidator,
             account,
         );
     }
@@ -68,7 +68,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.editValidator,
             account,
         );
     }
@@ -92,7 +92,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.redelegate,
             account,
         );
     }

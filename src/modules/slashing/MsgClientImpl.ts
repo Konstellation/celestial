@@ -34,7 +34,7 @@ export class MsgClientImpl implements MsgClient {
                     value: request,
                 },
             ],
-            this.ctx.fees.delegate,
+            this.ctx.fees.unjail,
             account,
         );
     }

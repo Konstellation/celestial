@@ -1,4 +1,6 @@
 // @ts-ignore
+import { DecodedTxRaw } from '@cosmjs/proto-signing/build/decode';
+// @ts-ignore
 import Account from '@konstellation/cosmosjs/src/types/Account';
 import { toHex } from '../../encoding/hex';
 import { Context } from '../../types/Context';
@@ -15,7 +17,7 @@ import { TxBodyEncodeObject } from './types/TxBodyEncodeObject';
 import { sleep } from '@cosmjs/utils';
 import { TimeoutError } from '../../types/timeoutError';
 import { IndexedTx } from './types/indexedTx';
-import { TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
+import { TxBody, TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
 // import Account from '../../types/Account';
 
 export default class TxModule {
@@ -105,13 +107,13 @@ export default class TxModule {
             const result = await this.getTx(txId);
             return result
                 ? {
-                      code: result.code,
-                      height: result.height,
-                      rawLog: result.rawLog,
-                      transactionHash: txId,
-                      gasUsed: result.gasUsed,
-                      gasWanted: result.gasWanted,
-                  }
+                    code: result.code,
+                    height: result.height,
+                    rawLog: result.rawLog,
+                    transactionHash: txId,
+                    gasUsed: result.gasUsed,
+                    gasWanted: result.gasWanted,
+                }
                 : pollForTx(txId);
         };
 
@@ -133,6 +135,12 @@ export default class TxModule {
         return results[0] ?? null;
     }
 
+    public decodeTx(tx: Uint8Array): DecodedTxRaw {
+        const txRaw = decodeTxRaw(tx);
+        txRaw.body.messages = txRaw.body.messages.map(msg => this.ctx.registry.decode(msg));
+        return txRaw;
+    }
+
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query });
         return results.txs.map(tx => {
@@ -141,7 +149,7 @@ export default class TxModule {
                 hash: toHex(tx.hash).toUpperCase(),
                 code: tx.result.code,
                 rawLog: tx.result.log || '',
-                tx: decodeTxRaw(tx.tx),
+                tx: this.decodeTx(tx.tx),
                 gasUsed: tx.result.gasUsed,
                 gasWanted: tx.result.gasWanted,
             };
