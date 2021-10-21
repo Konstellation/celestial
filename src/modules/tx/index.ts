@@ -106,13 +106,13 @@ export default class TxModule {
             const result = await this.getTx(txId);
             return result
                 ? {
-                    code: result.code,
-                    height: result.height,
-                    rawLog: result.rawLog,
-                    transactionHash: txId,
-                    gasUsed: result.gasUsed,
-                    gasWanted: result.gasWanted,
-                }
+                      code: result.code,
+                      height: result.height,
+                      rawLog: result.rawLog,
+                      transactionHash: txId,
+                      gasUsed: result.gasUsed,
+                      gasWanted: result.gasWanted,
+                  }
                 : pollForTx(txId);
         };
 
@@ -143,11 +143,13 @@ export default class TxModule {
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query });
         return results.txs.map(tx => {
+            const [{ events }] = JSON.parse(tx.result.log ?? '[{"events": []}]');
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),
                 code: tx.result.code,
                 rawLog: tx.result.log || '',
+                events,
                 tx: this.decodeTx(tx.tx),
                 gasUsed: tx.result.gasUsed,
                 gasWanted: tx.result.gasWanted,
