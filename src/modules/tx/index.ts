@@ -191,22 +191,20 @@ export default class TxModule {
                     : [];
         } else if (isSearchBySentFromOrToQuery(query)) {
             const sentQuery = withFilters(`message.module='bank' AND transfer.sender='${query.sentFromOrTo}'`);
-            const receivedQuery = withFilters(
-                `message.module='bank' AND transfer.recipient='${query.sentFromOrTo}'`,
-            );
+            const receivedQuery = withFilters(`message.module='bank' AND transfer.recipient='${query.sentFromOrTo}'`);
             const [sent, received] = await Promise.all(
-                [sentQuery, receivedQuery].map((rawQuery) => this.txsQuery(rawQuery)),
+                [sentQuery, receivedQuery].map(rawQuery => this.txsQuery(rawQuery)),
             );
-            const sentHashes = sent.map((t) => t.hash);
-            txs = [...sent, ...received.filter((t) => !sentHashes.includes(t.hash))];
+            const sentHashes = sent.map(t => t.hash);
+            txs = [...sent, ...received.filter(t => !sentHashes.includes(t.hash))];
         } else if (isSearchByTagsQuery(query)) {
-            const rawQuery = withFilters(query.tags.map((t) => `${t.key}='${t.value}'`).join(" AND "));
+            const rawQuery = withFilters(query.tags.map(t => `${t.key}='${t.value}'`).join(' AND '));
             txs = await this.txsQuery(rawQuery);
         } else {
-            throw new Error("Unknown query type");
+            throw new Error('Unknown query type');
         }
 
-        const filtered = txs.filter((tx) => tx.height >= minHeight && tx.height <= maxHeight);
+        const filtered = txs.filter(tx => tx.height >= minHeight && tx.height <= maxHeight);
         return filtered;
     }
 }
