@@ -1,6 +1,6 @@
 {
     "name": "@konstellation/celestial",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Celestial: A Typescript Open Source Library for Konstellation Network",
     "main": "build/index.js",
     "types": "build/index.d.ts",
