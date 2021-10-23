@@ -1,4 +1,4 @@
-import { Tendermint34Client, NewBlockEvent } from '@cosmjs/tendermint-rpc';
+import { Tendermint34Client, WebsocketClient } from '@cosmjs/tendermint-rpc';
 import { RpcClient } from '@cosmjs/tendermint-rpc/build/rpcclients';
 
 export class TendermintRpc {
@@ -16,8 +16,15 @@ export class TendermintRpc {
         return this.client;
     }
 
-    static async connect(rpcAddr: string): Promise<TendermintRpc> {
-        const tmClient = await Tendermint34Client.connect(rpcAddr);
+    static async connect(url: string, isHttp: boolean): Promise<TendermintRpc> {
+        let tmClient;
+        if (isHttp) {
+            tmClient = await Tendermint34Client.connect(url);
+        } else {
+            const rpc = new WebsocketClient(url);
+            tmClient = await Tendermint34Client.create(rpc);
+        }
+
         return new this(tmClient);
     }
 

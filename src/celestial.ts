@@ -12,14 +12,16 @@ export class Celestial extends Modules {
 
     static async create({
         rpcAddress,
+        isHttp = true,
         modules,
         options,
     }: {
         rpcAddress: string;
+        isHttp: boolean;
         modules: Module[];
         options: ContextOptions;
     }): Promise<Celestial> {
-        Celestial.ctx = new Context(await TendermintRpc.connect(rpcAddress), options);
+        Celestial.ctx = new Context(await TendermintRpc.connect(rpcAddress, isHttp), options);
         return new this(modules, Celestial.ctx);
     }
 
