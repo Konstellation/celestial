@@ -1,4 +1,5 @@
-import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
+import { Tendermint34Client, NewBlockEvent } from '@cosmjs/tendermint-rpc';
+import { RpcClient } from '@cosmjs/tendermint-rpc/build/rpcclients';
 
 export class TendermintRpc {
     private client?: Tendermint34Client;
@@ -17,6 +18,11 @@ export class TendermintRpc {
 
     static async connect(rpcAddr: string): Promise<TendermintRpc> {
         const tmClient = await Tendermint34Client.connect(rpcAddr);
+        return new this(tmClient);
+    }
+
+    static async create(rpc: RpcClient): Promise<TendermintRpc> {
+        const tmClient = await Tendermint34Client.create(rpc);
         return new this(tmClient);
     }
 

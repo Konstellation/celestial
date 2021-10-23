@@ -25,9 +25,11 @@ import { TimeoutError } from '../../types/timeoutError';
 import { IndexedTx } from './types/indexedTx';
 import { TxBody, TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
 // import Account from '../../types/Account';
+import { Stream } from 'xstream';
+import { NewBlockEvent } from '@cosmjs/tendermint-rpc';
 
 export default class TxModule {
-    private ctx: Context;
+    public ctx: Context;
 
     constructor(ctx: Context) {
         this.ctx = ctx;
@@ -206,5 +208,9 @@ export default class TxModule {
 
         const filtered = txs.filter(tx => tx.height >= minHeight && tx.height <= maxHeight);
         return filtered;
+    }
+
+    public subscribeNewBlock(): Stream<NewBlockEvent> {
+        return this.ctx.rpc.get().subscribeNewBlock();
     }
 }
