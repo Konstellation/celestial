@@ -156,7 +156,7 @@ export class MsgClientImpl implements Msg {
     VerifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse> {
         const data = MsgVerifyInvariant.encode(request).finish();
         const promise = this.rpc.request('cosmos.crisis.v1beta1.Msg', 'VerifyInvariant', data);
-        return promise.then(data => MsgVerifyInvariantResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgVerifyInvariantResponse.decode(new _m0.Reader(data)));
     }
 }
 

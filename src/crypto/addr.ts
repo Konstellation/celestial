@@ -13,9 +13,5 @@ export const btcaddr = (publicKey: Buffer): Buffer =>
  * Convert multisig public key into address
  */
 export const multisigaddr = (publicKey: Buffer): Buffer => {
-    return crypto
-        .createHash('sha256')
-        .update(publicKey)
-        .digest()
-        .slice(0, 20);
+    return crypto.createHash('sha256').update(publicKey).digest().slice(0, 20);
 };

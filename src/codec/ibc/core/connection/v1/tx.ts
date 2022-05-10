@@ -433,7 +433,7 @@ export const MsgConnectionOpenTry = {
             (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
         message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || Long.UZERO).toString());
         if (message.counterpartyVersions) {
-            obj.counterpartyVersions = message.counterpartyVersions.map(e => (e ? Version.toJSON(e) : undefined));
+            obj.counterpartyVersions = message.counterpartyVersions.map((e) => (e ? Version.toJSON(e) : undefined));
         } else {
             obj.counterpartyVersions = [];
         }
@@ -987,25 +987,25 @@ export class MsgClientImpl implements Msg {
     ConnectionOpenInit(request: MsgConnectionOpenInit): Promise<MsgConnectionOpenInitResponse> {
         const data = MsgConnectionOpenInit.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Msg', 'ConnectionOpenInit', data);
-        return promise.then(data => MsgConnectionOpenInitResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgConnectionOpenInitResponse.decode(new _m0.Reader(data)));
     }
 
     ConnectionOpenTry(request: MsgConnectionOpenTry): Promise<MsgConnectionOpenTryResponse> {
         const data = MsgConnectionOpenTry.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Msg', 'ConnectionOpenTry', data);
-        return promise.then(data => MsgConnectionOpenTryResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgConnectionOpenTryResponse.decode(new _m0.Reader(data)));
     }
 
     ConnectionOpenAck(request: MsgConnectionOpenAck): Promise<MsgConnectionOpenAckResponse> {
         const data = MsgConnectionOpenAck.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Msg', 'ConnectionOpenAck', data);
-        return promise.then(data => MsgConnectionOpenAckResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgConnectionOpenAckResponse.decode(new _m0.Reader(data)));
     }
 
     ConnectionOpenConfirm(request: MsgConnectionOpenConfirm): Promise<MsgConnectionOpenConfirmResponse> {
         const data = MsgConnectionOpenConfirm.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Msg', 'ConnectionOpenConfirm', data);
-        return promise.then(data => MsgConnectionOpenConfirmResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => MsgConnectionOpenConfirmResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -1024,7 +1024,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1035,7 +1035,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

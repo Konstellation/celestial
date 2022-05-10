@@ -390,7 +390,7 @@ export const QueryConnectionsResponse = {
     toJSON(message: QueryConnectionsResponse): unknown {
         const obj: any = {};
         if (message.connections) {
-            obj.connections = message.connections.map(e => (e ? IdentifiedConnection.toJSON(e) : undefined));
+            obj.connections = message.connections.map((e) => (e ? IdentifiedConnection.toJSON(e) : undefined));
         } else {
             obj.connections = [];
         }
@@ -542,7 +542,7 @@ export const QueryClientConnectionsResponse = {
     toJSON(message: QueryClientConnectionsResponse): unknown {
         const obj: any = {};
         if (message.connectionPaths) {
-            obj.connectionPaths = message.connectionPaths.map(e => e);
+            obj.connectionPaths = message.connectionPaths.map((e) => e);
         } else {
             obj.connectionPaths = [];
         }
@@ -966,25 +966,25 @@ export class QueryClientImpl implements Query {
     Connection(request: QueryConnectionRequest): Promise<QueryConnectionResponse> {
         const data = QueryConnectionRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Query', 'Connection', data);
-        return promise.then(data => QueryConnectionResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryConnectionResponse.decode(new _m0.Reader(data)));
     }
 
     Connections(request: QueryConnectionsRequest): Promise<QueryConnectionsResponse> {
         const data = QueryConnectionsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Query', 'Connections', data);
-        return promise.then(data => QueryConnectionsResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryConnectionsResponse.decode(new _m0.Reader(data)));
     }
 
     ClientConnections(request: QueryClientConnectionsRequest): Promise<QueryClientConnectionsResponse> {
         const data = QueryClientConnectionsRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Query', 'ClientConnections', data);
-        return promise.then(data => QueryClientConnectionsResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryClientConnectionsResponse.decode(new _m0.Reader(data)));
     }
 
     ConnectionClientState(request: QueryConnectionClientStateRequest): Promise<QueryConnectionClientStateResponse> {
         const data = QueryConnectionClientStateRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Query', 'ConnectionClientState', data);
-        return promise.then(data => QueryConnectionClientStateResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryConnectionClientStateResponse.decode(new _m0.Reader(data)));
     }
 
     ConnectionConsensusState(
@@ -992,7 +992,7 @@ export class QueryClientImpl implements Query {
     ): Promise<QueryConnectionConsensusStateResponse> {
         const data = QueryConnectionConsensusStateRequest.encode(request).finish();
         const promise = this.rpc.request('ibc.core.connection.v1.Query', 'ConnectionConsensusState', data);
-        return promise.then(data => QueryConnectionConsensusStateResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryConnectionConsensusStateResponse.decode(new _m0.Reader(data)));
     }
 }
 
@@ -1011,7 +1011,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1022,7 +1022,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

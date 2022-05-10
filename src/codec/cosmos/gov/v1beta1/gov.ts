@@ -364,7 +364,7 @@ export const Deposit = {
         message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
         message.depositor !== undefined && (obj.depositor = message.depositor);
         if (message.amount) {
-            obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.amount = message.amount.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.amount = [];
         }
@@ -533,7 +533,7 @@ export const Proposal = {
         message.submitTime !== undefined && (obj.submitTime = message.submitTime.toISOString());
         message.depositEndTime !== undefined && (obj.depositEndTime = message.depositEndTime.toISOString());
         if (message.totalDeposit) {
-            obj.totalDeposit = message.totalDeposit.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.totalDeposit = message.totalDeposit.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.totalDeposit = [];
         }
@@ -843,7 +843,7 @@ export const DepositParams = {
     toJSON(message: DepositParams): unknown {
         const obj: any = {};
         if (message.minDeposit) {
-            obj.minDeposit = message.minDeposit.map(e => (e ? Coin.toJSON(e) : undefined));
+            obj.minDeposit = message.minDeposit.map((e) => (e ? Coin.toJSON(e) : undefined));
         } else {
             obj.minDeposit = [];
         }
@@ -1030,7 +1030,7 @@ var globalThis: any = (() => {
 })();
 
 const atob: (b64: string) => string =
-    globalThis.atob || (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+    globalThis.atob || ((b64) => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
     const bin = atob(b64);
     const arr = new Uint8Array(bin.length);
@@ -1041,7 +1041,7 @@ function bytesFromBase64(b64: string): Uint8Array {
 }
 
 const btoa: (bin: string) => string =
-    globalThis.btoa || (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+    globalThis.btoa || ((bin) => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
     const bin: string[] = [];
     for (let i = 0; i < arr.byteLength; ++i) {

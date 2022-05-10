@@ -9,7 +9,7 @@ export default class StakingModule extends MsgClientImpl {
 
     constructor(ctx: Context) {
         super(ctx);
-        this.registryTypes.forEach(t => ctx.registry.register(t[0], t[1]));
+        this.registryTypes.forEach((t) => ctx.registry.register(t[0], t[1]));
         this.queries = new QueryClientImpl(ctx.rpc);
     }
 

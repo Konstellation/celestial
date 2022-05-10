@@ -164,7 +164,7 @@ export class QueryClientImpl implements Query {
     Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
         const data = QueryParamsRequest.encode(request).finish();
         const promise = this.rpc.request('cosmos.params.v1beta1.Query', 'Params', data);
-        return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+        return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
     }
 }
 
