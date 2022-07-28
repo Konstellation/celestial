@@ -152,13 +152,20 @@ export default class TxModule {
     public async txsQuery(query: string): Promise<readonly IndexedTx[]> {
         const results = await this.ctx.rpc.get().txSearchAll({ query });
         return results.txs.map((tx) => {
-            const [{ events }] = JSON.parse(tx.result.log ?? '[{"events": []}]');
+            let events;
+
+            try {
+                [{ events }] = JSON.parse(tx.result.log ?? '[{"events": []}]');
+            } catch {
+                events = []
+            } 
+
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),
                 code: tx.result.code,
-                rawLog: tx.result.log || '',
-                events,
+                rawLog: tx.result.log,
+                events: events,
                 tx: this.decodeTx(tx.tx),
                 gasUsed: tx.result.gasUsed,
                 gasWanted: tx.result.gasWanted,
