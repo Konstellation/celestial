@@ -14,7 +14,7 @@ const defaultGasLimits: GasLimits<CosmosFeeTable> = {
     send: 80_000,
     transfer: 160_000,
     delegate: 160_000,
-    redelegate: 300_000,
+    redelegate: 350_000,
     undelegate: 160_000,
     withdrawDelegatorReward: 160_000,
     setWithdrawAddress: 160_000,
