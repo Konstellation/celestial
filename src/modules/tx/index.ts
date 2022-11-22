@@ -1,4 +1,5 @@
 import { DecodedTxRaw } from '@cosmjs/proto-signing/build/decode';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Account from '@konstellation/cosmosjs/src/types/Account';
 import { toHex } from '../../encoding/hex';
@@ -23,7 +24,7 @@ import { TxBodyEncodeObject } from './types/TxBodyEncodeObject';
 import { sleep } from '@cosmjs/utils';
 import { TimeoutError } from '../../types/timeoutError';
 import { IndexedTx } from './types/indexedTx';
-import { TxBody, TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
+import { TxRaw } from '../../codec/cosmos/tx/v1beta1/tx';
 // import Account from '../../types/Account';
 import { Stream } from 'xstream';
 import { NewBlockEvent } from '@cosmjs/tendermint-rpc';
@@ -157,14 +158,14 @@ export default class TxModule {
             try {
                 [{ events }] = JSON.parse(tx.result.log ?? '[{"events": []}]');
             } catch {
-                events = []
-            } 
+                events = [];
+            }
 
             return {
                 height: tx.height,
                 hash: toHex(tx.hash).toUpperCase(),
                 code: tx.result.code,
-                rawLog: tx.result.log,
+                rawLog: tx.result.log || '',
                 events: events,
                 tx: this.decodeTx(tx.tx),
                 gasUsed: tx.result.gasUsed,
