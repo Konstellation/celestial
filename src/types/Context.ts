@@ -13,7 +13,7 @@ import { KeystoreV3Struct } from '../crypto/keystore';
 const defaultGasLimits: GasLimits<CosmosFeeTable> = {
     send: 80_000,
     transfer: 160_000,
-    delegate: 160_000,
+    delegate: 200_000,
     redelegate: 350_000,
     undelegate: 160_000,
     withdrawDelegatorReward: 160_000,
